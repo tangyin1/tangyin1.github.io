@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://tangyin1.github.io/favicon.ico?v=1691941234724">
+<link rel="shortcut icon" href="https://tangyin1.github.io/favicon.ico?v=1691942363611">
 <link rel="stylesheet" href="https://tangyin1.github.io/styles/main.css">
 
 
@@ -33,7 +33,7 @@ sudo apt install build-es..." />
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://tangyin1.github.io">
-        <img src="https://tangyin1.github.io/images/avatar.png?v=1691941234724" class="site-logo">
+        <img src="https://tangyin1.github.io/images/avatar.png?v=1691942363611" class="site-logo">
         <h1 class="site-title">tangyin</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -128,7 +128,7 @@ gdb --version
 4.运行text1(在ls查看文件后，若文件为绿色则表示为可执直接运行的文件)<br>
 <code>./text1</code></li>
 </ol>
-<h1 id="4on">4<strong>O[n]</strong></h1>
+<h1 id="4on优化源代码">4<strong>O[n]优化源代码</strong></h1>
 <ol>
 <li>-O，-O1<br>
 这两个命令的效果是一样的，目的都是在不影响编译速度的前提下，尽量采用一些优化算法降低代码大小和可执行代码的运行速度。并开启如下的优化选项：</li>
@@ -147,9 +147,41 @@ gdb --version
 用于生成可调试代码，因为某些收集调试信息的编译器通道在以下位置被禁用 -O0。<br>
 像-O0 -Og完全禁用了许多优化过程，因此控制它们的单个选项无效。除此以外-Og 使所有 -O1 优化标志，但那些可能会干扰调试的标志除外：</li>
 </ol>
-<h1 id="5-git工作流程图">5 Git工作流程图</h1>
+<h1 id="5-l和-l-指定库文件路径">5 <strong>-l</strong>和**-L** 指定库文件路径</h1>
+<p>-l参数(小写)就是用来指定程序要链接的库，-l参数紧接着就是库名<br>
+在/lib和/usr/lib和/usr/local/lib里的库直接用-l参数就能链接<br>
+链接glog库<br>
+<code>g++ -lglog test.cpp</code><br>
+如果库文件没放在上面三个目录里，需要使用-L参数(大写)指定库文件所在目录#  -L参数跟着的是库文件所在的目录名<br>
+链接mytest库，libmytest.so在*/home/bing/mytestlibfolder*目录下g++ -L/home/bing/<code>mytestlibfolder -lmytest test.cpp</code></p>
+<h1 id="6-i-指定头文件搜索目录">6 -I 指定头文件搜索目录</h1>
+<p>/usr/include目录一般是不用指定的，gcc知道去那里找，但 是如果头文件不在/usr/icnclude里我们就要用-I参数指定了，比如头文件放在/myinclude目录里，那编译命令行就要加上- I/myinclude 参数了，如果不加你会得到一个”xxxx.h: No such file or directory”的错<br>
+误。-I参数可以用相对路径，比如头文件在当前 目录，可以用-I.来指定。上面我们提到的–cflags参数就是用来生成-I参数的。</p>
+<p><code>g++ -I/myinclude test.cpp</code></p>
+<h1 id="7-wall打印警告信息">7-Wall打印警告信息</h1>
+<p><code>g++ -Wall text,cpp</code></p>
+<h1 id="8-stdc-设置编译标准">8-std=c++ 设置编译标准</h1>
+<p><code>g++ -std=c++11 text.cpp</code></p>
+<h1 id="9-o-指定输出文件名">9 -o 指定输出文件名</h1>
+<p><code>g++ text,cpp -o text</code></p>
+<p>#10-D   定义宏</p>
+<p>在使用gcc/g++编译的时候定义宏<br>
+常用场景：<br>
+-DDEBUG  定义DEBUG宏，可能文件中有DEBUG宏部分的相关信息，用个DDEBUG来选择开启或关闭DEBUG<br>
+示例代码：<br>
+//  -Dname  定义宏name,默认定义内容为字符串“1”</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+int main() {
+#ifdef DEBUG
+printf(&quot;DEBUG LOG\n&quot;); #endif
+printf(&quot;in\n&quot;); }
+
+//  1.  在编译的时候，使用gcc  -DDEBUG  main.cpp
+// 2. 第七行代码可以被执行
+</code></pre>
+<h1 id="11-git工作流程图">11 Git工作流程图</h1>
 <figure data-type="image" tabindex="1"><img src="https://tangyin1.github.io/post-images/1691940756890.png" alt="" loading="lazy"></figure>
-<h1 id="6-程序编译过程">6 程序编译过程</h1>
+<h1 id="12-程序编译过程">12 程序编译过程</h1>
 <figure data-type="image" tabindex="2"><img src="https://tangyin1.github.io/post-images/1691940820451.png" alt="" loading="lazy"></figure>
 
             </div>

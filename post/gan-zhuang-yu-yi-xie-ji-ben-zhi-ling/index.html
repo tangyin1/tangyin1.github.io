@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://tangyin1.github.io/favicon.ico?v=1691942539831">
+<link rel="shortcut icon" href="https://tangyin1.github.io/favicon.ico?v=1691943024205">
 <link rel="stylesheet" href="https://tangyin1.github.io/styles/main.css">
 
 
@@ -33,7 +33,7 @@ sudo apt install build-es..." />
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://tangyin1.github.io">
-        <img src="https://tangyin1.github.io/images/avatar.png?v=1691942539831" class="site-logo">
+        <img src="https://tangyin1.github.io/images/avatar.png?v=1691943024205" class="site-logo">
         <h1 class="site-title">tangyin</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -108,7 +108,7 @@ sudo apt install build-es..." />
 <h1 id="1安装gdb">1安装gdb</h1>
 <p>安装gdb（包含了gcc：c语言 g++：c++）<br>
 <code>sudo apt install build-essential gdb</code><br>
-在安装任何软件之前需要县输入：<br>
+在安装任何软件之前需要先输入：<br>
 <code>sudo apt update</code><br>
 检验：</p>
 <pre><code>gcc --version
@@ -171,13 +171,15 @@ gdb --version
 示例代码：<br>
 //  -Dname  定义宏name,默认定义内容为字符串“1”</p>
 <pre><code class="language-c">#include &lt;stdio.h&gt;
-int main() {
+int main()
+ {
 #ifdef DEBUG
 printf(&quot;DEBUG LOG\n&quot;); #endif
-printf(&quot;in\n&quot;); }
+printf(&quot;in\n&quot;); 
+}
 
 //  1.  在编译的时候，使用gcc  -DDEBUG  main.cpp
-// 2. 第七行代码可以被执行
+// 2. 第五行代码可以被执行
 </code></pre>
 <h1 id="11-git工作流程图">11 Git工作流程图</h1>
 <figure data-type="image" tabindex="1"><img src="https://tangyin1.github.io/post-images/1691940756890.png" alt="" loading="lazy"></figure>

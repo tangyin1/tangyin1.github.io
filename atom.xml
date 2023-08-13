@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tangyin1.github.io</id>
     <title>tangyin</title>
-    <updated>2023-08-13T16:02:27.392Z</updated>
+    <updated>2023-08-13T16:10:34.849Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tangyin1.github.io"/>
     <link rel="self" href="https://tangyin1.github.io/atom.xml"/>
@@ -25,7 +25,7 @@
 <h1 id="1安装gdb">1安装gdb</h1>
 <p>安装gdb（包含了gcc：c语言 g++：c++）<br>
 <code>sudo apt install build-essential gdb</code><br>
-在安装任何软件之前需要县输入：<br>
+在安装任何软件之前需要先输入：<br>
 <code>sudo apt update</code><br>
 检验：</p>
 <pre><code>gcc --version
@@ -88,13 +88,15 @@ gdb --version
 示例代码：<br>
 //  -Dname  定义宏name,默认定义内容为字符串“1”</p>
 <pre><code class="language-c">#include &lt;stdio.h&gt;
-int main() {
+int main()
+ {
 #ifdef DEBUG
 printf(&quot;DEBUG LOG\n&quot;); #endif
-printf(&quot;in\n&quot;); }
+printf(&quot;in\n&quot;); 
+}
 
 //  1.  在编译的时候，使用gcc  -DDEBUG  main.cpp
-// 2. 第七行代码可以被执行
+// 2. 第五行代码可以被执行
 </code></pre>
 <h1 id="11-git工作流程图">11 Git工作流程图</h1>
 <figure data-type="image" tabindex="1"><img src="https://tangyin1.github.io/post-images/1691940756890.png" alt="" loading="lazy"></figure>

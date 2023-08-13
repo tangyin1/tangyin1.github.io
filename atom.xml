@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tangyin1.github.io</id>
     <title>tangyin</title>
-    <updated>2023-08-13T16:10:34.849Z</updated>
+    <updated>2023-08-13T16:13:28.438Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tangyin1.github.io"/>
     <link rel="self" href="https://tangyin1.github.io/atom.xml"/>
@@ -64,7 +64,7 @@ gdb --version
 用于生成可调试代码，因为某些收集调试信息的编译器通道在以下位置被禁用 -O0。<br>
 像-O0 -Og完全禁用了许多优化过程，因此控制它们的单个选项无效。除此以外-Og 使所有 -O1 优化标志，但那些可能会干扰调试的标志除外：</li>
 </ol>
-<h1 id="5-l和-l-指定库文件路径">5 <strong>-l</strong>和**-L** 指定库文件路径</h1>
+<h1 id="5-l和-l指定库文件路径">5 <strong>-l</strong>和 <strong>-L</strong>指定库文件路径</h1>
 <p>-l参数(小写)就是用来指定程序要链接的库，-l参数紧接着就是库名<br>
 在/lib和/usr/lib和/usr/local/lib里的库直接用-l参数就能链接<br>
 链接glog库<br>
@@ -81,7 +81,7 @@ gdb --version
 <p><code>g++ -std=c++11 text.cpp</code></p>
 <h1 id="9-o-指定输出文件名">9 -o 指定输出文件名</h1>
 <p><code>g++ text,cpp -o text</code></p>
-<p>#10-D   定义宏</p>
+<h1 id="10-d-定义宏">10-D   定义宏</h1>
 <p>在使用gcc/g++编译的时候定义宏<br>
 常用场景：<br>
 -DDEBUG  定义DEBUG宏，可能文件中有DEBUG宏部分的相关信息，用个DDEBUG来选择开启或关闭DEBUG<br>

@@ -1,19 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://localhost:4000</id>
+    <id>https://tangyin1.github.io</id>
     <title>tangyin</title>
-    <updated>2023-08-13T15:22:21.520Z</updated>
+    <updated>2023-08-13T15:39:42.590Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="http://localhost:4000"/>
-    <link rel="self" href="http://localhost:4000/atom.xml"/>
+    <link rel="alternate" href="https://tangyin1.github.io"/>
+    <link rel="self" href="https://tangyin1.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>http://localhost:4000/images/avatar.png</logo>
-    <icon>http://localhost:4000/favicon.ico</icon>
+    <logo>https://tangyin1.github.io/images/avatar.png</logo>
+    <icon>https://tangyin1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, tangyin</rights>
     <entry>
+        <title type="html"><![CDATA[g++安装与一些基本指令]]></title>
+        <id>https://tangyin1.github.io/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/</id>
+        <link href="https://tangyin1.github.io/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/">
+        </link>
+        <updated>2023-08-13T15:25:49.000Z</updated>
+        <summary type="html"><![CDATA[<p>❤️❤️❤️新人小白请多指教❤️❤️❤️<br>
+💡💡💡在linux下安装gdb跟cmake，以及一些基础知识💡💡💡</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>❤️❤️❤️新人小白请多指教❤️❤️❤️<br>
+💡💡💡在linux下安装gdb跟cmake，以及一些基础知识💡💡💡</p>
+<!-- more -->
+<h1 id="1安装gdb">1安装gdb</h1>
+<p>安装gdb（包含了gcc：c语言 g++：c++）<br>
+<code>sudo apt install build-essential gdb</code><br>
+在安装任何软件之前需要县输入：<br>
+<code>sudo apt update</code><br>
+检验：</p>
+<pre><code>gcc --version
+g++ --version
+gdb --version
+</code></pre>
+<h1 id="2安装cmake">2安装cmake：</h1>
+<p><code>sudo apt install cmake</code><br>
+检验：<br>
+<code>cmake –version</code></p>
+<h1 id="3建第一个在linux下第一个程序">3建第一个在linux下第一个程序</h1>
+<ol>
+<li><code>vim text1.cpp</code>  #创建一个叫text1的.cpp文件</li>
+<li>编写程序</li>
+<li>生成可执行程序：<br>
+<code>g++ text1.cpp -o text1</code>  #生成一个叫text1的c++可执行文件<br>
+4.运行text1(在ls查看文件后，若文件为绿色则表示为可执直接运行的文件)<br>
+<code>./text1</code></li>
+</ol>
+<h1 id="4on">4<strong>O[n]</strong></h1>
+<ol>
+<li>-O，-O1<br>
+这两个命令的效果是一样的，目的都是在不影响编译速度的前提下，尽量采用一些优化算法降低代码大小和可执行代码的运行速度。并开启如下的优化选项：</li>
+<li>-O3<br>
+该选项除了执行-O2所有的优化选项之外，一般都是采取很多向量化算法，提高代码的并行执行程度，利用现代CPU中的流水线，Cache等</li>
+<li>-Os<br>
+这个优化标识和-O3有异曲同工之妙，当然两者的目标不一样，<br>
+-O3的目标是宁愿增加目标代码的大小，也要拼命的提高运行速度，<br>
+但是这个选项是在-O2的基础之上，尽量的降低目标代码的大小，这对于存储容量很小的设备来说非常重要。<br>
+为了降低目标代码大小，会禁用下列优化选项，一般就是压缩内存中的对齐空白(alignment padding)</li>
+<li>-Ofast<br>
+该选项将不会严格遵循语言标准，除了启用所有的-O3优化选项之外，也会针对某些语言启用部分优化。如：-ffast-math ，对于Fortran语言，还会启用下列选项</li>
+<li>-Og<br>
+优化调试体验。 -Og应该是标准edit-compile-debug周期的优化级别选择，<br>
+在保持快速编译和良好调试体验的同时，提供合理的优化级别。<br>
+用于生成可调试代码，因为某些收集调试信息的编译器通道在以下位置被禁用 -O0。<br>
+像-O0 -Og完全禁用了许多优化过程，因此控制它们的单个选项无效。除此以外-Og 使所有 -O1 优化标志，但那些可能会干扰调试的标志除外：</li>
+</ol>
+<h1 id="5-git工作流程图">5 Git工作流程图</h1>
+<figure data-type="image" tabindex="1"><img src="https://tangyin1.github.io/post-images/1691940756890.png" alt="" loading="lazy"></figure>
+<h1 id="6-程序编译过程">6 程序编译过程</h1>
+<figure data-type="image" tabindex="2"><img src="https://tangyin1.github.io/post-images/1691940820451.png" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[linux基础指令]]></title>
-        <id>http://localhost:4000/post/linux-ji-chu-zhi-ling/</id>
-        <link href="http://localhost:4000/post/linux-ji-chu-zhi-ling/">
+        <id>https://tangyin1.github.io/post/linux-ji-chu-zhi-ling/</id>
+        <link href="https://tangyin1.github.io/post/linux-ji-chu-zhi-ling/">
         </link>
         <updated>2023-08-13T13:59:42.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  这是一篇简单的<strong>linux</strong>基本指令 ！<br>
@@ -113,7 +173,7 @@ cp -r [被复制的文件夹路径] [文件夹被复制到的路径]</p>
 <h2 id="10-man">10 man</h2>
 <p>当没有手册，列如：<code>man cd</code></p>
 <p>这时候应该输入 help cd<br>
-<img src="http://localhost:4000/post-images/1691938848365.png" alt="" loading="lazy"></p>
+<img src="https://tangyin1.github.io/post-images/1691938848365.png" alt="" loading="lazy"></p>
 <p>shutdown:关机<br>
 rebot:重启<br>
 sudo -i:进入root权限</p>
@@ -138,8 +198,8 @@ sudo -i:进入root权限</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>http://localhost:4000/post/hello-gridea/</id>
-        <link href="http://localhost:4000/post/hello-gridea/">
+        <id>https://tangyin1.github.io/post/hello-gridea/</id>
+        <link href="https://tangyin1.github.io/post/hello-gridea/">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>

@@ -1,136 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://tangyin1.github.io</id>
-    <title>tangyin</title>
-    <updated>2023-08-05T14:12:14.180Z</updated>
+    <id>https://tangyin1.io</id>
+    <title>Gridea</title>
+    <updated>2023-08-13T13:47:04.472Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://tangyin1.github.io"/>
-    <link rel="self" href="https://tangyin1.github.io/atom.xml"/>
+    <link rel="alternate" href="https://tangyin1.io"/>
+    <link rel="self" href="https://tangyin1.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>https://tangyin1.github.io/images/avatar.png</logo>
-    <icon>https://tangyin1.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2023, tangyin</rights>
-    <entry>
-        <title type="html"><![CDATA[linux基础指令]]></title>
-        <id>https://tangyin1.github.io/post/linux-zhi-ling/</id>
-        <link href="https://tangyin1.github.io/post/linux-zhi-ling/">
-        </link>
-        <updated>2023-08-05T11:38:07.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  简单复习一下 <strong>Linux指令</strong> ！<br>
-✍️  小白刚开始请多指教...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  简单复习一下 <strong>Linux指令</strong> ！<br>
-✍️  小白刚开始请多指教...</p>
-<!-- more -->
-<p><strong>1</strong>：pwd （print current working directory）</p>
-<p>打印当前终端所在的目录</p>
-<p><strong>2</strong>：ls（list directory contents）</p>
-<p>列出当前工作目录下的所有文件/文件夹的名称</p>
-<p>用法：</p>
-<p>ls ./ #表示当前目录下</p>
-<p>ls.// #表示上一级目录下</p>
-<p>ls -lah /home</p>
-<p>解释：</p>
-<p>-l：表示list 表示以详细的列表的形式进行展示</p>
-<p>-a：all，表示显示所有的文件夹/文件（包含了隐藏文件）</p>
-<p>-h：表示以可读性较高的形式显示</p>
-<figure data-type="image" tabindex="1"><img src="https://tangyin1.github.io/post-images/1691239635885.png" alt="" loading="lazy"></figure>
-<p>当显示出文件以“d”开头则为文件夹</p>
-<p>当显示出文件以“-”开头则说明为文件</p>
-<p>当显示出文件以“.”开头则说明是隐藏文件</p>
-<p>（ctrl+l 清屏）</p>
-<p><strong>3</strong>：cd（change directory）切换到当前的工作目录</p>
-<p>用法1；cd  cd~  #直接进入当前的home目录下【很常用】</p>
-<p>用法2：cd【相对路径】</p>
-<p>#进入到上级目录下</p>
-<p>cd ..</p>
-<p>#进入到上级目录中的local目录下</p>
-<p>PS:当输入cd /etc 后输入tab键</p>
-<figure data-type="image" tabindex="2"><img src="https://tangyin1.github.io/post-images/1691242949505.png" alt="" loading="lazy"></figure>
-<p>然后输入y确定之后</p>
-<figure data-type="image" tabindex="3"><img src="https://tangyin1.github.io/post-images/1691242973012.png" alt="" loading="lazy"></figure>
-<p>在键盘上输入open（不会有显示）</p>
-<figure data-type="image" tabindex="4"><img src="https://tangyin1.github.io/post-images/1691242980603.png" alt="" loading="lazy"></figure>
-<p><strong>4</strong>：midir：make directories</p>
-<p>创建目录</p>
-<p>用法1：mkdir a#在当前路径下创建了一个a的文件夹（目录）</p>
-<p>用法2：mkdir -p a/b/c #在当前路径下先创建了一个a然后在a下面创建b 然后在b下面创建了c</p>
-<p>用法3：直接创建多个目录</p>
-<p>mkdir a b c</p>
-<p><strong>5</strong>：touch （change file timestamps）</p>
-<p>作用：创建新文件</p>
-<p>touch是创建文件 mkdir是创建文件夹</p>
-<p># 1. touch的作用本来不是创建文件，而是将指定文件的修改时间设置为当前时间。就是假</p>
-<p>装“碰”（touch）了一下这个文件，假装文件被“修改”了，于是文件的修改时间就是被设置为当前时间。</p>
-<p># 2. 这带来了一个副作用，就是当touch一个不存在的文件的时候，它会创建这个文件。然后，由于touch已经可以完成创建文件的功能了，就不再需要一个单独的create了。</p>
-<p>用法1：touch linux.txt 直接在当前目录下创建了一个linux的txt文件</p>
-<p>touch home/tangyin/myfile 在home/tangyin下面创建了一个myfile文件</p>
-<p>用法2：touch file file.txt 在当前目录下创建了file 跟file.txt两个文件</p>
-<p><strong>6</strong>：rm （remove files or directories）</p>
-<p>删除文件</p>
-<ol>
-<li>删除文件</li>
-</ol>
-<p>直接删除 rm myfile  rm /user/myfile</p>
-<ol start="2">
-<li>移除目录</li>
-</ol>
-<p>rm -rf myfolder 删除当前路径下的abc文件</p>
-<p>rm -rf /usr/myfolder 删除/usr路径下的abc文件</p>
-<p><strong>7</strong>：cp：复制文件到指定位置</p>
-<p>用法1：</p>
-<p>cp [被复制的文件路径] [文件被复制到的路径]</p>
-<p>用法二：</p>
-<p>cp -r [被复制的文件夹路径] [文件夹被复制到的路径]</p>
-<p>文件夹要加上-r 直接复制文件则直接</p>
-<p><strong>8</strong>：mv（move）移动文件或者重命名   ----剪切</p>
-<p>当文件在同一个文件夹下，没有移动到别处时，重命名</p>
-<p><strong>9</strong>：man</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td>![文本框: man - an interface to the system reference manuals 作用：包含了Linux中全部命令手册用法：man [命令] 含义：查看命令使用手册，按 q 退出  ]</td>
-</tr>
-</tbody>
-</table>
-<p>当没有手册，列如：man cd</p>
-<p>这时候应该输入 help cd</p>
-<figure data-type="image" tabindex="5"><img src="https://tangyin1.github.io/post-images/1691243290699.png" alt="" loading="lazy"></figure>
-<p>shutdown:关机</p>
-<p>rebot:重启</p>
-<p>sudo -i:进入root权限<br>
-<strong>tree</strong>：</p>
-<p>关于tree</p>
-<p>安装tree命令之前需要安装make命令</p>
-<ol>
-<li>安装make命令：</li>
-</ol>
-<p>首先在终端更新所有软件：sudo apt-get update</p>
-<p>然后输入：sudo apt install make</p>
-<p>最后等待安装，若出现需要确认的选项选择确认</p>
-<ol start="2">
-<li>安装tree：</li>
-</ol>
-<p>首先下载 输入：</p>
-<p>wget http://mama.indstate.edu/users/ice/tree/src/tree-1.7.0.tgz</p>
-<p>然后解压：tar zxvf tree-1.7.0.tgz</p>
-<p>进入目录：cd tree -1.7.0</p>
-<p>使用sudo -i切换到root    （这次修改的密码时12345678）</p>
-<p>然后 cp tree /bin</p>
-<p>完成</p>
-]]></content>
-    </entry>
+    <logo>https://tangyin1.io/images/avatar.png</logo>
+    <icon>https://tangyin1.io/favicon.ico</icon>
+    <rights>All rights reserved 2023, Gridea</rights>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://tangyin1.github.io/post/hello-gridea/</id>
-        <link href="https://tangyin1.github.io/post/hello-gridea/">
+        <id>https://tangyin1.io/post/hello-gridea/</id>
+        <link href="https://tangyin1.io/post/hello-gridea/">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
@@ -141,7 +24,7 @@
 <!-- more -->
 <p><a href="https://github.com/getgridea/gridea">Github</a><br>
 <a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="https://fehey.com/">示例网站</a></p>
+<a href="http://fehey.com/">示例网站</a></p>
 <h2 id="特性">特性👇</h2>
 <p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
 <p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>

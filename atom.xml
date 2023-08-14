@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tangyin1.github.io</id>
     <title>tangyin</title>
-    <updated>2023-08-13T16:13:28.438Z</updated>
+    <updated>2023-08-14T13:54:56.893Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tangyin1.github.io"/>
     <link rel="self" href="https://tangyin1.github.io/atom.xml"/>
@@ -10,6 +10,136 @@
     <logo>https://tangyin1.github.io/images/avatar.png</logo>
     <icon>https://tangyin1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, tangyin</rights>
+    <entry>
+        <title type="html"><![CDATA[单元测试的一些基础知识]]></title>
+        <id>https://tangyin1.github.io/post/dan-yuan-ce-shi-de-yi-xie-ji-chu-zhi-shi/</id>
+        <link href="https://tangyin1.github.io/post/dan-yuan-ce-shi-de-yi-xie-ji-chu-zhi-shi/">
+        </link>
+        <updated>2023-08-14T13:08:11.000Z</updated>
+        <summary type="html"><![CDATA[<p>🐶🐶关于单元测试的小知识<br>
+🐱🐱本人菜鸡，说错勿怪</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>🐶🐶关于单元测试的小知识<br>
+🐱🐱本人菜鸡，说错勿怪</p>
+<!-- more -->
+<h1 id="一-什么是单元测试">一、什么是单元测试</h1>
+<p>单元测试是为了保证代码在基本功能正确，因为代码经常会修改，每次修改完之后如果手动测试太花费时间，单元测试写好之后可以随时跑。</p>
+<p>单元测试类似于网页设计时的代码校验，一般用白盒测试进去检测，当然也分静态和动态测试之分，单元测试主要是检测这部分代码ok不，不行就记录下来修改，这个校验过程叫回归测试，通过了单元测试，就到下一环节。<br>
+集成测试，集测相当于组装测试，把网站开发小组各自通过的模块（单元测试）组装在一起集成一个面，多个集成测试就串起一个系统，进行系统测试，最后到验收测试，大体上测试分开  单元-集成-系统-验收，四大测试流程</p>
+<p>不同的单元测试框架有不同的使用方法，一般来说会输出测试报告，告诉你哪些测试用例成功了，哪些测试用例失败了。</p>
+<h1 id="二-单元测试案例gtest">二、单元测试案例（gtest）</h1>
+<p>在vs2019中，内置gtest测试功能，选择创建新项目---&gt;点击搜索---&gt;本机单元测试---&gt;找到gtest<br>
+下面是根据一个计算器的基础功能加减乘除的作为例子讲解<br>
+<img src="https://tangyin1.github.io/post-images/1692019404735.png" alt="" loading="lazy"><br>
+在一个单元测试中，有下面三个部分组成<br>
+<img src="https://tangyin1.github.io/post-images/1692019631421.png" alt="" loading="lazy"></p>
+<h2 id="1">1.</h2>
+<p>在pch.cpp中放需要测试的函数<br>
+需要在头部包含<strong>pch.h</strong>头文件</p>
+<pre><code>//
+// pch.cpp
+//
+
+#include &quot;pch.h&quot;
+double calculate(const std::string&amp; expression, int&amp; index) {
+  int length = expression.length();
+
+  // 当前操作数
+  double operand1 = 0.0;
+
+  // 处理第一个操作数
+  while (index &lt; length &amp;&amp; (isdigit(expression[index]) || expression[index] == '.')) {
+      operand1 = operand1 * 10.0 + (expression[index] - '0');
+      index++;
+  }
+
+  // 如果已经到达表达式结尾，直接返回第一个操作数
+  if (index == length) {
+      return operand1;
+  }
+
+  char operation = expression[index];
+
+  // 跳过运算符
+  index++;
+
+  // 递归计算后续的表达式
+  double operand2 = calculate(expression, index);
+
+  // 根据运算符进行计算并返回结果
+  switch (operation) {
+  case '+':
+      return operand1 + operand2;
+  case '-':
+      return operand1 - operand2;
+  case '*':
+      return operand1 * operand2;
+  case '/':
+      if (operand2 != 0.0) {
+          return operand1 / operand2;
+      }
+      else {
+          std::cerr &lt;&lt; &quot;Error: 除数不能为零&quot; &lt;&lt; std::endl;
+          return 0.0;
+      }
+  default:
+      std::cerr &lt;&lt; &quot;Error: 无法识别，请正确输入&quot; &lt;&lt; std::endl;
+      return 0.0;
+  }
+}
+
+double calculate(const std::string&amp; expression) {
+  int index = 0;
+  return calculate(expression, index);
+}
+</code></pre>
+<h2 id="2">2.</h2>
+<p>在pch.h中<br>
+<img src="https://tangyin1.github.io/post-images/1692020040154.png" alt="" loading="lazy"></p>
+<h2 id="3">3.</h2>
+<p>在test.cpp中写测试数据代码</p>
+<pre><code>#include &quot;pch.h&quot;
+
+#include &quot;pch.h&quot;
+#include &lt;gtest/gtest.h&gt;
+
+TEST(CalculatorTest, Addition) {
+    double result = calculate(&quot;1+2*3&quot;);//测试案例
+    EXPECT_EQ(result, 7);//测试预期正确结果
+}
+
+TEST(CalculatorTest, Subtraction) {
+    double result = calculate(&quot;5-2&quot;);
+    EXPECT_EQ(result, 3);
+}
+
+TEST(CalculatorTest, Multiplication) {
+    double result = calculate(&quot;2*4&quot;);
+    EXPECT_EQ(result, 8);
+}
+
+TEST(CalculatorTest, Division) {
+    double result = calculate(&quot;10/2&quot;);
+    EXPECT_EQ(result, 5);
+}
+
+TEST(CalculatorTest, DivisionByZero) {
+    double result = calculate(&quot;5/0&quot;);
+    EXPECT_TRUE(std::isinf(result));
+}
+</code></pre>
+<h2 id="4">4.</h2>
+<p>最后点击运行，如果是在整个项目中添加到额单元测试，想要运行测试代码则右键---&gt;设为启动项即可<br>
+测试结果如下：<br>
+<img src="https://tangyin1.github.io/post-images/1692020497921.png" alt="" loading="lazy"></p>
+<h1 id="三-测试的需求">三、测试的需求</h1>
+<p>基础的测试工作，在实际开发中大多数的岗位是开发岗位，但技术含量相对较低，由于分为白盒测试跟黑盒测试，写开发代码的才是大佬，基础的说白了也就是配置好环境以后点点点，高端的测试岗位一般都在大厂，且很重要，中小型公司技术含量较低，一般都是新手进去了解整个项目开发流程的一个岗位。</p>
+<p>测试有专门的岗位，单元测试是开发人员的职责。</p>
+<p>专门测试主要做集成测试和功能测试，有专门的工具和方案</p>
+<p>基础的测试岗位说白了就是点点点，发现哪里功能和设计不一致就提bug给开发修复。</p>
+<p>测试开发岗位本质就是开发，开发测试相关的工具，以及写相关的集成代码。这种岗位国内很少，基本上只有头部的大厂会有，规模不大。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[g++安装与一些基本指令]]></title>
         <id>https://tangyin1.github.io/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/</id>

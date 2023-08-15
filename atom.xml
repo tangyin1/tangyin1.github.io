@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://tangyin1.github.io</id>
+    <id>http://localhost:4000</id>
     <title>tangyin</title>
-    <updated>2023-08-14T13:54:56.893Z</updated>
+    <updated>2023-08-15T11:18:16.878Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://tangyin1.github.io"/>
-    <link rel="self" href="https://tangyin1.github.io/atom.xml"/>
+    <link rel="alternate" href="http://localhost:4000"/>
+    <link rel="self" href="http://localhost:4000/atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>https://tangyin1.github.io/images/avatar.png</logo>
-    <icon>https://tangyin1.github.io/favicon.ico</icon>
+    <logo>http://localhost:4000/images/avatar.png</logo>
+    <icon>http://localhost:4000/favicon.ico</icon>
     <rights>All rights reserved 2023, tangyin</rights>
     <entry>
         <title type="html"><![CDATA[单元测试的一些基础知识]]></title>
-        <id>https://tangyin1.github.io/post/dan-yuan-ce-shi-de-yi-xie-ji-chu-zhi-shi/</id>
-        <link href="https://tangyin1.github.io/post/dan-yuan-ce-shi-de-yi-xie-ji-chu-zhi-shi/">
+        <id>http://localhost:4000/post/dan-yuan-ce-shi-de-yi-xie-ji-chu-zhi-shi/</id>
+        <link href="http://localhost:4000/post/dan-yuan-ce-shi-de-yi-xie-ji-chu-zhi-shi/">
         </link>
         <updated>2023-08-14T13:08:11.000Z</updated>
         <summary type="html"><![CDATA[<p>🐶🐶关于单元测试的小知识<br>
@@ -30,13 +30,13 @@
 <h1 id="二-单元测试案例gtest">二、单元测试案例（gtest）</h1>
 <p>在vs2019中，内置gtest测试功能，选择创建新项目---&gt;点击搜索---&gt;本机单元测试---&gt;找到gtest<br>
 下面是根据一个计算器的基础功能加减乘除的作为例子讲解<br>
-<img src="https://tangyin1.github.io/post-images/1692019404735.png" alt="" loading="lazy"><br>
+<img src="http://localhost:4000/post-images/1692019404735.png" alt="" loading="lazy"><br>
 在一个单元测试中，有下面三个部分组成<br>
-<img src="https://tangyin1.github.io/post-images/1692019631421.png" alt="" loading="lazy"></p>
+<img src="http://localhost:4000/post-images/1692019631421.png" alt="" loading="lazy"></p>
 <h2 id="1">1.</h2>
 <p>在pch.cpp中放需要测试的函数<br>
 需要在头部包含<strong>pch.h</strong>头文件</p>
-<pre><code>//
+<pre><code class="language-C++">//
 // pch.cpp
 //
 
@@ -95,10 +95,10 @@ double calculate(const std::string&amp; expression) {
 </code></pre>
 <h2 id="2">2.</h2>
 <p>在pch.h中<br>
-<img src="https://tangyin1.github.io/post-images/1692020040154.png" alt="" loading="lazy"></p>
+<img src="http://localhost:4000/post-images/1692020040154.png" alt="" loading="lazy"></p>
 <h2 id="3">3.</h2>
 <p>在test.cpp中写测试数据代码</p>
-<pre><code>#include &quot;pch.h&quot;
+<pre><code class="language-C++">#include &quot;pch.h&quot;
 
 #include &quot;pch.h&quot;
 #include &lt;gtest/gtest.h&gt;
@@ -131,7 +131,7 @@ TEST(CalculatorTest, DivisionByZero) {
 <h2 id="4">4.</h2>
 <p>最后点击运行，如果是在整个项目中添加到额单元测试，想要运行测试代码则右键---&gt;设为启动项即可<br>
 测试结果如下：<br>
-<img src="https://tangyin1.github.io/post-images/1692020497921.png" alt="" loading="lazy"></p>
+<img src="http://localhost:4000/post-images/1692020497921.png" alt="" loading="lazy"></p>
 <h1 id="三-测试的需求">三、测试的需求</h1>
 <p>基础的测试工作，在实际开发中大多数的岗位是开发岗位，但技术含量相对较低，由于分为白盒测试跟黑盒测试，写开发代码的才是大佬，基础的说白了也就是配置好环境以后点点点，高端的测试岗位一般都在大厂，且很重要，中小型公司技术含量较低，一般都是新手进去了解整个项目开发流程的一个岗位。</p>
 <p>测试有专门的岗位，单元测试是开发人员的职责。</p>
@@ -142,8 +142,8 @@ TEST(CalculatorTest, DivisionByZero) {
     </entry>
     <entry>
         <title type="html"><![CDATA[g++安装与一些基本指令]]></title>
-        <id>https://tangyin1.github.io/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/</id>
-        <link href="https://tangyin1.github.io/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/">
+        <id>http://localhost:4000/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/</id>
+        <link href="http://localhost:4000/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/">
         </link>
         <updated>2023-08-13T15:25:49.000Z</updated>
         <summary type="html"><![CDATA[<p>❤️❤️❤️新人小白请多指教❤️❤️❤️<br>
@@ -229,15 +229,15 @@ printf(&quot;in\n&quot;);
 // 2. 第五行代码可以被执行
 </code></pre>
 <h1 id="11-git工作流程图">11 Git工作流程图</h1>
-<figure data-type="image" tabindex="1"><img src="https://tangyin1.github.io/post-images/1691940756890.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1691940756890.png" alt="" loading="lazy"></figure>
 <h1 id="12-程序编译过程">12 程序编译过程</h1>
-<figure data-type="image" tabindex="2"><img src="https://tangyin1.github.io/post-images/1691940820451.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="http://localhost:4000/post-images/1691940820451.png" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[linux基础指令]]></title>
-        <id>https://tangyin1.github.io/post/linux-ji-chu-zhi-ling/</id>
-        <link href="https://tangyin1.github.io/post/linux-ji-chu-zhi-ling/">
+        <id>http://localhost:4000/post/linux-ji-chu-zhi-ling/</id>
+        <link href="http://localhost:4000/post/linux-ji-chu-zhi-ling/">
         </link>
         <updated>2023-08-13T13:59:42.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  这是一篇简单的<strong>linux</strong>基本指令 ！<br>
@@ -337,7 +337,7 @@ cp -r [被复制的文件夹路径] [文件夹被复制到的路径]</p>
 <h2 id="10-man">10 man</h2>
 <p>当没有手册，列如：<code>man cd</code></p>
 <p>这时候应该输入 help cd<br>
-<img src="https://tangyin1.github.io/post-images/1691938848365.png" alt="" loading="lazy"></p>
+<img src="http://localhost:4000/post-images/1691938848365.png" alt="" loading="lazy"></p>
 <p>shutdown:关机<br>
 rebot:重启<br>
 sudo -i:进入root权限</p>
@@ -362,8 +362,8 @@ sudo -i:进入root权限</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://tangyin1.github.io/post/hello-gridea/</id>
-        <link href="https://tangyin1.github.io/post/hello-gridea/">
+        <id>http://localhost:4000/post/hello-gridea/</id>
+        <link href="http://localhost:4000/post/hello-gridea/">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>

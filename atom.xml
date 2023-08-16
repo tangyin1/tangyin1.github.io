@@ -1,28 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://localhost:4000</id>
+    <id>https://tangyin1.github.io</id>
     <title>tangyin</title>
-    <updated>2023-08-16T05:52:55.761Z</updated>
+    <updated>2023-08-16T13:40:07.848Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="http://localhost:4000"/>
-    <link rel="self" href="http://localhost:4000/atom.xml"/>
+    <link rel="alternate" href="https://tangyin1.github.io"/>
+    <link rel="self" href="https://tangyin1.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>http://localhost:4000/images/avatar.png</logo>
-    <icon>http://localhost:4000/favicon.ico</icon>
+    <logo>https://tangyin1.github.io/images/avatar.png</logo>
+    <icon>https://tangyin1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, tangyin</rights>
     <entry>
         <title type="html"><![CDATA[免费搭建属于自己的博客网站]]></title>
-        <id>http://localhost:4000/post/mian-fei-da-jian-shu-yu-zi-ji-de-bo-ke-wang-zhan/</id>
-        <link href="http://localhost:4000/post/mian-fei-da-jian-shu-yu-zi-ji-de-bo-ke-wang-zhan/">
+        <id>https://tangyin1.github.io/post/mian-fei-da-jian-shu-yu-zi-ji-de-bo-ke-wang-zhan/</id>
+        <link href="https://tangyin1.github.io/post/mian-fei-da-jian-shu-yu-zi-ji-de-bo-ke-wang-zhan/">
         </link>
         <updated>2023-08-16T05:40:16.000Z</updated>
-        <content type="html"><![CDATA[<p>我也是最近才搭建起来属于自己的网站的，趁这个机会把</p>
+        <summary type="html"><![CDATA[<p>我也是最近才搭建起来属于自己的网站的，现在把这个方法记录分享下来。<br>
+🍓🍓🍓本人小白，描述不清请勿怪🍓🍓🍓<br>
+🍅🍅🍅Gridea+github+GithubDesktop🍅🍅🍅</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>我也是最近才搭建起来属于自己的网站的，现在把这个方法记录分享下来。<br>
+🍓🍓🍓本人小白，描述不清请勿怪🍓🍓🍓<br>
+🍅🍅🍅Gridea+github+GithubDesktop🍅🍅🍅</p>
+<!-- more -->
+<h1 id="一-首先需要准备的工作如下">一、首先需要准备的工作如下：</h1>
+<ol>
+<li>注册好github账号，或者gitee账号<br>
+<a href="www.github.com">github网站</a>  <a href="www.gitee.com">gitee网站</a><br>
+（由于gitee需要实名认证，一个开源网站实名真的是，非必需真的不推荐）</li>
+<li>安装好Gridea跟Git（最新版本的Gridea貌似不需要安装Git也能使用）<br>
+<a href="https://gridea.dev">Gridea官网</a>  <a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git">git官网</a></li>
+<li>在GitHub上创建好一个专门放博客内容的仓库。注册是仓库名建议使用你github上实际的用户名+github.io<br>
+列如我的是tangyin1.github.io<br>
+<img src="https://tangyin1.github.io/post-images/1692189488871.png" alt="" loading="lazy"></li>
+</ol>
+<h1 id="二-随后需要申请token">二、随后需要申请token</h1>
+<p>点击github上右上角头像---&gt;settings---&gt;划到最底下找到developer settings---&gt;点击personnal access tokens---&gt;tokens(classic)---&gt;Generate new token---输入账号密码---&gt;按照步骤来并且保存好你的token（<strong>且不要告诉别人</strong>）</p>
+<h1 id="三-其次在gridea中进行配置">三、其次在Gridea中进行配置</h1>
+<ul>
+<li>域名：Github Pages 对应的域名（例如：https://tangyin1.github.io ）</li>
+<li>仓库：你的静态文件存放的仓库（例如：tangyin1.github.io ）</li>
+<li>分支：你的 Github Pages 对应的分支（这里默认是：master ）</li>
+<li>用户名：仓库所属用户的用户名（通常就是你的 Github 账号的昵称，例如：tangyin1）</li>
+<li>邮箱：Git 推送时使用的邮箱（通常就是你的 Github 账号的邮箱，例如：1234457678@qq.com）</li>
+<li>Token: Git 推送时需要的 Token，用来向 Github 提交构建后的文件 这里的 token 就是 刚刚申请的 Github personal access tokens</li>
+<li>CNAME: 可通过这个【可选项】配置你自己的域名（例如：suremotoo.site）</li>
+<li>填写上面的信息后，点击 「检测远程连接」 按钮，如果提示 「远程连接成功」 那就 ok 啦～</li>
+</ul>
+<h1 id="四-测试连接">四、测试连接</h1>
+<p>不过由于Gridea软件的特性，测试连接时可能会出现问题，这里建议使用科学上网的方式增加测试链接的成功性。</p>
+<p>Gridea默认会出现预览功能，会在本地端口渲染好网页内容，但是这时候只有你自己可以访问，别人访问不了，点击同步按钮（由于软件特性和github网站服务器在外国，同步不成功很正常即便可以正常访问外网）</p>
+<h2 id="相关解决办法">相关解决办法：</h2>
+<p>我这里使用的GithubDesktop解决<br>
+<a href="https://desktop.github.com/">GithubDesktop下载地址</a><br>
+首先找到gridea的根目录下的output文件夹，删除里面所有内容<br>
+然后进入GithubDesktop，登录好以后进入浏览器登录，找到刚刚建立的仓库，点击Clone---&gt;Open<br>
+GithubDesktop---&gt;这时候浏览器会提示点击确认---&gt;打开GithubDesktop选择克隆仓库的存放路径---&gt;选择刚刚删除的output下<br>
+<img src="https://tangyin1.github.io/post-images/1692190587003.png" alt="" loading="lazy"><br>
+随后再次点击Gridea中的同步按钮，不论是否成功，打开GithubDesktop随便填写commit内容然后推上去（这步也需要科学上网），推送成功以后就，打开浏览器输入网址就能看到属于你的博客网站了。<br>
+也有其他办法可以解决，修改根文件内容等，当然也可以使用其他的搭建方法，比如<strong>hexo</strong></p>
+<h1 id="五-如何写博客">五、如何写博客</h1>
+<p>进入Gridea主页面，点击右上角的+号，支持makedown语法，在写作页面有一些功能按钮，上传图片，更改封面，添加表情，预览等。<br>
+关于科学上网……要是这个不会的话，那么建议您放弃本篇文章的方法，选择购买国内服务器+宝塔之类的办法搭建属于您的个人网站。可以选择腾讯云，阿里云、京东等，安全，快速，有效，唯一的缺点可能只是花了点小钱。不过学生可以进行认证，能稍微便宜点，亦或者白嫖几个月以后就算了。<br>
+Gridea有创建评论的功能，虽然我们的域名是放在国外的，但由于国家方面考虑，不建议开启该功能，当有些不良言论的时候会影响到博客网站创始人。建议使用邮箱进行联系，或者在仓库下面进行评论。<br>
+最后希望能够帮助到您顺利搭建好属于您自己的博客网站。</p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[单元测试的一些基础知识]]></title>
-        <id>http://localhost:4000/post/dan-yuan-ce-shi-de-yi-xie-ji-chu-zhi-shi/</id>
-        <link href="http://localhost:4000/post/dan-yuan-ce-shi-de-yi-xie-ji-chu-zhi-shi/">
+        <id>https://tangyin1.github.io/post/dan-yuan-ce-shi-de-yi-xie-ji-chu-zhi-shi/</id>
+        <link href="https://tangyin1.github.io/post/dan-yuan-ce-shi-de-yi-xie-ji-chu-zhi-shi/">
         </link>
         <updated>2023-08-14T13:08:11.000Z</updated>
         <summary type="html"><![CDATA[<p>🐶🐶关于单元测试的小知识<br>
@@ -39,9 +87,9 @@
 <h1 id="二-单元测试案例gtest">二、单元测试案例（gtest）</h1>
 <p>在vs2019中，内置gtest测试功能，选择创建新项目---&gt;点击搜索---&gt;本机单元测试---&gt;找到gtest<br>
 下面是根据一个计算器的基础功能加减乘除的作为例子讲解<br>
-<img src="http://localhost:4000/post-images/1692019404735.png" alt="" loading="lazy"><br>
+<img src="https://tangyin1.github.io/post-images/1692019404735.png" alt="" loading="lazy"><br>
 在一个单元测试中，有下面三个部分组成<br>
-<img src="http://localhost:4000/post-images/1692019631421.png" alt="" loading="lazy"></p>
+<img src="https://tangyin1.github.io/post-images/1692019631421.png" alt="" loading="lazy"></p>
 <h2 id="1">1.</h2>
 <p>在pch.cpp中放需要测试的函数<br>
 需要在头部包含<strong>pch.h</strong>头文件</p>
@@ -104,7 +152,7 @@ double calculate(const std::string&amp; expression) {
 </code></pre>
 <h2 id="2">2.</h2>
 <p>在pch.h中<br>
-<img src="http://localhost:4000/post-images/1692020040154.png" alt="" loading="lazy"></p>
+<img src="https://tangyin1.github.io/post-images/1692020040154.png" alt="" loading="lazy"></p>
 <h2 id="3">3.</h2>
 <p>在test.cpp中写测试数据代码</p>
 <pre><code class="language-C++">#include &quot;pch.h&quot;
@@ -140,7 +188,7 @@ TEST(CalculatorTest, DivisionByZero) {
 <h2 id="4">4.</h2>
 <p>最后点击运行，如果是在整个项目中添加到额单元测试，想要运行测试代码则右键---&gt;设为启动项即可<br>
 测试结果如下：<br>
-<img src="http://localhost:4000/post-images/1692020497921.png" alt="" loading="lazy"></p>
+<img src="https://tangyin1.github.io/post-images/1692020497921.png" alt="" loading="lazy"></p>
 <h1 id="三-测试的需求">三、测试的需求</h1>
 <p>基础的测试工作，在实际开发中大多数的岗位是开发岗位，但技术含量相对较低，由于分为白盒测试跟黑盒测试，写开发代码的才是大佬，基础的说白了也就是配置好环境以后点点点，高端的测试岗位一般都在大厂，且很重要，中小型公司技术含量较低，一般都是新手进去了解整个项目开发流程的一个岗位。</p>
 <p>测试有专门的岗位，单元测试是开发人员的职责。</p>
@@ -151,8 +199,8 @@ TEST(CalculatorTest, DivisionByZero) {
     </entry>
     <entry>
         <title type="html"><![CDATA[gdb安装与一些基本指令]]></title>
-        <id>http://localhost:4000/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/</id>
-        <link href="http://localhost:4000/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/">
+        <id>https://tangyin1.github.io/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/</id>
+        <link href="https://tangyin1.github.io/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/">
         </link>
         <updated>2023-08-13T15:25:49.000Z</updated>
         <summary type="html"><![CDATA[<p>❤️❤️❤️新人小白请多指教❤️❤️❤️<br>
@@ -238,15 +286,15 @@ printf(&quot;in\n&quot;);
 // 2. 第五行代码可以被执行
 </code></pre>
 <h1 id="11-git工作流程图">11 Git工作流程图</h1>
-<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1691940756890.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://tangyin1.github.io/post-images/1691940756890.png" alt="" loading="lazy"></figure>
 <h1 id="12-程序编译过程">12 程序编译过程</h1>
-<figure data-type="image" tabindex="2"><img src="http://localhost:4000/post-images/1691940820451.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://tangyin1.github.io/post-images/1691940820451.png" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[linux基础指令]]></title>
-        <id>http://localhost:4000/post/linux-ji-chu-zhi-ling/</id>
-        <link href="http://localhost:4000/post/linux-ji-chu-zhi-ling/">
+        <id>https://tangyin1.github.io/post/linux-ji-chu-zhi-ling/</id>
+        <link href="https://tangyin1.github.io/post/linux-ji-chu-zhi-ling/">
         </link>
         <updated>2023-08-13T13:59:42.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  这是一篇简单的<strong>linux</strong>基本指令 ！<br>
@@ -346,7 +394,7 @@ cp -r [被复制的文件夹路径] [文件夹被复制到的路径]</p>
 <h2 id="10-man">10 man</h2>
 <p>当没有手册，列如：<code>man cd</code></p>
 <p>这时候应该输入 help cd<br>
-<img src="http://localhost:4000/post-images/1691938848365.png" alt="" loading="lazy"></p>
+<img src="https://tangyin1.github.io/post-images/1691938848365.png" alt="" loading="lazy"></p>
 <p>shutdown:关机<br>
 rebot:重启<br>
 sudo -i:进入root权限</p>
@@ -371,8 +419,8 @@ sudo -i:进入root权限</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>http://localhost:4000/post/hello-gridea/</id>
-        <link href="http://localhost:4000/post/hello-gridea/">
+        <id>https://tangyin1.github.io/post/hello-gridea/</id>
+        <link href="https://tangyin1.github.io/post/hello-gridea/">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>

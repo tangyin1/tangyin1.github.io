@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tangyin1.github.io</id>
     <title>tangyin</title>
-    <updated>2023-09-16T13:55:47.397Z</updated>
+    <updated>2023-09-20T15:39:15.313Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tangyin1.github.io"/>
     <link rel="self" href="https://tangyin1.github.io/atom.xml"/>
@@ -10693,8 +10693,53 @@ cp -r [被复制的文件夹路径] [文件夹被复制到的路径]</p>
 <p>当没有手册，列如：<code>man cd</code></p>
 <p>这时候应该输入 help cd<br>
 <img src="https://tangyin1.github.io/post-images/1691938848365.png" alt="" loading="lazy"></p>
-<p>shutdown:关机<br>
-rebot:重启<br>
+<h2 id="11-chomd">11 chomd</h2>
+<p>可以修改文件的权限<br>
+文件的基本权限包括：</p>
+<ul>
+<li>r (只读)</li>
+<li>w (写入)</li>
+<li>x(执行)<br>
+chmod和标志+x，然后键入要修改其权限的文件</li>
+</ul>
+<h2 id="12-exit">12 exit</h2>
+<p>退出命令，可在进入root后想回到普通用户模式直接使用exit</p>
+<h2 id="13-shutdown">13 shutdown</h2>
+<p>关机指令，可以指定时间关机，或者多少时间后关机<br>
+shutdown now ：立即关机</p>
+<h2 id="14-htop">14 htop</h2>
+<p>htop是一种交互式流程查看器，可让您直接从终端管理计算机的资源。在大多数情况下，默认情况下它并没有安装，所以请确保在下载页面上阅读更多关于它的信息。<br>
+<img src="https://tangyin1.github.io/post-images/1695223295065.png" alt="" loading="lazy"></p>
+<h2 id="15-echo">15 echo</h2>
+<p>在终端中直接显示文件内容</p>
+<h2 id="16-cat">16 cat</h2>
+<p>cat 是“concatenate”的缩写，用于直接从终端创建、查看和连接文件。它主要用于在不打开图形文本编辑器的情况下预览文件</p>
+<h2 id="17-kill">17 kill</h2>
+<p>杀死进程<br>
+当一个程序没有响应，并且你不能用任何方法关闭它时，这是很烦人的。幸运的是，kill命令解决了这类问题。<br>
+简单地说，kill向终止它的进程发送一个TERM或kill信号</p>
+<h2 id="18-ping">18 ping</h2>
+<p>ping 是用于测试网络连接的最流行的网络终端工具。ping 有很多选项，但在大多数情况下，您将使用它来请求域或IP地址</p>
+<h2 id="19-vim">19 vim</h2>
+<p>vim 是一个免费的开源终端文本编辑器，从90年代开始使用。它允许您使用高效的键绑定编辑纯文本文件。<br>
+有些人认为使用困难——退出VIM是最常见的StackOverflow问题之一，但一旦习惯了，它就成为命令行中最好的盟友。<br>
+要启动Vim，只需键入：<br>
+<code>vim</code></p>
+<h2 id="20-history">20 history</h2>
+<p>如果你正在努力记住一个命令，history就会派上用场。此命令显示一个枚举列表，其中包含您过去使用过的命令</p>
+<h2 id="21-which">21 which</h2>
+<p>which命令输出shell命令的完整路径。如果它不能识别给定的命令，它将抛出一个错误</p>
+<p>##22 shred<br>
+如果您希望文件几乎无法恢复，shred 可以帮助您完成此任务。此命令会重复覆盖文件的内容，因此，给定的文件极难恢复。<br>
+如果要立即删除文件，可以使用-u标志：</p>
+<p><code>shred -u file_to_shred.txt</code></p>
+<p>##23 head<br>
+这是对tail命令的补充。head输出文本文件的前10行，但您可以使用-n标志设置要显示的任意行数：</p>
+<pre><code>head long.txt
+head -n 5 long.txt
+</code></pre>
+<p>##24</p>
+<p>rebot:重启<br>
 sudo -i:进入root权限</p>
 <p>拓展：<br>
 关于tree<br>

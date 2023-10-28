@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>搜索方法分享 | tangyin</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://tangyin1.github.io/favicon.ico?v=1698498301272">
+<link rel="stylesheet" href="https://tangyin1.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="关于现在搜索能力的一些信息
+
+搜索方式的选择
+谷歌&gt;bing&gt;微信公众号&gt;短视频平台&gt;搜狗、百度等一系列国内搜索引擎
+搜索技巧
+1.关键字 +&quot;&quot;  （限定关键字）
+有时候想快速搜索到自己想要的东..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://tangyin1.github.io">
+        <img src="https://tangyin1.github.io/images/avatar.png?v=1698498301272" class="site-logo">
+        <h1 class="site-title">tangyin</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      welcome <a href="https://github.com/getgridea/gridea" target="_blank">mygithub</a> | <a class="rss" href="https://tangyin1.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">搜索方法分享</h2>
+            <div class="post-date">2023-10-28</div>
+            
+              <div class="feature-container" style="background-image: url('https://tangyin1.github.io/post-images/sou-suo-fang-fa-fen-xiang.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <p>关于现在搜索能力的一些信息</p>
+<!-- more -->
+<h3 id="搜索方式的选择">搜索方式的选择</h3>
+<h5 id="谷歌bing微信公众号短视频平台搜狗-百度等一系列国内搜索引擎">谷歌&gt;bing&gt;微信公众号&gt;短视频平台&gt;搜狗、百度等一系列国内搜索引擎</h5>
+<h3 id="搜索技巧">搜索技巧</h3>
+<h4 id="1关键字-限定关键字">1.关键字 +&quot;&quot;  （限定关键字）</h4>
+<p>有时候想快速搜索到自己<font color='red'>想要</font>的东西，但有时会被大量搜索信息覆盖掉自己想要的信息时，这时只需要在需要搜索的词语加上英文的双引号就可以。</p>
+<p>列如你想搜索  <font color='red'>易阳千喜</font> 并不是那个明星 <strong>易烊千玺</strong> 时，不加&quot;&quot;会出现大量关于易烊千玺的信息，这时候加上<font color='red'>&quot;&quot;</font>会减少大量不需要的信息。</p>
+<h3 id="2intitle-限定标题">2.intitle （限定标题）</h3>
+<p>在检索信息的时候，一般都是标题加上精简内容出现在我们的面前，有时候搜索相关标题会更好的让我们找到相关的文章或者其他内容。</p>
+<p>使用方法： intitle :+你所需要搜索的内容</p>
+<p>但这种只能限定一个关键字段</p>
+<h3 id="3allintitle-限定标题多个关键字">3.allintitle (限定标题多个关键字)</h3>
+<p>使用方法与intitle一样，但可以包含多个关键字</p>
+<h3 id="4intext限定内容关键字">4.intext(限定内容关键字)</h3>
+<p>搜索相关文章信息中的关键字，由于有时候网上标题党过多，内容并没有自己想要的内容，这时候再加上intext会更加精准的搜索到自己想要的内容，比如想要搜索标题含有李佳琪但内容中含有哭泣的信息，这时候就要搜索栏上输入</p>
+<p>intitle:&quot;小杨哥&quot; intext:&quot;哭泣&quot;</p>
+<h3 id="5inurl限定网址关键字">5.inurl(限定网址关键字)</h3>
+<p>例如：搜索</p>
+<p>李子柒 inurl:cctv</p>
+<p>搜索到关于的都是关于cctv对李子柒的采访报道等</p>
+<p>在这里再加一个网站：SimilarSites 可以搜索一个网站相似内容的网址、例如在里面搜索：www.bilibili.com</p>
+<p>会出现youtube，知乎等和b站有着相似度的网址。</p>
+<h3 id="6site限定网址来源">6：site(限定网址来源)</h3>
+<p>后面需要接完整的域名，例如cctv.com bilibili.com</p>
+<h3 id="7imagesize-限定图片尺寸大小">7.imagesize (限定图片尺寸大小)</h3>
+<p>搜索语法：【搜索图片】+imagesize:[尺寸大小]</p>
+<p>列如：</p>
+<p>黑丝 imagesize:2903x1440</p>
+<h3 id="8filetype-限定文件格式">8.filetype （限定文件格式）</h3>
+<p>例如：研究报告 filetype:pdf</p>
+<p>在搜索图片的时候也可以限定要的格式 例如 小猫咪 filetuype:jpg</p>
+<h2 id="关于资源搜索方法">关于资源搜索方法</h2>
+<h3 id="1电子书">1.电子书</h3>
+<p>在国内建议使用，微信读书、得到、网站的话使用鸠摩搜书</p>
+<p>使用谷歌的话，就直接搜  best free ebook download sistes 大部分出现的z-library      manybooks等</p>
+<p>论文搜索 ：谷歌学术  scihub</p>
+<h3 id="2ppt">2.PPT</h3>
+<p>1.iSlide插件</p>
+<p>2.canva.com（这是个非常好用的网址）</p>
+<h3 id="3软件">3.软件</h3>
+<p>https://alternativeto.net/</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://tangyin1.github.io/post/xian-cheng-chi-de-yi-xie-xiang-guan-zhi-shi/">
+                  <h3 class="post-title">
+                    线程池的一些相关知识
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

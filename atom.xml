@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tangyin1.github.io</id>
     <title>tangyin</title>
-    <updated>2023-10-18T07:04:36.919Z</updated>
+    <updated>2023-10-28T13:05:26.343Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tangyin1.github.io"/>
     <link rel="self" href="https://tangyin1.github.io/atom.xml"/>
@@ -10,6 +10,58 @@
     <logo>https://tangyin1.github.io/images/avatar.png</logo>
     <icon>https://tangyin1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, tangyin</rights>
+    <entry>
+        <title type="html"><![CDATA[搜索方法分享]]></title>
+        <id>https://tangyin1.github.io/post/sou-suo-fang-fa-fen-xiang/</id>
+        <link href="https://tangyin1.github.io/post/sou-suo-fang-fa-fen-xiang/">
+        </link>
+        <updated>2023-10-28T13:00:20.000Z</updated>
+        <summary type="html"><![CDATA[<p>关于现在搜索能力的一些信息</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>关于现在搜索能力的一些信息</p>
+<!-- more -->
+<h3 id="搜索方式的选择">搜索方式的选择</h3>
+<h5 id="谷歌bing微信公众号短视频平台搜狗-百度等一系列国内搜索引擎">谷歌&gt;bing&gt;微信公众号&gt;短视频平台&gt;搜狗、百度等一系列国内搜索引擎</h5>
+<h3 id="搜索技巧">搜索技巧</h3>
+<h4 id="1关键字-限定关键字">1.关键字 +&quot;&quot;  （限定关键字）</h4>
+<p>有时候想快速搜索到自己<font color='red'>想要</font>的东西，但有时会被大量搜索信息覆盖掉自己想要的信息时，这时只需要在需要搜索的词语加上英文的双引号就可以。</p>
+<p>列如你想搜索  <font color='red'>易阳千喜</font> 并不是那个明星 <strong>易烊千玺</strong> 时，不加&quot;&quot;会出现大量关于易烊千玺的信息，这时候加上<font color='red'>&quot;&quot;</font>会减少大量不需要的信息。</p>
+<h3 id="2intitle-限定标题">2.intitle （限定标题）</h3>
+<p>在检索信息的时候，一般都是标题加上精简内容出现在我们的面前，有时候搜索相关标题会更好的让我们找到相关的文章或者其他内容。</p>
+<p>使用方法： intitle :+你所需要搜索的内容</p>
+<p>但这种只能限定一个关键字段</p>
+<h3 id="3allintitle-限定标题多个关键字">3.allintitle (限定标题多个关键字)</h3>
+<p>使用方法与intitle一样，但可以包含多个关键字</p>
+<h3 id="4intext限定内容关键字">4.intext(限定内容关键字)</h3>
+<p>搜索相关文章信息中的关键字，由于有时候网上标题党过多，内容并没有自己想要的内容，这时候再加上intext会更加精准的搜索到自己想要的内容，比如想要搜索标题含有李佳琪但内容中含有哭泣的信息，这时候就要搜索栏上输入</p>
+<p>intitle:&quot;小杨哥&quot; intext:&quot;哭泣&quot;</p>
+<h3 id="5inurl限定网址关键字">5.inurl(限定网址关键字)</h3>
+<p>例如：搜索</p>
+<p>李子柒 inurl:cctv</p>
+<p>搜索到关于的都是关于cctv对李子柒的采访报道等</p>
+<p>在这里再加一个网站：SimilarSites 可以搜索一个网站相似内容的网址、例如在里面搜索：www.bilibili.com</p>
+<p>会出现youtube，知乎等和b站有着相似度的网址。</p>
+<h3 id="6site限定网址来源">6：site(限定网址来源)</h3>
+<p>后面需要接完整的域名，例如cctv.com bilibili.com</p>
+<h3 id="7imagesize-限定图片尺寸大小">7.imagesize (限定图片尺寸大小)</h3>
+<p>搜索语法：【搜索图片】+imagesize:[尺寸大小]</p>
+<p>列如：</p>
+<p>黑丝 imagesize:2903x1440</p>
+<h3 id="8filetype-限定文件格式">8.filetype （限定文件格式）</h3>
+<p>例如：研究报告 filetype:pdf</p>
+<p>在搜索图片的时候也可以限定要的格式 例如 小猫咪 filetuype:jpg</p>
+<h2 id="关于资源搜索方法">关于资源搜索方法</h2>
+<h3 id="1电子书">1.电子书</h3>
+<p>在国内建议使用，微信读书、得到、网站的话使用鸠摩搜书</p>
+<p>使用谷歌的话，就直接搜  best free ebook download sistes 大部分出现的z-library      manybooks等</p>
+<p>论文搜索 ：谷歌学术  scihub</p>
+<h3 id="2ppt">2.PPT</h3>
+<p>1.iSlide插件</p>
+<p>2.canva.com（这是个非常好用的网址）</p>
+<h3 id="3软件">3.软件</h3>
+<p>https://alternativeto.net/</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[线程池的一些相关知识]]></title>
         <id>https://tangyin1.github.io/post/xian-cheng-chi-de-yi-xie-xiang-guan-zhi-shi/</id>
@@ -11024,38 +11076,6 @@ hard link：权限比较少，但安全且不消耗内存，删除连接后不�
 使用sudo -i切换到root       （这次修改的密码时12345678）<br>
 然后 <code>cp tree /bin</code><br>
 完成</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://tangyin1.github.io/post/hello-gridea/</id>
-        <link href="https://tangyin1.github.io/post/hello-gridea/">
-        </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
 ]]></content>
     </entry>
 </feed>

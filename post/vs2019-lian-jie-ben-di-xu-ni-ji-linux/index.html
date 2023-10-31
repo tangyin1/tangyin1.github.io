@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>vs2019连接本地虚拟机linux | tangyin</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://tangyin1.github.io/favicon.ico?v=1698750922678">
+<link rel="stylesheet" href="https://tangyin1.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="今天准备使用vs2019远程连接Linux进行一些小玩意，结果死活连不上。捣鼓了一会终于成功！
+
+正常的步骤是 先在linux下下载ssh
+执行
+sudo apt install openssh-server----下载ssh
+sudo s..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://tangyin1.github.io">
+        <img src="https://tangyin1.github.io/images/avatar.png?v=1698750922678" class="site-logo">
+        <h1 class="site-title">tangyin</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      welcome <a href="https://github.com/getgridea/gridea" target="_blank">mygithub</a> | <a class="rss" href="https://tangyin1.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">vs2019连接本地虚拟机linux</h2>
+            <div class="post-date">2023-10-31</div>
+            
+              <div class="feature-container" style="background-image: url('https://tangyin1.github.io/post-images/vs2019-lian-jie-ben-di-xu-ni-ji-linux.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <p>今天准备使用vs2019远程连接Linux进行一些小玩意，结果死活连不上。捣鼓了一会终于成功！</p>
+<!-- more -->
+<p>正常的步骤是 先在linux下下载ssh</p>
+<p>执行</p>
+<p><code>sudo apt install openssh-server</code>----下载ssh</p>
+<p><code>sudo service ssh start</code>----启动ssh服务</p>
+<p>然后</p>
+<p>在 Visual Studio 中，依次选择菜单栏上的“工具”&gt;“选项”，以打开“选项”对话框。 然后，依次选择“跨平台”&gt;“连接管理器”，以打开“连接管理器”对话框</p>
+<p>在“连接管理器”对话框中，选择“添加” 按钮，以添加新连接</p>
+<p>然后按照要求填主机名 用户名 密码</p>
+<p>正常来说到了这一步基本上就没啥了，会添加成功。但我今天死活都添加不上。</p>
+<p>后面捣鼓了好久才发现一个解决办法    那就是    -------防火墙</p>
+<p>可能是Windows和linux下面的防火墙把22端口给墙了，</p>
+<p>于是乎我直奔防火墙进行修改</p>
+<p>在windows下面</p>
+<p>要在防火墙上打开SSH端口，你可以按照以下步骤进行操作：</p>
+<ol>
+<li>打开开始菜单并搜索&quot;Windows Defender 防火墙&quot;，然后打开防火墙设置。</li>
+<li>在防火墙设置窗口中，点击&quot;高级设置&quot;链接。</li>
+<li>在高级安全设置窗口中，你将看到&quot;入站规则&quot;和&quot;出站规则&quot;两个选项。这些规则控制了进入和离开计算机的网络流量。</li>
+<li>如果你的虚拟机是在本地网络中，你需要在&quot;入站规则&quot;中创建一个新规则。右键点击&quot;入站规则&quot;，然后选择&quot;新建规则&quot;。</li>
+<li>在新建入站规则向导中，选择&quot;端口&quot;选项，然后点击&quot;下一步&quot;。</li>
+<li>选择&quot;特定本地端口&quot;，并输入SSH使用的端口号（默认为22）。点击&quot;下一步&quot;。</li>
+<li>选择&quot;允许连接&quot;，然后点击&quot;下一步&quot;。</li>
+<li>在&quot;配置配置文件&quot;中，选择适用于你的网络配置的选项。如果你不确定，可以选择默认选项&quot;域网络、专用网络和公用网络&quot;。点击&quot;下一步&quot;。</li>
+<li>输入规则的名称和描述（可选），然后点击&quot;完成&quot;。</li>
+</ol>
+<p>在linux下</p>
+<p>进入root模式</p>
+<p>检查防火墙规则：运行以下命令查看当前的iptables规则：</p>
+<p><code>sudo iptables -L</code></p>
+<p>然后一看好像真没关于ssh 22的端口</p>
+<p>于是</p>
+<ul>
+<li>
+<p>允许SSH连接：如果没有针对SSH连接的规则，可以运行以下命令添加规则：</p>
+<pre><code>sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+</code></pre>
+</li>
+<li>
+<p>保存规则：如果你的Linux虚拟机重启后需要保留规则，你需要保存iptables规则。运行以下命令保存规则：</p>
+<pre><code>sudo iptables-save &gt; /etc/iptables/rules.v4
+</code></pre>
+</li>
+</ul>
+<p>然后再使用vs2019连接，连接成功！</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://tangyin1.github.io/post/sou-suo-fang-fa-fen-xiang/">
+                  <h3 class="post-title">
+                    搜索方法分享
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

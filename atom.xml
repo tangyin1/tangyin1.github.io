@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tangyin1.github.io</id>
     <title>tangyin</title>
-    <updated>2023-10-28T13:06:33.638Z</updated>
+    <updated>2023-10-31T11:15:34.275Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tangyin1.github.io"/>
     <link rel="self" href="https://tangyin1.github.io/atom.xml"/>
@@ -10,6 +10,62 @@
     <logo>https://tangyin1.github.io/images/avatar.png</logo>
     <icon>https://tangyin1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2023, tangyin</rights>
+    <entry>
+        <title type="html"><![CDATA[vs2019连接本地虚拟机linux]]></title>
+        <id>https://tangyin1.github.io/post/vs2019-lian-jie-ben-di-xu-ni-ji-linux/</id>
+        <link href="https://tangyin1.github.io/post/vs2019-lian-jie-ben-di-xu-ni-ji-linux/">
+        </link>
+        <updated>2023-10-31T11:13:55.000Z</updated>
+        <summary type="html"><![CDATA[<p>今天准备使用vs2019远程连接Linux进行一些小玩意，结果死活连不上。捣鼓了一会终于成功！</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>今天准备使用vs2019远程连接Linux进行一些小玩意，结果死活连不上。捣鼓了一会终于成功！</p>
+<!-- more -->
+<p>正常的步骤是 先在linux下下载ssh</p>
+<p>执行</p>
+<p><code>sudo apt install openssh-server</code>----下载ssh</p>
+<p><code>sudo service ssh start</code>----启动ssh服务</p>
+<p>然后</p>
+<p>在 Visual Studio 中，依次选择菜单栏上的“工具”&gt;“选项”，以打开“选项”对话框。 然后，依次选择“跨平台”&gt;“连接管理器”，以打开“连接管理器”对话框</p>
+<p>在“连接管理器”对话框中，选择“添加” 按钮，以添加新连接</p>
+<p>然后按照要求填主机名 用户名 密码</p>
+<p>正常来说到了这一步基本上就没啥了，会添加成功。但我今天死活都添加不上。</p>
+<p>后面捣鼓了好久才发现一个解决办法    那就是    -------防火墙</p>
+<p>可能是Windows和linux下面的防火墙把22端口给墙了，</p>
+<p>于是乎我直奔防火墙进行修改</p>
+<p>在windows下面</p>
+<p>要在防火墙上打开SSH端口，你可以按照以下步骤进行操作：</p>
+<ol>
+<li>打开开始菜单并搜索&quot;Windows Defender 防火墙&quot;，然后打开防火墙设置。</li>
+<li>在防火墙设置窗口中，点击&quot;高级设置&quot;链接。</li>
+<li>在高级安全设置窗口中，你将看到&quot;入站规则&quot;和&quot;出站规则&quot;两个选项。这些规则控制了进入和离开计算机的网络流量。</li>
+<li>如果你的虚拟机是在本地网络中，你需要在&quot;入站规则&quot;中创建一个新规则。右键点击&quot;入站规则&quot;，然后选择&quot;新建规则&quot;。</li>
+<li>在新建入站规则向导中，选择&quot;端口&quot;选项，然后点击&quot;下一步&quot;。</li>
+<li>选择&quot;特定本地端口&quot;，并输入SSH使用的端口号（默认为22）。点击&quot;下一步&quot;。</li>
+<li>选择&quot;允许连接&quot;，然后点击&quot;下一步&quot;。</li>
+<li>在&quot;配置配置文件&quot;中，选择适用于你的网络配置的选项。如果你不确定，可以选择默认选项&quot;域网络、专用网络和公用网络&quot;。点击&quot;下一步&quot;。</li>
+<li>输入规则的名称和描述（可选），然后点击&quot;完成&quot;。</li>
+</ol>
+<p>在linux下</p>
+<p>进入root模式</p>
+<p>检查防火墙规则：运行以下命令查看当前的iptables规则：</p>
+<p><code>sudo iptables -L</code></p>
+<p>然后一看好像真没关于ssh 22的端口</p>
+<p>于是</p>
+<ul>
+<li>
+<p>允许SSH连接：如果没有针对SSH连接的规则，可以运行以下命令添加规则：</p>
+<pre><code>sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+</code></pre>
+</li>
+<li>
+<p>保存规则：如果你的Linux虚拟机重启后需要保留规则，你需要保存iptables规则。运行以下命令保存规则：</p>
+<pre><code>sudo iptables-save &gt; /etc/iptables/rules.v4
+</code></pre>
+</li>
+</ul>
+<p>然后再使用vs2019连接，连接成功！</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[搜索方法分享]]></title>
         <id>https://tangyin1.github.io/post/sou-suo-fang-fa-fen-xiang/</id>
@@ -10899,183 +10955,6 @@ printf(&quot;in\n&quot;);
 https://learngitbranching.js.org/?locale=zh_CN</p>
 <h1 id="12-程序编译过程">12 程序编译过程</h1>
 <figure data-type="image" tabindex="1"><img src="https://tangyin1.github.io/post-images/1691940820451.png" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[linux基础指令]]></title>
-        <id>https://tangyin1.github.io/post/linux-ji-chu-zhi-ling/</id>
-        <link href="https://tangyin1.github.io/post/linux-ji-chu-zhi-ling/">
-        </link>
-        <updated>2023-08-13T13:59:42.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  这是一篇简单的<strong>linux</strong>基本指令 ！<br>
-✍️ 新人小白请多指教</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  这是一篇简单的<strong>linux</strong>基本指令 ！<br>
-✍️ 新人小白请多指教</p>
-<!-- more -->
-<h2 id="常见文件夹意义"><strong>常见文件夹意义</strong>：</h2>
-<p><strong>Bin</strong>：全称binary，含义是二进制。该目录中存储的都是一些二进制文件，文件都是可以被运行的。<br>
-<strong>Dev</strong>：该目录中主要存放的是外接设备，例如盘、其他的光盘等。在其中的外接设备是不能直接被使用的，需要挂载（类似window下的分配盘符）。<br>
-<strong>Etc</strong>：该目录主要存储一些配置文件。<br>
-<strong>Home</strong>：表示“家”，表示除了root用户以外其他用户的家目录，类似于windows下的User/用户目录。<br>
-<strong>Proc</strong>：全称process，表示进程，该目录中存储的是Linux运行时候的进程。<br>
-<strong>Root</strong>：该目录是root用户自己的家目录。<br>
-<strong>Sbin</strong>：全称super binary，该目录也是存储一些可以被执行的二进制文件，但是必须得有super权限的用户才能执行。<br>
-<strong>Tmp</strong>：表示“临时”的，当系统运行时候产生的临时文件会在这个目录存着。<br>
-<strong>Usr</strong>：存放的是用户自己安装的软件。类似于windows下的program files。<br>
-<strong>Var</strong>：存放的程序/系统的日志文件的目录。<br>
-<strong>Mnt</strong>：当外接设备需要挂载的时候，就需要挂载到mnt目录下<br>
-<strong>Boot</strong>：系统开机启动的文件<br>
-命令格式：【命令】空格【选项】空格【操作对象】<br>
-Eg:<code>ls -lah /home</code></p>
-<h3 id="重要指令"><strong>重要指令</strong>*</h3>
-<h2 id="1pwd">1：pwd</h2>
-<p><code>pwd （print current working directory）</code><br>
-打印当前终端所在的目录</p>
-<h2 id="2ls">2：ls</h2>
-<p><code>ls（list directory contents）</code><br>
-列出当前工作目录下的所有文件/文件夹的名称<br>
-用法：<br>
-ls ./ #表示当前目录下<br>
-ls.// #表示上一级目录下<br>
-ls -lah /home<br>
-解释：</p>
-<ol>
-<li>-l：表示list 表示以详细的列表的形式进行展示</li>
-<li>-a：all，表示显示所有的文件夹/文件（包含了隐藏文件）</li>
-<li>-h：表示以可读性较高的形式显示</li>
-</ol>
-<p>当显示出文件以“d”开头则为文件夹<br>
-当显示出文件以“-”开头则说明为文件<br>
-当显示出文件以“.”开头则说明是隐藏文件</p>
-<h2 id="3-ctrll-清屏">3 ctrl+l  (清屏）</h2>
-<h2 id="4-cd">4 cd</h2>
-<p><code>cd（change directory）</code>切换到当前的工作目录<br>
-用法1；cd  cd~    #直接进入当前的home目录下【很常用】</p>
-<p>用法2：cd【相对路径】<br>
-#进入到上级目录下<br>
-<code>cd ..</code><br>
-#进入到上级目录中的local目录下<br>
-<code>cd ../local</code></p>
-<p>PS:当输入cd /etc 后输入tab键</p>
-<p>然后输入y确定之后</p>
-<p>在键盘上输入open（不会有显示）</p>
-<h2 id="5-midir">5 midir</h2>
-<p><code>midir：make directories</code>创建目录<br>
-用法1：mkdir a#在当前路径下创建了一个a的文件夹（目录）<br>
-用法2：mkdir -p a/b/c #在当前路径下先创建了一个a然后在a下面创建b 然后在b下面创建了c<br>
-用法3：直接创建多个目录<br>
-<code>mkdir a b c</code></p>
-<h2 id="6-touch">6 touch</h2>
-<p><code>touch change file timestamps</code><br>
-作用：创建新文件<br>
-touch是创建文件 mkdir是创建文件夹</p>
-<h4 id="1">1.</h4>
-<p>touch的作用本来不是创建文件，而是将指定文件的修改时间设置为当前时间。就是假<br>
-装“碰”（touch）了一下这个文件，假装文件被“修改”了，于是文件的修改时间就是被设置为当前时间。</p>
-<h4 id="2">2.</h4>
-<p>这带来了一个副作用，就是当touch一个不存在的文件的时候，它会创建这个文件。然后，由于touch已经可以完成创建文件的功能了，就不再需要一个单独的create了。</p>
-<p>用法1：<br>
-<code>touch linux.txt</code> 直接在当前目录下创建了一个linux的txt文件<br>
-<code>touch home/tangyin/myfile</code>  在home/tangyin下面创建了一个myfile文件<br>
-用法2：<br>
-<code>touch file file.txt</code>  在当前目录下创建了file 跟file.txt两个文件</p>
-<h2 id="7-rm">7 rm</h2>
-<p><code>rm （remove files or directories）</code><br>
-删除文件</p>
-<ol>
-<li>删除文件<br>
-直接删除<br>
-<code>rm myfile</code><br>
-<code>rm /user/myfile</code></li>
-<li>移除目录<br>
-<code>rm -rf myfolder</code> 删除当前路径下的abc文件<br>
-<code>rm -rf /usr/myfolder</code>  删除/usr路径下的abc文件</li>
-</ol>
-<h2 id="8-cp">8 cp</h2>
-<p>cp：复制文件到指定位置<br>
-用法1：<br>
-cp [被复制的文件路径] [文件被复制到的路径]<br>
-用法二：<br>
-cp -r [被复制的文件夹路径] [文件夹被复制到的路径]</p>
-<p>文件夹要加上-r  直接复制文件则直接</p>
-<h2 id="9-mv">9 mv</h2>
-<p>mv（move）移动文件或者重命名    ----剪切<br>
-当文件在同一个文件夹下，没有移动到别处时，重命名</p>
-<h2 id="10-man">10 man</h2>
-<p>当没有手册，列如：<code>man cd</code></p>
-<p>这时候应该输入 help cd<br>
-<img src="https://tangyin1.github.io/post-images/1691938848365.png" alt="" loading="lazy"></p>
-<h2 id="11-chomd">11 chomd</h2>
-<p>可以修改文件的权限<br>
-文件的基本权限包括：</p>
-<ul>
-<li>r (只读)</li>
-<li>w (写入)</li>
-<li>x(执行)<br>
-chmod和标志+x，然后键入要修改其权限的文件</li>
-</ul>
-<h2 id="12-exit">12 exit</h2>
-<p>退出命令，可在进入root后想回到普通用户模式直接使用exit</p>
-<h2 id="13-shutdown">13 shutdown</h2>
-<p>关机指令，可以指定时间关机，或者多少时间后关机<br>
-shutdown now ：立即关机</p>
-<h2 id="14-htop">14 htop</h2>
-<p>htop是一种交互式流程查看器，可让您直接从终端管理计算机的资源。在大多数情况下，默认情况下它并没有安装，所以请确保在下载页面上阅读更多关于它的信息。<br>
-<img src="https://tangyin1.github.io/post-images/1695223295065.png" alt="" loading="lazy"></p>
-<h2 id="15-echo">15 echo</h2>
-<p>在终端中直接显示文件内容</p>
-<h2 id="16-cat">16 cat</h2>
-<p>cat 是“concatenate”的缩写，用于直接从终端创建、查看和连接文件。它主要用于在不打开图形文本编辑器的情况下预览文件</p>
-<h2 id="17-kill">17 kill</h2>
-<p>杀死进程<br>
-当一个程序没有响应，并且你不能用任何方法关闭它时，这是很烦人的。幸运的是，kill命令解决了这类问题。<br>
-简单地说，kill向终止它的进程发送一个TERM或kill信号</p>
-<h2 id="18-ping">18 ping</h2>
-<p>ping 是用于测试网络连接的最流行的网络终端工具。ping 有很多选项，但在大多数情况下，您将使用它来请求域或IP地址</p>
-<h2 id="19-vim">19 vim</h2>
-<p>vim 是一个免费的开源终端文本编辑器，从90年代开始使用。它允许您使用高效的键绑定编辑纯文本文件。<br>
-有些人认为使用困难——退出VIM是最常见的StackOverflow问题之一，但一旦习惯了，它就成为命令行中最好的盟友。<br>
-要启动Vim，只需键入：<br>
-<code>vim</code></p>
-<h2 id="20-history">20 history</h2>
-<p>如果你正在努力记住一个命令，history就会派上用场。此命令显示一个枚举列表，其中包含您过去使用过的命令</p>
-<h2 id="21-which">21 which</h2>
-<p>which命令输出shell命令的完整路径。如果它不能识别给定的命令，它将抛出一个错误</p>
-<p>##22 shred<br>
-如果您希望文件几乎无法恢复，shred 可以帮助您完成此任务。此命令会重复覆盖文件的内容，因此，给定的文件极难恢复。<br>
-如果要立即删除文件，可以使用-u标志：</p>
-<p><code>shred -u file_to_shred.txt</code></p>
-<p>##23 head<br>
-这是对tail命令的补充。head输出文本文件的前10行，但您可以使用-n标志设置要显示的任意行数：</p>
-<pre><code>head long.txt
-head -n 5 long.txt
-</code></pre>
-<p>##24 find<br>
-find命令根据regex表达式在目录层次结构中搜索文件。</p>
-<p>rebot:重启<br>
-sudo -i:进入root权限</p>
-<h2 id="25-ln">25 ln</h2>
-<p>直接链接文件，<br>
-hard link：权限比较少，但安全且不消耗内存，删除连接后不会对文件进行删除<br>
-另一种连接类似Windows下的创建快捷方式， 需要【ln -s 文件名】删除之后不能正常打开文件，且创建连接会消耗一部分存储空间</p>
-<p>拓展：<br>
-关于tree<br>
-安装tree命令之前需要安装make命令</p>
-<ol>
-<li>安装make命令：<br>
-首先在终端更新所有软件：sudo apt-get update<br>
-然后输入：sudo apt install make<br>
-最后等待安装，若出现需要确认的选项选择确认</li>
-<li>安装tree：<br>
-首先下载 输入：<br>
-<code>wget http://mama.indstate.edu/users/ice/tree/src/tree-1.7.0.tgz</code></li>
-</ol>
-<p>然后解压：<code>tar zxvf tree-1.7.0.tgz</code><br>
-进入目录：<code>cd tree -1.7.0</code><br>
-使用sudo -i切换到root       （这次修改的密码时12345678）<br>
-然后 <code>cp tree /bin</code><br>
-完成</p>
 ]]></content>
     </entry>
 </feed>

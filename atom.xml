@@ -1,15 +1,721 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://tangyin1.github.io</id>
-    <title>tangyin</title>
-    <updated>2023-10-31T11:16:27.552Z</updated>
+    <title>Gridea</title>
+    <updated>2023-11-09T02:53:10.386Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://tangyin1.github.io"/>
     <link rel="self" href="https://tangyin1.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://tangyin1.github.io/images/avatar.png</logo>
     <icon>https://tangyin1.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2023, tangyin</rights>
+    <rights>All rights reserved 2023, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[vim命令]]></title>
+        <id>https://tangyin1.github.io/post/vim-ming-ling/</id>
+        <link href="https://tangyin1.github.io/post/vim-ming-ling/">
+        </link>
+        <updated>2023-11-09T02:17:53.000Z</updated>
+        <summary type="html"><![CDATA[<p>vim命令大全，需要自己多看多用。也可在终端输入 vimtutor来帮助自己学习！</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>vim命令大全，需要自己多看多用。也可在终端输入 vimtutor来帮助自己学习！</p>
+<!-- more -->
+<h2 id="基础命令"><strong>基础命令</strong></h2>
+<ul>
+<li><code>$ vim code.c</code>: 在终端中打开 code.c 文件</li>
+<li><code>$ vim ~/.vimrc</code>: 打开根目录下的 <code>.vimrc</code> 文件</li>
+<li><code>$ vim -u NONE -N</code>: 以不加载任何插件的方式启动 vim</li>
+<li><code>:h [option]</code>: 显示对命令的帮助</li>
+<li><code>:source ~/.vimrc</code>: 重载配置文件(可以在不重启 vim 的情况下重载配置文件)</li>
+<li><code>:syntax on</code>: 开启语法</li>
+<li><code>:set number</code>: 设置行号</li>
+<li><code>:set ft=json</code>: 设置的文件格式为<code>json 格式</code></li>
+<li><code>:set ft?</code>: 查看当前文件的 ft 值</li>
+<li><code>.</code>: 修改完之后移动至下一个单词出按<code>.</code> 可重复相同操作(厉害!)</li>
+<li><code>5.</code>: 重复 5 次相同动作</li>
+<li><code>*</code>: 向下查找光标下的单词</li>
+<li><code>#</code>: 向上查找光标下的单词</li>
+<li><code>ga</code>: 查看当前光标下字符的 unicode 码及其他详细信息</li>
+<li><code>:e.</code>: <code>.</code> 代表 <code>pwd</code> 的结果, 即当前工作路径, 这个命令会进入 <code>netrw</code> 的文件管理界面</li>
+</ul>
+<h2 id="保存退出"><strong>保存退出</strong></h2>
+<ul>
+<li><code>:q</code>: 退出文件</li>
+<li><code>q:</code>: 进入命令历史记录, 与<code>:history</code> 等价</li>
+<li><code>q/</code>: 进入搜索历史记录</li>
+<li><code>:wq</code>: 保存退出</li>
+<li><code>:wa</code>: 保存所有缓冲区</li>
+<li><code>:wn</code>: 保存当前缓冲区并进入下一个参数列表</li>
+<li><code>:qa</code>: 退出所有缓冲区</li>
+<li><code>ZZ</code>: 保存退出</li>
+<li><code>:sav path/to.txt</code>: 将本缓冲区保存为文件(相当于另存为, 命令全名是 <code>saveas</code>)</li>
+<li><code>:w path/to.txt</code>: 保存到某路径</li>
+<li><code>:e!</code>: 重载本文件, 即使有未保存的内容也会被丢弃(edit 缩写)</li>
+<li><code>:e path/to.txt</code>: 打开指定文件</li>
+<li><code>:e .</code>: 进入 <code>netrw</code> 浏览目录</li>
+</ul>
+<h2 id="移动"><strong>移动</strong></h2>
+<ul>
+<li><code>hjkl</code>: 左下上右键</li>
+<li><code>10 + hjkl</code>: 向左下上右跳 10 个格</li>
+<li><code>gj</code>: 在一段被折为多行时, 将光标向下移动一行(向下移动一个屏幕行)</li>
+<li><code>gk</code>: 在一段被折为多行时, 将光标向上移动一行(向上移动一个屏幕行)</li>
+<li><code>&gt;&gt;</code>: 整行向右缩进</li>
+<li><code>&lt;&lt;</code>: 整行向左缩进</li>
+<li><code>:le</code>: 当前行居左对齐</li>
+<li><code>:ce</code>: 当前行居中对齐</li>
+<li><code>:ri</code>: 当前行居右对齐</li>
+<li><code>0</code>: 移动到行首(非字符)</li>
+<li><code>^</code>: 光标移至行首(字符)</li>
+<li><code>g^</code>: 移动到屏幕行的行首</li>
+<li><code>$</code>: 光标移至行尾(换行符)</li>
+<li><code>g$</code>: 移动到屏幕行的行尾</li>
+<li><code>g_</code>: 光标移至最后一个可见字符上</li>
+<li><code>0</code>: 光标移动至行首</li>
+<li><code>g;</code>: 跳转到上次修改的位置</li>
+<li><code>g,</code>: 跳转到下次修改的位置</li>
+<li><code>gi</code>: 跳转到上次退出插入模式的位置并直接进入 <code>Insert Mode</code></li>
+<li><code>%</code>: 在 <code>()</code>, <code>[]</code>, <code>{}</code> 之内跳转到包围符号上</li>
+<li><code>''</code>, 双反撇号, 跳转到当前文件中最近一次跳转动作发生时的位置</li>
+<li><code>'.</code>: 反撇号, 跳转到上次修改的地方</li>
+<li><code>w</code>: 跳至下一个词首</li>
+<li><code>b</code>: 跳至上一个词首</li>
+<li><code>e</code>: 跳至下一个词末端</li>
+<li><code>ge</code>: 跳转到上一个词的结尾</li>
+<li><code>f</code>: 移动到行内下一个字符, 如 <code>fx</code> 将查找行内出现的下一个 <code>x</code> 字符</li>
+<li><code>F</code>: 移动到行内上一个字符, 用法同 <code>f</code></li>
+<li><code>t</code>: 移动到行内下一个字符的前一字符上</li>
+<li><code>T</code>: 移动到行内上一个字符的下一字符上</li>
+<li><code>;</code>: 重复查找, 即重复 <code>f</code> 或 <code>t</code>, 非常有用, 可以与 <code>.</code> 想媲美</li>
+<li><code>,</code>: <code>;</code> 的反面, 当按 <code>;</code> 过头了可以用 <code>,</code> 退回来</li>
+<li><code>&lt;C-b&gt;</code>: 向前滚一页</li>
+<li><code>&lt;C-f&gt;</code>: 向后滚一页</li>
+<li><code>&lt;C-e&gt;</code>: 向上滚一行</li>
+<li><code>&lt;C-y&gt;</code>: 向下滚一行</li>
+<li><code>&lt;C-u&gt;</code>: 向上滚半页</li>
+<li><code>&lt;C-d&gt;</code>: 向下滚半页</li>
+<li><code>gg</code>: 跳至文件顶部</li>
+<li><code>G</code>: 跳至文件底部</li>
+<li><code>M</code>: 光标移至页中部</li>
+<li><code>L</code>: 光标移至页底部</li>
+<li><code>H</code>: 光标移至页顶部</li>
+<li><code>88gg</code>: 跳至第 88 行</li>
+<li><code>88G</code>: 跳至第 88 行</li>
+<li><code>zz</code>: 将当前行置于视图中央</li>
+<li><code>zt</code>: 将当前行置于视图顶部</li>
+<li><code>zb</code>: 将当前行置于视图底部</li>
+<li><code>gd</code>: 跳转到局部变量定义处</li>
+<li><code>gD</code>: 跳转到文件内全局声明(从文件开头开始查找)</li>
+<li><code>gf</code>: 跳转到相应的头文件</li>
+<li><code>&lt;C-o&gt;</code>: Normal 模式下返回上一个操作的位置, Insert 模式下切换到 Normal 模式, 输入完命令后再次进入 Insert 模式: <code>c-o zz</code></li>
+<li><code>&lt;C-t&gt;</code>: Normal 模式下返回上一个操作的位置</li>
+<li><code>&lt;C-i&gt;</code>: Normal 模式下返回下一个操作的位置</li>
+<li><code>&lt;C-^&gt;</code>: 在当前文件与上次编辑的文件中快速切换</li>
+<li><code>mm</code>: 为当前位置在当前缓冲区内设置标记 <code>m</code></li>
+<li><code>'m</code>: 反撇号, 跳转到设置的标记 <code>m</code> 处</li>
+<li><code>mM</code>: 为当前位置设置全局标记 <code>M</code>(必须是大写, 可以跨文件使用)</li>
+<li><code>'M</code>: 跳转到全局标记</li>
+</ul>
+<h2 id="复制粘贴删除"><strong>复制/粘贴/删除</strong></h2>
+<ul>
+<li>
+<p><code>c</code>: 删除并进入<code>插入模式</code> (理解: <code>cert</code> , 会插入)</p>
+</li>
+<li>
+<p><code>cw</code>: 删除一个单词并进入<code>插入模式</code></p>
+</li>
+<li>
+<p><code>C</code>: 删除自游标处到当前行尾, 并进入<code>插入模式</code></p>
+</li>
+<li>
+<p><code>c2c</code>: 删除两行并进入<code>插入模式</code></p>
+</li>
+<li>
+<p><code>cc</code>: 删除一行并进入<code>插入模式</code></p>
+</li>
+<li>
+<p><code>d^</code>: 删除至行首 (理解: <code>delete</code> , 不会插入, 直接删除, 不会复制)</p>
+</li>
+<li>
+<p><code>D</code>: 从当前光标处删除至行尾</p>
+</li>
+<li>
+<p><code>dw</code>: 向右删除一个单词</p>
+</li>
+<li>
+<p><code>d2d</code>: 删除两行</p>
+</li>
+<li>
+<p><code>dd</code>: 删除一行</p>
+</li>
+<li>
+<p><code>d121gg</code>: 从当前行删除到 121 行</p>
+</li>
+<li>
+<p><code>d121j</code>: 从当前行向下删除 121 行</p>
+</li>
+<li>
+<p><code>x</code>: 删除本字符(等于 delete)</p>
+</li>
+<li>
+<p><code>X</code>: 向前删除一个字符(等于 backspace)</p>
+</li>
+<li>
+<p><code>s</code>: 删除右侧并进入插入模式</p>
+</li>
+<li>
+<p><code>S</code>: 删除整行并进入插入模式</p>
+</li>
+<li>
+<p><code>yy</code>: 复制一行</p>
+</li>
+<li>
+<p><code>y$</code>: 从光标当前处复制到结尾, 不会复制到换行符, 但是如果 <code>v$y</code> 则会复制到换行符</p>
+</li>
+<li>
+<p><code>y</code>: 复制所选(可视模式)</p>
+</li>
+<li>
+<p><code>y5j</code>: 向下复制 5 行</p>
+</li>
+<li>
+<p><code>v/d/c/y</code> + <code>[文本对象]</code></p>
+</li>
+<li>
+<ul>
+<li>
+<p>操作分隔符的文本对象: 用于确定范围</p>
+</li>
+<li>
+<ul>
+<li><code>i(/[/{/&quot;/'</code>: 由<code>(/[/{/&quot;/'</code> 包围起来的字符, 不包含 <code>(/[/{/&quot;/'</code></li>
+<li><code>a(/[/{/&quot;/'</code>: 由 <code>(/[/{/&quot;/'</code>包围起来的字符及包围符号本身</li>
+<li><code>it</code>: 由 tag 包围起来的字符</li>
+<li><code>at</code>: 由 tag 包围起来的字符及 tag 本身</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<p>操作文本块的文本对象</p>
+</li>
+<li>
+<ul>
+<li><code>iw</code>: 当前单词</li>
+<li><code>aw</code>: 当前单词及一个空格</li>
+<li><code>iW</code>: 当前字串</li>
+<li><code>aW</code>: 当前字串及一个空格</li>
+<li><code>is</code>: 当前句子</li>
+<li><code>as</code>: 当前句子及一个空格</li>
+<li><code>ip</code>: 当前段落</li>
+<li><code>ap</code>: 当前段落记一个空行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>一般来说, <code>d{motion}</code> 命令和 <code>aw</code>, <code>as</code> 和 <code>ap</code> 配合起来使用比较好,而 <code>c{motion}</code> 命令和 <code>iw</code> 及类似的文本对象一起用效果会更好.</li>
+</ul>
+</li>
+<li>
+<p><code>p</code>: 如果整行复制, 粘贴在下方一行. 如果选中复制, 粘贴到当前光标后方</p>
+</li>
+<li>
+<p><code>P</code>: 与 <code>p</code> 方向相反</p>
+</li>
+<li>
+<p><code>gp</code>: 与<code>p</code>类似, 不过会把光标移动至文本的结尾</p>
+</li>
+<li>
+<p><code>gP</code>: 与 <code>P</code>类似, 不过会把光标移动到文本的结尾, 在粘贴多行的时候尤其有用</p>
+</li>
+</ul>
+<h2 id="模式切换"><strong>模式切换</strong></h2>
+<ul>
+<li><code>i</code>: 当前字符之前插入</li>
+<li><code>I</code>: 行首插入</li>
+<li><code>a</code>: 当前字符之后插入</li>
+<li><code>A</code>: 当前字符行尾插入</li>
+<li><code>o</code>: 在下方插入一行并进入<code>Insert Mode</code></li>
+<li><code>O</code>: 在上方插入一行并进入<code>Insert Mode</code></li>
+<li><code>&lt;C-v&gt;</code>: 进入列选择模式, 可沿垂直方向选中多行, 然后使用大写的 I 和 A 分别可以实现在前侧和后侧批量添加字符, 使用 <code>&gt;</code> 可以向右缩进, 使用 <code>r</code> 可以替换, 特别好用!</li>
+<li><code>v</code>: 进入 visual 模式, 移动光标可进行批量选择删除</li>
+<li><code>gv</code>: 重复选择上次选择并操作的区域</li>
+<li><code>O</code>: 在 Visual 模式下切换高亮选取的活动端使之可调整</li>
+</ul>
+<h2 id="大小写加减"><strong>大小写/加减</strong></h2>
+<ul>
+<li>
+<p><code>~</code>: 将当前光标处的大小写翻转</p>
+</li>
+<li>
+<p><code>g~5j</code>: 将当前行向下 5 行大小写反转</p>
+</li>
+<li>
+<p><code>gu5j</code>: 将当前行向下 5 行改为小写</p>
+</li>
+<li>
+<p><code>gU5j</code>: 将当前行向下 5 行改为大写</p>
+</li>
+<li>
+<p><code>gUit</code>: 将 tag 包围的内容改为大写</p>
+</li>
+<li>
+<p><code>Vu</code>: 将当前行改为小写</p>
+</li>
+<li>
+<p><code>VU</code>: 将当前行改为大写</p>
+</li>
+<li>
+<p><code>veu</code>: 当前光标至尾端的字符改为小写</p>
+</li>
+<li>
+<p><code>vG~</code>: 将当前光标至文本结尾的字符翻转大小写</p>
+</li>
+<li>
+<p><code>&lt;C-a&gt;</code>: 对数字进行增加操作, 在列选择模式下批量增加数字, 对 Markdown 的列表排序特别好用</p>
+</li>
+<li>
+<ul>
+<li><code>&lt;C-v&gt;</code> + <code>select</code> + <code>C-a</code>: 将选择区域数字统一增加 1</li>
+<li><code>&lt;C-v&gt;</code> + <code>select</code> + <code>2</code> + <code>C-a</code>: 将选择区域数字统一增加 2</li>
+<li><code>&lt;C-v&gt;</code> + <code>select</code> + <code>g</code> + <code>C-a</code>: 将选择区域的数字改为递增为 1 的序列</li>
+<li><code>&lt;C-v&gt;</code> + <code>select</code> + <code>2</code> + <code>g</code> + <code>C-a</code>: 将选择区域的数字改为递增为 2 的序列</li>
+</ul>
+</li>
+<li>
+<p><code>&lt;C-x&gt;</code>: 对数字进行缩小操作(用法同<code>C-a</code> )</p>
+</li>
+</ul>
+<h2 id="撤销"><strong>撤销</strong></h2>
+<ul>
+<li><code>u</code>: 撤销 undo(命令模式, 可多次撤销)</li>
+<li><code>U</code>: 无论当前行修改了多少次, 全部撤销操作</li>
+<li><code>&lt;C-r&gt;</code>: Normal 模式下反撤销</li>
+<li><code>:undolist</code>: 撤销历史(命令模式)</li>
+<li><code>:undo 5</code>: 撤销 5 个改变(命令模式)</li>
+</ul>
+<h2 id="folding"><strong>Folding</strong></h2>
+<ul>
+<li><code>zc</code>: close, 关闭当前光标下可折叠区域</li>
+<li><code>zo</code>: open, 打开当前光标下可折叠区域</li>
+<li><code>za</code>: toggle, 打开/关闭当前光标下可折叠区域</li>
+<li><code>zC/zO/zA</code>: 与小写不同的是操作对象为全局, 与光标位置无关</li>
+<li><code>zr</code>: reduce, 减少折叠等级</li>
+<li><code>zR</code>: 将所有折叠级别减值最小(直观看来就是缓冲区完全展开了)</li>
+<li><code>zm</code>: more, 增加折叠级别</li>
+<li><code>zM</code>: 增加折叠级别至最高(直观看来就是缓冲区完全折叠了)</li>
+<li><code>zd</code>: 删除当前折叠</li>
+<li><code>zE</code>: 删除所有折叠</li>
+<li><code>zj</code>: 移动至下一个折叠</li>
+<li><code>zk</code>: 移动至上一个折叠</li>
+<li><code>zn</code>: 禁用折叠</li>
+<li><code>zN</code>: 启用折叠</li>
+</ul>
+<h2 id="windowtab"><strong>window/tab</strong></h2>
+<ul>
+<li><code>:tabnew [filename]</code>: 新建一个标签页, 例: <code>tabnew%</code> 以当前文件新建一个标签页, <code>%</code> 表示当前文件</li>
+<li><code>:tabclose</code>: 关闭当前标签</li>
+<li><code>:tabonly</code>: 关闭所有其他的tab</li>
+<li><code>:tabn</code>: 前一个 tab</li>
+<li><code>:tabp</code>: 后一个 tab</li>
+<li><code>tabdo %s/foo/bar/g</code>: 在所有打开的 tab 上执行替换</li>
+<li><code>tab ball</code>: 将所有的缓冲区在 tab 中打开</li>
+<li><code>gt</code>: 跳转到下一个 tab</li>
+<li><code>gT</code>: 跳转到上一个 tab</li>
+<li><code>gt5</code>: 跳转到第 5 个 tab 上</li>
+<li><code>:tabn</code>: 移动至下一个标签, 直接使用 gt 也可</li>
+<li><code>:tabp</code>: 移动至上一个标签, 直接使用 gT 也可</li>
+<li><code>:sp</code>: 上下切割当前文件, 同 <code>&lt;C-w&gt; s</code></li>
+<li><code>:vs</code>: 左右切割当前文件, 同 <code>&lt;C-w&gt; v</code></li>
+<li><code>:sp [filename]</code>: 上下分割并打开一个新文件, 如果不输入 filename 会切割打开本文件(光标在文件开头位置)</li>
+<li><code>:vs [filename]</code>: 左右分割并打开一个新文件, 如果不输入 filename 会切割打开本文件(光标在文件开头位置)</li>
+<li><code>&lt;C-w&gt; T</code>: 如果当前 tab 存在多个不同的window, 那么将当前 window 移动到新标签上, 必须是大写</li>
+<li><code>&lt;C-w&gt; s</code>: 水平切割当前窗口</li>
+<li><code>&lt;C-w&gt; v</code>: 垂直切割当前窗口</li>
+<li><code>&lt;C-w&gt; h/j/k/l</code>: 光标向某个方向分屏移动</li>
+<li><code>&lt;C-w&gt; w</code>: 在所有窗口间进行切换</li>
+<li><code>&lt;C-w&gt; _</code>: 使窗口高度最大化</li>
+<li><code>&lt;C-w&gt; |</code>: 使窗口宽度最大化</li>
+<li><code>&lt;C-w&gt; =</code>: 使所有窗口等宽等高</li>
+<li><code>&lt;C-w&gt; q</code>: quit, 关闭当前分屏, 如果是最后一个, 则退出 vim</li>
+<li><code>&lt;C-w&gt; c</code>: close, 关闭当前分屏, 如果是最后一个, 则退出 vim</li>
+<li><code>&lt;C-w&gt; o</code>: only, 关闭所有除当前屏幕外的所有分屏</li>
+<li><code>&lt;C-w&gt; L</code>: 当前分屏向右移动</li>
+<li><code>[N]&lt;C-w&gt; +</code>: 分屏增加 N 列高度(可选)</li>
+<li><code>[N]&lt;C-w&gt; &lt;</code>: 分屏减少 N 列宽度(可选)</li>
+<li><code>:close</code>: 关闭活动窗口</li>
+<li><code>:only</code>: 只留下当前活动窗口</li>
+<li><code>new abc.txt</code>: 在新窗口中编辑文件</li>
+</ul>
+<h2 id="buffer"><strong>Buffer</strong></h2>
+<ul>
+<li><code>:ls</code>: 显示当前所有 buffer(缓冲区列表)</li>
+<li><code>:ls!</code> : 列出非缓冲区列表文件</li>
+<li><code>:bn</code>: buffer next, 下一个 buffer</li>
+<li><code>:bp</code>: buffer previous, 上一个 buffer</li>
+<li><code>:bf</code>: 打开第一个 buffer</li>
+<li><code>:bl</code>: 打开最后一个 buffer</li>
+<li><code>:b1</code>: 切换到 buffer1(同理可按照数字切换到不同的 buffer)</li>
+<li><code>:bd</code>: 删除 buffer(并没有删除文件本身, 只是 buffer 而已)</li>
+<li><code>:bd 1 3</code>: 删除 buffer 编号为 <code>1</code>, <code>3</code> 的两个 buffer</li>
+<li><code>:bw 3</code> : 将非缓冲区文件全部删除</li>
+<li><code>:bfirst</code>: 第一个缓冲区</li>
+<li><code>:blast</code>: 最后一个缓冲区</li>
+<li><code>:bufdo [command]</code>: 对所有缓冲区执行操作</li>
+<li><code>:1,3 bd</code>: 删除 buffer 编号在 <code>1~3</code>之间的所有 buffer</li>
+</ul>
+<h2 id="tag"><strong>Tag</strong></h2>
+<ul>
+<li><code>&lt;C-]&gt;</code>: 跳转到当前光标的定义处</li>
+<li><code>g &lt;C-]&gt;</code>: 查看当前光标处有多少个定义(可输入数字然后跳转)</li>
+<li><code>g ]</code>: 查看当前光标处有多少个定义(可输入数字然后跳转)</li>
+<li><code>tag {keyword}</code>: 根据 <code>keyworkd</code> 查找有多少个匹配的 tag</li>
+<li><code>tag</code>: 正向遍历标签历史</li>
+<li><code>tnext</code>: 跳转到下一处匹配的标签</li>
+<li><code>tprev</code>: 跳转到上一处匹配的标签</li>
+<li><code>tfist</code>: 跳转到第一处匹配的标签</li>
+<li><code>tlast</code>: 跳转到最后一处匹配的标签</li>
+<li><code>tselect</code>: 提示用户从标签匹配的列表中选择一项进行跳转</li>
+</ul>
+<h2 id="quick-list"><strong>Quick-list</strong></h2>
+<ul>
+<li><code>:cnext</code> : 显示当前页下一个结果</li>
+<li><code>:cpre</code> : 显示当前页上一个结果</li>
+<li><code>:copen</code> : 打开 Quickfix 窗口</li>
+<li><code>:cfirst</code>: 跳转到第一项</li>
+<li><code>:clast</code>: 跳转到最后一项</li>
+<li><code>:cnfile</code>: 跳转到下一个文件中的第一项</li>
+<li><code>:cpfile</code>: 跳转到上一个文件中的最后一项</li>
+<li><code>:cc N</code>: 跳转到第 n 项</li>
+<li><code>:cclose</code> : 关闭 Quickfix 窗口</li>
+<li><code>:cdo {cmd}</code>: 在 quickfix 列表中的每一行上执行 {cmd}</li>
+<li><code>:cfdo {cmd}</code>: 在 quickfix 列表上的每个文件上执行一次 {cmd}</li>
+<li><code>:cl[ist]</code> : 打开 location list 窗口, 目前看来不需要使用此选项</li>
+</ul>
+<h2 id="location-list"><strong>Location List</strong></h2>
+<p>与 Quick-List 相似, 最大的不同是: Quick-List 是针对多个窗口共享一个结果, 而 <code>Location List</code> 则是各个窗口的结果互相独立</p>
+<ul>
+<li><code>lopen</code>: 用于打开位置列表窗口</li>
+<li><code>lclose</code>: 用于关闭位置列表窗口</li>
+<li><code>lnext</code>: 用于切换到位置列表中的下一项</li>
+<li><code>lprevious</code>: 用于切换到位置列表中的上一项</li>
+<li><code>lwindow</code>: 用于在错误出现时才触发位置列表窗口</li>
+</ul>
+<h2 id="宏"><strong>宏</strong></h2>
+<ul>
+<li><code>q + 小写字母</code>: 进入宏记录模式, 记录到<code>小写字母</code>寄存器中, 记录完成后再次按下 <code>q</code> 即可.</li>
+<li><code>q + 大写字母</code>: 进入宏记录模式, 在 <code>小写字母</code>寄存器尾部接着添加命令, 记录完成后再次按下 <code>q</code> 即可.</li>
+<li><code>@ + 小写字母</code>: 执行对应寄存器内的宏. 可使用前缀添加数字的方式重复多次命令</li>
+<li><code>@:</code>: 重复执行上一次运行过的命令, <code>:</code> 寄存器总是保存着最后执行的命令行命令</li>
+<li><code>@@</code>: 直接重复上一次的 <code>@</code> 命令, 此命令必须建立在上一次使用了以 <code>@</code> 开头的寄存器宏 或者 刚刚建立了一个寄存器宏的 基础上, 因此经常配合 <code>@:</code> 使用.</li>
+<li><code>10@a</code>: 执行寄存器 <code>a</code>中所存储宏 10 次(串行处理, 如果有错误, 则立刻停止, 后续命令不再执行)</li>
+</ul>
+<h2 id="参数列表"><strong>参数列表</strong></h2>
+<p>参数列表与缓冲区的概念很类似, 参数列表的原始含义是我们在终端中使用 <code>vim a.txt b.txt</code> 时后面的一系列文件或参数名, 但是我们也可以在进入 vim 后使用 <code>args</code>手动添加参数文件. 其与缓冲区的区别是:</p>
+<ol>
+<li>位于参数列表的文件必然位于缓冲区列表中</li>
+<li>缓冲区列表永远是乱糟糟的, 但是参数列表永远是秩序井然</li>
+</ol>
+<ul>
+<li><code>:args *.*</code> : 将当前目录下的所有类型的文件加入到参数列表中(不包括文件夹中的文件)</li>
+<li><code>:args **/*.*</code> : 将当前目录下的所有文件及子文件夹的所有文件都匹配加入到参数列表中</li>
+<li><code>:args *.md aa/**/*.md</code> 表示添加子文件夹下的 md 文件及 aa 文件夹下的和其子文件夹下的 md 文件到参数列表中</li>
+<li><code>:args 'cat list.txt'</code>: 用反撇号将命令包围起来, 然后将命令被执行后的结果作为参数加入参数列表中</li>
+<li><code>:argdo %s/oldword/newword/egc | update</code> : 对所有存在参数列表中的文件执行命令, s 代表替换, % 指对所有行进行匹配, g 代表整行替换(必用), e 指使用正则表达式, c 代表每次替换前都会进行确认, update 表示对文件进行读写</li>
+<li><code>:argdo write</code>: 将所有参数列表中的内容进行缓冲区保存</li>
+<li><code>:argdo normal @a</code>: 将当前参数列表的所有缓冲区执行寄存器 a 中所存储的宏</li>
+<li><code>:argd *</code> : 清空参数列表</li>
+<li><code>:argdo bw</code> : 将参数列表中的所有文件清除出缓冲区</li>
+<li><code>args</code>: 显示当前的所有参数列表</li>
+<li><code>:next</code>: 跳转到下一个参数列表的文件</li>
+<li><code>:prev</code>: 跳转到上一个参数列表的文件</li>
+<li><code>:first</code>: 跳转到第一个参数列表的文件</li>
+<li><code>:last</code>: 跳转到最后一个参数列表的文件</li>
+<li><code>:args **/*.md</code> : 将当前文件夹下所有.md 文件加入到参数列表中(包括子文件夹中的文件)</li>
+<li><code>:argdo %s/!\[.*\]/!\[img\]/gc</code>: 将所有参数列表中的以 <code>![</code> 开头, 以 <code>]</code> 结尾的所有字段改为 <code>[img]</code></li>
+<li><code>:argdo source FormatCN.vim</code>: 对参数列表中的所有文件执行脚本 <code>FormatCN.vim</code></li>
+</ul>
+<h2 id="命令行模式"><strong>命令行模式</strong></h2>
+<ul>
+<li><code>:shell</code>: 调用系统的 <code>shell</code> 来在 vim 进程中执行命令, 执行完使用 <code>exit</code> 退出</li>
+<li><code>:term bash</code>: 在底部分割出一个独立窗口并调用 <code>bash</code>, 也可以使用 <code>term zsh</code> 来调用 <code>zsh</code>, 或 <code>:terminal zsh</code></li>
+<li><code>&lt;C-w&gt; N</code>: 在进入 <code>:term</code> 的终端模式后, 使用本命令可以获得 <code>Normal 模式</code> 的效果, 使用 <code>i</code> 返回正常的终端模式</li>
+<li><code>:col&lt;C-d&gt;</code>: 在 Ex 命令模式中使用补全查看可能的选项, 然后使用 <code>Tab</code>/<code>S-Tab</code> 进行选择/反向选择</li>
+<li><code>&lt;C-r&gt;&lt;C-w&gt;</code>: 将当前的光标下的单词插入到命令行中</li>
+<li><code>&lt;C-f&gt;</code>: 将正在命令行中输入的内容放入到命令行窗口开始编辑</li>
+<li><code>&lt;C-c&gt;</code>: 与 <code>&lt;C-f&gt;</code> 相反, 此命令可以使命令行窗口的当前行内容从命令行窗口放回到命令行中</li>
+<li><code>&lt;C-z&gt;</code>: 在终端中将 <code>vim</code> 最小化, 然后如果再需要调用的话使用 <code>fg</code> 进行操作, 使用 <code>jobs</code>查看所有处于后台的工作</li>
+<li><code>&lt;C-b&gt;</code>: beginning, 在命令行模式中跳转到行首</li>
+<li><code>&lt;C-e&gt;</code>: end, 在命令行模式中跳转到结尾</li>
+<li><code>&lt;C-p&gt;</code>: 在命令行模式中显示上次的命令</li>
+<li><code>&lt;C-n&gt;</code>: 在命令行模式中显示下次的命令</li>
+<li><code>:!&lt;command&gt;</code>: 在 shell 中执行命令</li>
+<li><code>!sh %</code>: 将当前文件使用外部程序 sh 执行, <code>%</code> 代表本文件</li>
+<li><code>!!&lt;command&gt;</code>: 运行命令并将结果作为当前行的内容, 同 <code>:read !&lt;command&gt;</code></li>
+<li><code>:!ls</code>: 显示当前工作目录下的所有文件(此操作属于调用系统进程, 使用!来调用系统操作是 Vim 的一大特点)</li>
+<li><code>:w !sudo tee % &gt; /dev/null</code>: 在当前用户没有权限对当前文件做操作时使用超级管理员身份进行操作</li>
+<li><code>:ls</code>: 列出当前所有的缓冲区文件列表, 执行的是 vim 的 ls 命令</li>
+<li><code>:f</code>: 显示当前文件路径, (使用了 <code>&lt;C-g&gt;</code> 代替, 此项基本不会用了)</li>
+<li><code>:command</code>: 显示当前所文件的所有可使用命令</li>
+<li><code>:retab</code> : 重新生成所有的 tab(主要用于在 .vimrc 中重新设置了 tab 格式, 然后在已存在旧格式 tab 的文档进行重生成)</li>
+<li><code>:map g</code>: 查看所有以 <code>g</code> 开头的映射</li>
+</ul>
+<blockquote>
+<p>❝Vim 的先祖是 vi, 正是 vi 开创了区分模式编辑的范例. 相应的, vi 奉 一个名为 ex 的行编辑器为先祖, 这就是为什么会有 Ex 命令.</p>
+</blockquote>
+<p>Ex 命令在命令行模式中执行, 而命令行模式的进入方式为 <code>:</code> 键, 因此我们可以看到所有的 <code>Ex</code> 命令都是以 <code>:</code> 开始的, 输入完命令后按下确定键 <code>&lt;CR&gt;</code> 即可执行, 虽然 <code>Ex</code> 命令年代久远, 但是不可否认其语法的简洁明了以及高效, 很多复杂的操作往往都是通过 <code>Ex</code> 命令来进行处理.</p>
+<ul>
+<li>
+<p><code>:[range] &lt;command&gt; [target]</code>: 执行命令并将结果放入目标位置</p>
+</li>
+<li>
+<ul>
+<li>
+<p><code>:3,5 w !bash</code>: 将 3~5 行写入 bash</p>
+</li>
+<li>
+<p><code>:. w !bash</code>: 将当前行写入 bash</p>
+</li>
+<li>
+<p><code>:. !bash</code>: 将当前行执行结果写入当前 buffer</p>
+</li>
+<li>
+<p><code>:3,5 delete x</code>: 将当前行执行结果删除到 x 寄存器</p>
+</li>
+<li>
+<p><code>:3,5 yank x</code>: 将当前行执行结果复制到 x 寄存器</p>
+</li>
+<li>
+<p><code>:. put x</code>: 在当前行后粘贴寄存器 x 的内容</p>
+</li>
+<li>
+<p><code>:3,5 copy .</code>: 将 3~5 行复制到当前行下</p>
+</li>
+<li>
+<p><code>:3,5 move .</code>: 将 3~5 行移动到当前行下</p>
+</li>
+<li>
+<p><code>:3,5 join</code>: 将 3~5 行进行合并</p>
+</li>
+<li>
+<p><code>[range] normal [cmd]</code>: normal 用来指定在 normal 模式下对文本的操作命令</p>
+</li>
+<li>
+<ul>
+<li><code>:3,5 normal .</code>: 对 3~5 行执行 <code>.</code> 重复命令</li>
+<li><code>:3,5 normal @q</code>: 对 3~5 行执行寄存器 <code>q</code> 内存储的命令</li>
+<li><code>'&lt;,'&gt; normal @a</code>: 在所选高亮区域上执行宏(如果有错误也不停止, 因为是针对每一行执行的, 出错了只需要不处理那一行就行了)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>
+<p><code>:[range] global/{pattern}/[cmd]</code>: 对指定范围内匹配的所有行执行 Ex 命令</p>
+</li>
+<li>
+<ul>
+<li><code>:g/re/d</code>: 删除所有匹配到 <code>re</code> 的行</li>
+<li><code>:g/re/p</code>: 打印所有匹配到 <code>re</code> 的行</li>
+<li><code>:g//d</code>: 使用上次的查找结果进行匹配然后删除</li>
+<li><code>:v/re/d</code>: vglobal 的反面, 只保留匹配到 <code>re</code> 的行</li>
+<li><code>:g/TODO/yank A</code>: 将结果匹配到 <code>TODO</code> 的行复制到寄存器 <code>a</code> 的原内容尾部</li>
+<li><code>:g/TODO/t$</code>: 将结果匹配到 <code>TODO</code> 的行复制到本缓冲区的尾部</li>
+<li><code>:g:/{pattern}/[range][cmd]</code>: 可以用 <code>:g/{pattern}</code> 匹配作为参考点, 动态设置 <code>[cmd</code> 的 range</li>
+<li><code>g/{/ .+1,/}/-1 sort</code>: 会在每个 <code>{</code> 开始找, 然后在之后一直执行到 <code>}</code> 为止, 进行排序</li>
+<li><code>g/{/sil .+1,/}/-1 &gt;</code>: 会在每个 <code>{</code> 开始找, 然后在之后一直执行到 <code>}</code> 为止, 进行缩进(加入 sil 是为了屏蔽提示信息)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><code>:3,5 s/{pattern}/{string}/[flags]</code>: 将 <code>3~5</code>行进行相应替换</li>
+<li><code>:3,5 join</code>: 将 <code>3~5</code>行进行合并</li>
+<li><code>:3 p</code>: 打印第 3 行</li>
+<li><code>:3,5 p</code>: 打印 3~5 行</li>
+<li><code>:.,.+3 p</code>: 打印本行以下的三行内容, <code>+3</code> 代表偏移</li>
+<li><code>:% p</code>: 打印本 buffer 的所有行, <code>%</code> 代表所有行, 是 <code>1:$</code> 的简写</li>
+<li><code>:0,$ p</code>: 打印本 buffer 所有行, <code>$</code> 代表最后一行</li>
+<li><code>:.,$ p</code>: 打印本 buffer 内从本行到结尾的所有内容, <code>.</code> 代表当前行</li>
+<li><code>/&lt;html&gt;/+1,/&lt;\/html&gt;/-1 p</code>: 使用 patten 指定范围, <code>+1</code> 表示偏移</li>
+<li><code>:6t.</code>: 把第 6 行复制到当前行下方, tail 代表尾巴, 遵守 <code>from...to...</code> 的含义</li>
+<li><code>:t6</code>: 把当前行复制到第 6 行下方, <strong>当.位于首位时可以省略.</strong>, 因此全称是 <code>:.t6</code></li>
+<li><code>:t.</code>: 粘贴当前行到下方, 与 <code>yyp</code> 不同的是本方式不会将内容放到寄存器中, 而 <code>yyp</code> 会将内容复制到 <code>unname</code> 寄存器与 <code>0</code> 寄存器</li>
+<li><code>:t$</code>: 粘贴当前行到文本结尾</li>
+<li><code>:'&lt;,'&gt;t0</code>: 把高亮选中的行复制到文件开头, <code>'&lt;</code> 代表高亮选取的第一行, <code>'&gt;</code> 代表高亮选取的最后一行</li>
+<li><code>:'&lt;,'&gt;m$</code>: 把高亮选中的行移动到文件结尾</li>
+<li><code>:'&lt;,'&gt;A;</code>: 把当前文件的所有行的尾部加上 <code>;</code></li>
+</ul>
+</li>
+<li>
+<p><code>:!!</code>: 重复执行上一次运行过的命令</p>
+</li>
+<li>
+<p><code>:read !&lt;command&gt;</code>: 将命令的结果输入(重定向)到当前缓冲区</p>
+</li>
+<li>
+<p><code>:[range]write !sh</code>: 将当前缓冲区的内容, 在 shell 中逐行执行, 与 <code>read !&lt;command&gt;</code>作用正好相反, <code>!</code>表示外部程序</p>
+</li>
+<li>
+<p><code>:[range]write ! sh</code>: 将当前缓冲区的内容, 在 shell 中逐行执行, <code>!</code>表示外部程序</p>
+</li>
+<li>
+<p><code>:[range]write! sh</code>: 将当前缓存区内容写入到一个名为 sh 的文件, <code>!</code>表示强制覆盖式写入</p>
+</li>
+<li>
+<p><code>:[range]write! filename</code>: 将当前缓冲区内容另存为到 filename 文件中</p>
+</li>
+<li>
+<p><code>:.,$ sort [option]</code>: 从当前行到末尾进行排序</p>
+</li>
+<li>
+<ul>
+<li><code>!</code>: 翻转顺序, 默认小在前, 翻转后大在前</li>
+<li><code>i</code>: 忽略大小写</li>
+<li><code>l</code>: ...</li>
+<li><code>n</code>: ...</li>
+<li><code>o</code>: ...</li>
+<li><code>r</code>: ...</li>
+<li><code>u</code>: ...</li>
+<li><code>x</code>: ...</li>
+</ul>
+</li>
+<li>
+<p><code>:2,$ !sort -t',' -k2</code>: 使用外部 <code>sort</code> 程序进行排序, 以 <code>,</code> 为分隔符, 以第二项进行排序</p>
+</li>
+</ul>
+<h2 id="insert-模式"><strong>Insert 模式</strong></h2>
+<ul>
+<li><code>&lt;C-p&gt;</code>: 选择上方补全</li>
+<li><code>&lt;C-n&gt;</code>: 选择下方补全</li>
+<li><code>⎋</code>: 退出插入模式(推荐)</li>
+<li><code>&lt;C-c&gt;</code>: 退出插入模式</li>
+<li><code>&lt;C-[&gt;</code>: 退出插入模式</li>
+<li><code>&lt;C-u&gt;</code>: 向左删除到行首</li>
+<li><code>&lt;C-w&gt;</code>: 向左删除一个单词</li>
+<li><code>&lt;C-h&gt;</code>: 向左删除一个字符</li>
+<li><code>&lt;C-t&gt;</code>: 整行向右偏移</li>
+<li><code>&lt;C-d&gt;</code>: 整行向左偏移</li>
+<li><code>&lt;C + r&gt;= &lt;function&gt;</code>: 进行计算并将结果输出到当前缓冲区中</li>
+<li><code>&lt;C-v&gt;065</code>: 输入大写字母 A</li>
+<li><code>&lt;C-v&gt;u{123}</code>: 按照 unicode 码以 10 进制来输入</li>
+<li><code>&lt;C-v&gt;u{1234}</code>: 按照 unicode 码以 16 进制来输入</li>
+<li><code>&lt;C-v&gt; &lt;Tab&gt;</code>: 无论 <code>expandtab</code> 选项是否开启都会插入制表符</li>
+<li>插入模式中的粘贴操作参考这里</li>
+</ul>
+<h2 id="路径"><strong>路径</strong></h2>
+<p>vim 的工作路径是使用中要格外注意的地方, 简单来说, 终端中的 vim 默认会把终端当前的路径作为其工作路径, 当然我们可以使用 <code>cd</code> 使其工作路径变更</p>
+<ul>
+<li><code>:cd [path]</code>: 设置此次vim的工作目录为path</li>
+<li><code>:cd %:h</code>: cd 到当前缓冲区所属目录中</li>
+<li><code>:cd ../</code>: cd 到上一级</li>
+<li><code>:pwd</code>: 显示当前工作路径</li>
+<li><code>:lcd [path]</code>: 设置当前窗口的工作目录为 path(与 cd 不同的是只会改变当前 window 的工作路径, 其他 window 的不受此影响)</li>
+</ul>
+<p>vim 为我们提供了一些可以使用的宏用来表示相关路径或文件名称:</p>
+<ul>
+<li><code>%:h</code>: 表示当前文件所在目录的相对工作目录路径(不含文件名及扩展)</li>
+<li><code>%:p</code>: 表示当前文件所在目录的绝对路径(含文件名及扩展)</li>
+<li><code>%:t</code>: 文件名及扩展</li>
+<li><code>%:r</code>: 移除扩展之后的所有内容</li>
+<li><code>%:e</code>: 扩展名</li>
+</ul>
+<p>在使用以上这几种宏时, 我们可以使用 <code>&lt;Tab&gt;</code> 使其自动展开, 有些命令不支持自动展开的话需要使用 <code>expand()</code> 命令</p>
+<ul>
+<li><code>echo expand('%:e')</code>: 打印当前文档扩展名, markdown 是 <code>md</code></li>
+<li><code>cd %:h&lt;Tab&gt;</code>: cd 到当前缓冲区所属目录中, 在最后可以使用 <code>&lt;Tab&gt;</code> 进行自动展开</li>
+<li><code>e %&lt;Tab&gt;</code>: 会自动扩展为当前文件含相对工作目录的路径全名</li>
+</ul>
+<h2 id="寄存器"><strong>寄存器</strong></h2>
+<p>寄存器是 vim 的一种特有概念, 其他文本编辑器默认都会用系统剪贴板作为复制粘贴的根据地, 然后 vim 另辟蹊径使用多种不同类型寄存器作为临时内容存储位置. 我们可以在复制粘贴时使用指定的寄存器定制化我们的需求, 也可以在录制宏及使用宏时指定寄存器, 大大地提高了我们的工作效率.</p>
+<p>很多刚使用 vim 的人会抱怨无法复制内容到 vim 外或 vim 内, 然后各种搜索如何使 vim 的默认复制操作与剪贴板交互, 最后定义了一大堆按键, 譬如 <code>&quot;*y</code>, <code>set clipboard=unnamed</code>, 其实大可不必, 寄存器是 vim 的高效操作方式之一, 接受了这种方式才能更好地利用 vim 来为我们服务(虽然刚开始适应的过程必然是痛苦的)</p>
+<p>总的来说 Vim 的删除, 复制与粘贴命令以及定义宏时都会用到众多寄存器中的某一个. 可以通过给命令加 <code>&quot;{register}</code> 前缀的方式指定要用的寄存器. 若不指明, Vim 将缺省使用无名寄存器</p>
+<ul>
+<li>
+<p>无名寄存器<br>
+所有删除复制粘贴操作如果不显示指明寄存器类型的话使用的都是无名寄存器, 其标志符是 <code>&quot;&quot;</code>.</p>
+</li>
+<li>
+<p>复制寄存器<br>
+使用 <code>y</code> 复制后内容会被放到复制寄存器及无名寄存器中, 但是复制寄存器是稳定的, 无名寄存器的内容会时刻被重置替换. 其标志符是 <code>&quot;0</code></p>
+</li>
+<li>
+<p>粘贴板寄存器<br>
+用于与系统的其他应用中进行复制粘贴交互, 等于系统的剪贴板. 其标识符是 <code>&quot;*</code>(或 <code>&quot;+</code>)</p>
+</li>
+<li>
+<p>黑洞寄存器<br>
+所有放入黑洞寄存器的内容全部被丢弃, 相当于完全删除, 不留痕迹, 其标识符是 <code>&quot;_</code></p>
+</li>
+<li>
+<p>有名寄存器<br>
+以单个小写字母命名的寄存器, 可用于自定义存储空间, 一共有 26 个</p>
+</li>
+<li>
+<p>特殊寄存器</p>
+</li>
+<li>
+<ul>
+<li><code>&quot;%</code>: 当前文件名</li>
+<li><code>&quot;#</code>: 轮换文件名</li>
+<li><code>&quot;.</code>: 上次插入的文本</li>
+<li><code>&quot;:</code>: 上次执行的 Ex 命令</li>
+<li><code>&quot;/</code>: 上次查找的模式</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用方式"><strong>使用方式</strong></h3>
+<ul>
+<li><code>&quot;&quot;p</code>: 从无名寄存器中取值进行粘贴</li>
+<li><code>&quot;ay</code>: 将内容复制到有名寄存器 <code>a</code></li>
+<li><code>&quot;_y</code>: 将内容复制到黑洞寄存器, 相当于彻底地删除</li>
+<li><code>&quot;ap</code>: 从自定义寄存器中取出内容进行粘贴</li>
+<li><code>&quot;0p</code>: 从复制寄存器中取出内容进行粘贴, 默认的 p 是从无名寄存器取值</li>
+<li><code>&quot;*p</code>: 从系统粘贴板寄存器中取出内容进行粘贴</li>
+<li><code>&lt;C-r&gt;&quot;</code>: 在插入模式中将无名寄存器的内容粘贴进来</li>
+<li><code>&lt;C-r&gt;*</code>: 在插入模式中将系统粘贴板寄存器的内容粘贴进来</li>
+<li><code>&lt;C-r&gt;0</code>: 在插入模式中将复制寄存器的内容粘贴进来</li>
+<li><code>&lt;C-r&gt;%</code>: 插入当前文件名(因为 &quot;% 寄存器中存储了当前文件名)</li>
+<li><code>:reg a</code>: 查看有名寄存器 <code>a</code> 的内容</li>
+<li><code>:reg *</code>: 查看粘贴板寄存器 <code>*</code> 的内容</li>
+<li><code>:reg &quot;</code>: 查看无名寄存器 <code>&quot;</code> 的内容</li>
+<li><code>:put a</code>: 将有名寄存器 <code>a</code> 的内容粘贴到当前缓冲区中, 与 <code>&quot;ap</code> 不同的是 <code>p</code> 用于只能在光标之前或光标之后进行粘贴, 但是 <code>put</code> 则会始终将内容粘贴到新的一行上</li>
+<li><code>:d a</code>: 将内容删除到有名寄存器 <code>a</code> 中</li>
+</ul>
+<blockquote>
+<p>❝使用 Visual Mode 时, 在选中的文本上使用 <code>p</code> 将直接替换该部分文本(替换后被替换的文本会被放入到无名寄存器中), 可用于解决需要删除然后粘贴但是会影响到无名寄存器的问题</p>
+</blockquote>
+<h2 id="vimdiff"><strong>vimdiff</strong></h2>
+<figure data-type="image" tabindex="1"><img src="https://pic4.zhimg.com/80/v2-7b7f72df7db5d10e3d73ab21c15246bb_1440w.webp" alt="img" loading="lazy"></figure>
+<p>git 与 vim 可以说是非常好的一对搭档了, 平时在终端中提交 commit 我们都少不了与 <code>vim</code>打交道, vimdiff 是 vim 提供的专门用于修正 git 冲突文件的一款工具</p>
+<p>若想使用 vimdiff 作为冲突修改工具, 需要设置 <code>~/.gitconfig</code> 的以下项</p>
+<pre><code class="language-text">[diff]
+    tool = vimdiff
+[merge]
+    tool = vimdiff
+</code></pre>
+<p>在 vimdiff 中, 一共有四个窗口, 上面依次是 <code>LOCAL</code>, <code>BASE</code>, <code>REMOTE</code>, 底部则是一个最终的文件结果窗口, 整个过程我们只需要将光标在最下方窗口上上下移动, 使用 <code>diffget</code> 命令从 <code>LOCAL</code>, <code>BASE</code>, <code>REMOTE</code> 中选择需要使用哪一个作为本行的最终结果(当然也可以跳到上面的窗口中使用 diffput 放置结果到底部窗口上</p>
+<ul>
+<li><code>:diffget LOCAL</code>: 选择 LCOAL 作为本行最终结果</li>
+<li><code>:diffget REMOTE</code>: 选择 REMOTE 作为本行最终结果</li>
+<li><code>:diffget BASE</code>: 选择 BASE 作为本行最终结果</li>
+<li><code>:diffput [num]</code>: 放置结果到缓冲区上, <code>num</code> 为缓冲区编号</li>
+<li><code>:diffg L</code>: 这里 vim 为我们做了简略命令, 同样可用于 <code>REMTOE</code> 与 <code>BASE</code> 上</li>
+<li><code>dp/do</code>: 如果只有两个文件则可以使用 <code>dp/do</code> 来替代 <code>:diffput/:diffget</code></li>
+<li><code>:ls!</code>: 显示当前所有缓冲区的号码</li>
+<li><code>[c</code>: conflict, 移动到上一个冲突处</li>
+<li><code>]c</code>: conflict, 移动到下一个冲突处</li>
+<li><code>:wqa</code>: 冲突修复完成保存退出, 如果仍然有文件冲突则进入下一个冲突</li>
+<li><code>$git merge --continue</code>: 冲突全部解决完后在外界终端中使用 <code>git merge --continue</code>继续之前的 <code>merge</code> 操作</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[vs2019连接本地虚拟机linux]]></title>
         <id>https://tangyin1.github.io/post/vs2019-lian-jie-ben-di-xu-ni-ji-linux/</id>
@@ -10860,101 +11566,6 @@ TEST(CalculatorTest, DivisionByZero) {
 <p>专门测试主要做集成测试和功能测试，有专门的工具和方案</p>
 <p>基础的测试岗位说白了就是点点点，发现哪里功能和设计不一致就提bug给开发修复。</p>
 <p>测试开发岗位本质就是开发，开发测试相关的工具，以及写相关的集成代码。这种岗位国内很少，基本上只有头部的大厂会有，规模不大。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[gdb安装与一些基本指令]]></title>
-        <id>https://tangyin1.github.io/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/</id>
-        <link href="https://tangyin1.github.io/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/">
-        </link>
-        <updated>2023-08-13T15:25:49.000Z</updated>
-        <summary type="html"><![CDATA[<p>❤️❤️❤️新人小白请多指教❤️❤️❤️<br>
-💡💡💡在linux下安装gdb跟cmake，以及一些基础知识💡💡💡</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>❤️❤️❤️新人小白请多指教❤️❤️❤️<br>
-💡💡💡在linux下安装gdb跟cmake，以及一些基础知识💡💡💡</p>
-<!-- more -->
-<h1 id="1安装gdb">1安装gdb</h1>
-<p>安装gdb（包含了gcc：c语言 g++：c++）<br>
-<code>sudo apt install build-essential gdb</code><br>
-在安装任何软件之前需要先输入：<br>
-<code>sudo apt update</code><br>
-检验：</p>
-<pre><code>gcc --version
-g++ --version
-gdb --version
-</code></pre>
-<h1 id="2安装cmake">2安装cmake：</h1>
-<p><code>sudo apt install cmake</code><br>
-检验：<br>
-<code>cmake –version</code></p>
-<h1 id="3建第一个在linux下第一个程序">3建第一个在linux下第一个程序</h1>
-<ol>
-<li><code>vim text1.cpp</code>  #创建一个叫text1的.cpp文件</li>
-<li>编写程序</li>
-<li>生成可执行程序：<br>
-<code>g++ text1.cpp -o text1</code>  #生成一个叫text1的c++可执行文件<br>
-4.运行text1(在ls查看文件后，若文件为绿色则表示为可执直接运行的文件)<br>
-<code>./text1</code></li>
-</ol>
-<h1 id="4on优化源代码">4<strong>O[n]优化源代码</strong></h1>
-<ol>
-<li>-O，-O1<br>
-这两个命令的效果是一样的，目的都是在不影响编译速度的前提下，尽量采用一些优化算法降低代码大小和可执行代码的运行速度。并开启如下的优化选项：</li>
-<li>-O3<br>
-该选项除了执行-O2所有的优化选项之外，一般都是采取很多向量化算法，提高代码的并行执行程度，利用现代CPU中的流水线，Cache等</li>
-<li>-Os<br>
-这个优化标识和-O3有异曲同工之妙，当然两者的目标不一样，<br>
--O3的目标是宁愿增加目标代码的大小，也要拼命的提高运行速度，<br>
-但是这个选项是在-O2的基础之上，尽量的降低目标代码的大小，这对于存储容量很小的设备来说非常重要。<br>
-为了降低目标代码大小，会禁用下列优化选项，一般就是压缩内存中的对齐空白(alignment padding)</li>
-<li>-Ofast<br>
-该选项将不会严格遵循语言标准，除了启用所有的-O3优化选项之外，也会针对某些语言启用部分优化。如：-ffast-math ，对于Fortran语言，还会启用下列选项</li>
-<li>-Og<br>
-优化调试体验。 -Og应该是标准edit-compile-debug周期的优化级别选择，<br>
-在保持快速编译和良好调试体验的同时，提供合理的优化级别。<br>
-用于生成可调试代码，因为某些收集调试信息的编译器通道在以下位置被禁用 -O0。<br>
-像-O0 -Og完全禁用了许多优化过程，因此控制它们的单个选项无效。除此以外-Og 使所有 -O1 优化标志，但那些可能会干扰调试的标志除外：</li>
-</ol>
-<h1 id="5-l和-l指定库文件路径">5 <strong>-l</strong>和 <strong>-L</strong>指定库文件路径</h1>
-<p>-l参数(小写)就是用来指定程序要链接的库，-l参数紧接着就是库名<br>
-在/lib和/usr/lib和/usr/local/lib里的库直接用-l参数就能链接<br>
-链接glog库<br>
-<code>g++ -lglog test.cpp</code><br>
-如果库文件没放在上面三个目录里，需要使用-L参数(大写)指定库文件所在目录#  -L参数跟着的是库文件所在的目录名<br>
-链接mytest库，libmytest.so在*/home/bing/mytestlibfolder*目录下g++ -L/home/bing/<code>mytestlibfolder -lmytest test.cpp</code></p>
-<h1 id="6-i-指定头文件搜索目录">6 -I 指定头文件搜索目录</h1>
-<p>/usr/include目录一般是不用指定的，gcc知道去那里找，但 是如果头文件不在/usr/icnclude里我们就要用-I参数指定了，比如头文件放在/myinclude目录里，那编译命令行就要加上- I/myinclude 参数了，如果不加你会得到一个”xxxx.h: No such file or directory”的错<br>
-误。-I参数可以用相对路径，比如头文件在当前 目录，可以用-I.来指定。上面我们提到的–cflags参数就是用来生成-I参数的。</p>
-<p><code>g++ -I/myinclude test.cpp</code></p>
-<h1 id="7-wall打印警告信息">7-Wall打印警告信息</h1>
-<p><code>g++ -Wall text,cpp</code></p>
-<h1 id="8-stdc-设置编译标准">8-std=c++ 设置编译标准</h1>
-<p><code>g++ -std=c++11 text.cpp</code></p>
-<h1 id="9-o-指定输出文件名">9 -o 指定输出文件名</h1>
-<p><code>g++ text,cpp -o text</code></p>
-<h1 id="10-d-定义宏">10-D   定义宏</h1>
-<p>在使用gcc/g++编译的时候定义宏<br>
-常用场景：<br>
--DDEBUG  定义DEBUG宏，可能文件中有DEBUG宏部分的相关信息，用个DDEBUG来选择开启或关闭DEBUG<br>
-示例代码：<br>
-//  -Dname  定义宏name,默认定义内容为字符串“1”</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-int main()
- {
-#ifdef DEBUG
-printf(&quot;DEBUG LOG\n&quot;); #endif
-printf(&quot;in\n&quot;); 
-}
-
-//  1.  在编译的时候，使用gcc  -DDEBUG  main.cpp
-// 2. 第五行代码可以被执行
-</code></pre>
-<h1 id="11-git工作流程图">11 Git工作流程图</h1>
-<p><img src="https://tangyin1.github.io/post-images/1691940756890.png" alt="" loading="lazy"><br>
-https://learngitbranching.js.org/?locale=zh_CN</p>
-<h1 id="12-程序编译过程">12 程序编译过程</h1>
-<figure data-type="image" tabindex="1"><img src="https://tangyin1.github.io/post-images/1691940820451.png" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
 </feed>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>C++11新特性（1） | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://tangyin1.github.io/favicon.ico?v=1700459614382">
+<link rel="stylesheet" href="https://tangyin1.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="C++11的一些常用新特性
+
+1字符串原始字面量
+在C++11中添加了定义原始字符串的字面量，定义方式为：R “xxx(原始字符串)xxx”其中（）两边的字符串可以省略。原始字面量R可以直接表示字符串的实际含义，而不需要额外对字符串做转义或..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://tangyin1.github.io">
+        <img src="https://tangyin1.github.io/images/avatar.png?v=1700459614382" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://tangyin1.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">C++11新特性（1）</h2>
+            <div class="post-date">2023-11-20</div>
+            
+              <div class="feature-container" style="background-image: url('https://tangyin1.github.io/post-images/c11-xin-te-xing-1.jpeg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <p>C++11的一些常用新特性</p>
+<!-- more -->
+<h3 id="1字符串原始字面量">1字符串原始字面量</h3>
+<p>在C++11中添加了定义原始字符串的字面量，定义方式为：<font color='red'>R “xxx(原始字符串)xxx”</font>其中（）两边的字符串可以省略。原始字面量R可以直接表示字符串的实际含义，而不需要额外对字符串做转义或连接等操作。</p>
+<p>在R “xxx(raw string)xxx” 中，原始字符串必须用括号（）括起来，括号的前后可以加其他字符串，所加的字符串会被忽略，<font color='red'>并且加的字符串必须在括号两边同时出现</font>。</p>
+<p><code>string str2 = R&quot;luffy(D:\hello\world\test.text)luffy&quot;;</code>-----------正确</p>
+<p><code>string str3 = R&quot;luffy(D:\hello\world\test.text)robin&quot;;</code>	----------<font color='cornflowerblue'>错误（原因在字符串两边的字符串不一样）</font></p>
+<p>运行结果：</p>
+<p><code>D:\hello\world\test.text</code></p>
+<h3 id="2long-long-整型">2long long 整型</h3>
+<p>C++11 标准要求 long long 整型可以在不同平台上有不同的长度，但至少有64位。long long 整型有两种∶</p>
+<p>long long - 对应类型的数值可以使用 LL (大写) 或者 ll (小写) 后缀</p>
+<p><code>long long num1 = 123456789LL;</code><br>
+<code>long long num2 = 123456789ll;</code></p>
+<p><font color='red'>在通常情况下我们使用LL</font>，因为ll容易与数字1混淆</p>
+<p>同其他的整型一样，要了解平台上 long long大小的方法就是查看<climits>（或&lt;limits. h&gt; ）中的宏与long long整 型相关的一共有3个：</p>
+<ul>
+<li>LLONG_MIN - 最小的long long值（负数）</li>
+<li>LLONG_MAX - 最大的long long 值（正数包括0）</li>
+<li>ULLONG MAX - 最大的 unsigned long long 值LLONG_MIN+LLONG_MAX的数）</li>
+</ul>
+<p><strong>在C++11中一共只定义了以下5种标准的有符号整型</strong>：</p>
+<ul>
+<li>signed char</li>
+<li>short int</li>
+<li>int</li>
+<li>long int</li>
+<li>long long int</li>
+</ul>
+<p>关于整形提升的隐式转换遵循如下原则:</p>
+<ul>
+<li>长度越大的整型等级越高，比如 long long int 的等级会高于int。</li>
+<li>长度相同的情况下，标准整型的等级高于扩展类型，比如 long long int 和 int64 如果 都是64 位长度，则long long int类型的等级更高。</li>
+<li>相同大小的有符号类型和无符号类型的等级相同，long long int 和unsigned longlong  int的等级就相同。</li>
+<li><font color='red'>转换过程中，低等级整型需要转换为高等级整型，有符号的需要转换为无符号整形。</font></li>
+</ul>
+<h3 id="3类成员的快速初始化">3类成员的快速初始化</h3>
+<p>//类成员的快速初始化</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+struct Base
+{
+    Base() : a(250) {}
+    Base(int num) : a(num) {}
+
+int a;
+int b = 1;
+static int c;//直接在类中声明会报错 类的静态成员，必须在类的外部进行初始化
+static const double d;//类的静态常量成员，但不是整形或者枚举，无法通过编译
+static const char* const e ;//类的静态常量成员，但不是整形或者枚举，无法通过编译
+const static int f = 0;
+
+};
+//可以在类外声明
+int::Base::c = 1;
+const double::Base::d = 3.14;
+const char* const e = &quot;i am luffy&quot;;
+int main()
+{
+	system(&quot;pause&quot;);
+	return 0;
+
+}
+</code></pre>
+<h3 id="c11-标准两种类成员初始化方法">C++11 标准两种类成员初始化方法</h3>
+<h4 id="21-初始化类的非静态成员">2.1 初始化类的非静态成员</h4>
+<p>进行类成员变量初始化的时候，C++11标准对于C++98做了补充，允许在定义类的时候在类内部直接对非静态成员变量进行初始化，在初始化的时候可以<font color='red'>使用等号 = 也可以使用花括号 {}</font> 。</p>
+<pre><code class="language-cpp">class Test
+{
+private:
+    int a = 9;
+    int b = {5};
+    int c{12};
+    double array[4] = { 3.14, 3.15, 3.16, 3.17};
+    double array1[4] { 3.14, 3.15, 3.16, 3.17 };
+    string s1(&quot;hello&quot;);     // error
+    string s2{ &quot;hello, world&quot; };
+};
+</code></pre>
+<p><font color='cornflowerblue'>可以看到如果使用花括号 {}的方式对类的非静态成员进行初始化，等号是可以省略不写的</font>。</p>
+<p>第9行：错误，不能使用小括号() 初始化对象，应该使用花括号{}</p>
+<h4 id="22-类内部赋值和初始化列表">2.2 类内部赋值和初始化列表</h4>
+<p>在C++11之前对于非静态的类成员变量我们除了在构造函数内部进行赋值，也可以在类的初始化列表中进行初始化（这种方式比在构造函数内部赋值效率高）</p>
+<pre><code class="language-cpp">class Init
+{
+public:
+    Init(int x, int y, int z) :a(x), b(y), c(z) {}
+
+int a = 1;
+int b = 2;
+int c = 3;
+
+};
+
+int main()
+{
+    Init tmp(10, 20, 30);
+    cout &lt;&lt; &quot;a: &quot; &lt;&lt; tmp.a &lt;&lt; &quot;, b: &quot; &lt;&lt; tmp.b &lt;&lt; &quot;, c: &quot; &lt;&lt; tmp.c &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+<ul>
+<li>第4行：使用初始化列表对类的非静态成员进行初始化</li>
+<li>第6、7、8行：在类内部对非静态成员变量就地初始化（C++11新特性）</li>
+</ul>
+<p>执行程序，输出的结果如下：<br>
+<code>a: 10, b: 20, c: 30</code></p>
+<p><font color='red'>通过初始化列表指定的值会覆盖就地初始化时指定的值</font></p>
+<h3 id="4final和override">4.final和override</h3>
+<h4 id="final">final</h4>
+<p>C++中增加了<font color='red'>final关键字来限制某个类不能被继承，或者某个虚函数不能被重写</font>，和Java的final关键字的功能是类似的。如果使用final修饰函数，只能修饰虚函数，并且要把final关键字<font color='red'>放到类或者函数的后面</font></p>
+<p>如果使用final修饰函数，只能修饰虚函数，这样就能<font color='red'>阻止子类重写父类的这个函数了</font>：</p>
+<pre><code class="language-cpp">class Base
+{
+public:
+    virtual void test()
+    {
+        cout &lt;&lt; &quot;Base class...&quot;;
+    }
+};
+
+class Child : public Base
+{
+public:
+    void test() final
+    {
+        cout &lt;&lt; &quot;Child class...&quot;;
+    }
+};
+
+class GrandChild : public Child
+{
+public:
+    // 语法错误, 不允许重写
+    void test()
+    {
+        cout &lt;&lt; &quot;GrandChild class...&quot;;
+    }
+};
+</code></pre>
+<p>但注意的是，在父类的虚函数以后不允许加上final</p>
+<h4 id="override重写">override(重写)</h4>
+<p>override关键字确保在派生类中声明的重写函数与基类的虚函数有相同的签名，同时也明确表明将会重写基类的虚函数，这样就可以保证重写的虚函数的正确性，也提高了代码的可读性，和final一样这个关键字要写到方法的后面。</p>
+<pre><code class="language-cpp">class Base
+{
+public:
+    virtual void test()
+    {
+        cout &lt;&lt; &quot;Base class...&quot;;
+    }
+};
+
+class Child : public Base
+{
+public:
+    void test() override
+    {
+        cout &lt;&lt; &quot;Child class...&quot;;
+    }
+};
+
+class GrandChild : public Child
+{
+public:
+    void test() override
+    {
+        cout &lt;&lt; &quot;Child class...&quot;;
+    }
+};
+</code></pre>
+<p>上述代码中第13行和第22行就是显示指定了要重写父类的test()方法，使用了override关键字之后，假设在重写过程中因为误操作，写错了函数名或者函数参数或者返回值编译器都会提示语法错误，提高了程序的正确性，降低了出错的概率</p>
+<h3 id="5断言">5.断言</h3>
+<h4 id="断言">断言</h4>
+<p>断言（assertion）是一种编程中常用的手段。在通常情况下，断言就是将一个返回值总是需要为真的判断表达式放在语句中，用于排除在设计的逻辑上不应该产生的情况。</p>
+<p>比如：一个函数总需要输入在一定的范围内的参数，那么程序员就可以对该参数使用断言，以迫使在该参数发生异常的时候程序退出，从而避免程序陷入逻辑的混乱。</p>
+<p>从一些意义上讲，断言并不是正常程序所必需的，不过对于程序调试来说，通常断言能够帮助程序开发者快速定位那些违反了某些前提条件的程序错误。</p>
+<p>如果我们要在C++程序中使用断言，需要在程序中包含头文件<cassert>或&lt;assert.h&gt;，头文件中为我们提供了 assert 宏，用于在运行时进行断言。举例说明：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include&lt;cassert&gt;
+using namespace std;
+char* creatArray(int size)
+{
+	assert(size &gt; 0);
+	char* Array = new char[size];
+	return Array;
+}
+int main()
+{
+	char* buf = creatArray(0);
+	system(&quot;pause&quot;);
+	return 0;
+
+}
+</code></pre>
+<h4 id="静态断言">静态断言</h4>
+<p>在上面的例子中我们使用了断言 assert。<font color='cornflowerblue'>但 assert是一个运行时断言，也就是说它只有在程序运行时才能起作用 </font>。这意味着不运行程序我们将无法得知某些条件是否是成立的。 比如：我们想知道当前是32位还是64位平台，对于这个需求我们应该是在程序运行之前就应该得到结果，如果使用断言显然是无法做到的，对于这种情况我们就需要使用C++11提供的静态断言了。</p>
+<p>静态断言static_assert，所谓静态就是在编译时就能够进行检查的断言，使用时不需要引用头文件。静态断言的另一个好处是，可以自定义违反断言时的错误提示信息。静态断言使用起来非常简单，它接收两个参数：</p>
+<ul>
+<li>参数1：断言表达式，这个表达式通常需要返回一个 bool值</li>
+<li>参数2：警告信息，它通常就是一段字符串，在违反断言（表达式为false）时提示该信息</li>
+</ul>
+<pre><code class="language-cpp">#include &lt;iostream&gt;                                         
+using namespace std;
+
+int main()
+{
+    // 字体原因看起来是一个=, 其实这是两个=
+    static_assert(sizeof(long) == 4, &quot;错误, 不是32位平台...&quot;);
+    cout &lt;&lt; &quot;64bit Linux 指针大小: &quot; &lt;&lt; sizeof(char*) &lt;&lt; endl;
+    cout &lt;&lt; &quot;64bit Linux long 大小: &quot; &lt;&lt; sizeof(long) &lt;&lt;endl;
+
+    return 0;
+
+}
+</code></pre>
+<h3 id="异常和noexcept">异常和noexcept</h3>
+<h4 id="异常">异常</h4>
+<p>异常通常用于处理逻辑上可能发生的错误，在C++98中为我们提供了一套完善的异常处理机制，我们可以直接在程序中将各种类型的异常抛出，从而强制终止程序的运行。</p>
+<pre><code class="language-cpp">int main()
+{ 
+    try
+    {
+        throw -1; 
+    } 
+    catch (int e)
+    { 
+        cout &lt;&lt; &quot;int exception, value: &quot; &lt;&lt; e &lt;&lt; endl; 
+    } 
+    cout &lt;&lt; &quot;That's ok!&quot; &lt;&lt; endl; 
+    return 0; 
+}
+</code></pre>
+<h4 id="noexcept">noexcept</h4>
+<p>表示其修饰的函数不会抛出异常 。不过与 <code>throw()</code>动态异常声明不同的是，<font color='red'>在 C++11 中如果 noexcept 修饰的函数抛出了异常，编译器可以选择直接调用 std::terminate() 函数来终止程序的运行，这比基于异常机制的 throw() 在效率上会高一些</font>。这是因为异常机制会带来一些额外开销，比如函数抛出异常，会导致函数栈被依次地展开（栈解旋），并自动调用析构函数释放栈上的所有对象。</p>
+<p>从语法上讲，noexcept 修饰符有两种形式：</p>
+<p>简单地在函数声明后加上 noexcept 关键字</p>
+<p>可以接受一个常量表达式作为参数，如下所示∶</p>
+<pre><code class="language-cpp">double divisionMethod(int a, int b) noexcept(常量表达式);
+</code></pre>
+<p>常量表达式的结果会被转换成一个bool类型的值：</p>
+<ul>
+<li>值为 true，表示函数不会抛出异常</li>
+<li>值为 false，表示有可能抛出异常这里</li>
+<li>不带常量表达式的noexcept相当于声明了noexcept（true），即不会抛出异常。</li>
+</ul>
+<h3 id="字符串和数值类型之间的转换">字符串和数值类型之间的转换</h3>
+<h4 id="to_string">to_string()</h4>
+<p>数字转成字符串</p>
+<h4 id="stoi">stoi()</h4>
+<p>字符串转换成数字，默认是十进制，第二个参数通常写0 或者nullptr</p>
+<pre><code class="language-cpp">inline int stoi(const string&amp; _Str, size_t* _Idx = nullptr, int _Base = 10)
+</code></pre>
+<pre><code class="language-cpp">//字符串和数值类型之间的转换
+#include &lt;iostream&gt;
+#include&lt;string&gt;
+using namespace std;
+void numbertostring()
+{
+	double a = 3.1415926;
+	string b = to_string(a);
+	cout &lt;&lt; b &lt;&lt; endl;
+}
+void stringtonumber()
+{
+	string a = &quot;2020.04.01 is a goodday!&quot;;
+	string b = &quot;10001&quot;;
+	string c = &quot;0x13&quot;;
+	size_t sz;
+	int i_a = stoi(a, &amp;sz);
+	int i_b = stoi(b, 0,2);//int i_b=stoi(b,nullptr,2)
+	int i_c = stoi(c, nullptr, 0);//0为编译器自动推导
+	cout &lt;&lt; i_a &lt;&lt; endl;
+	cout &lt;&lt; i_b &lt;&lt; endl;
+	cout &lt;&lt; i_c &lt;&lt; endl;
+}
+int main()
+{
+	numbertostring();
+	stringtonumber();
+	system(&quot;pause&quot;);
+	return 0;
+
+}
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://tangyin1.github.io/post/vim-ming-ling/">
+                  <h3 class="post-title">
+                    vim命令
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>C++11新特性（三） | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://tangyin1.github.io/favicon.ico?v=1700558559150">
+<link rel="stylesheet" href="https://tangyin1.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="文章内容来自https://subingwen.cn/cplusplus/的整理，感谢丙哥
+
+1for循环新特性
+C++98/03中普通的for循环，语法格式：
+for(表达式 1; 表达式 2; 表达式 3)
+{
+    // 循环体
+}..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://tangyin1.github.io">
+        <img src="https://tangyin1.github.io/images/avatar.png?v=1700558559150" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://tangyin1.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">C++11新特性（三）</h2>
+            <div class="post-date">2023-11-21</div>
+            
+              <div class="feature-container" style="background-image: url('https://tangyin1.github.io/post-images/c11-xin-te-xing-san.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <p>文章内容来自https://subingwen.cn/cplusplus/的整理，感谢丙哥</p>
+<!-- more -->
+<h3 id="1for循环新特性">1for循环新特性</h3>
+<p>C++98/03中普通的for循环，语法格式：</p>
+<pre><code class="language-cpp">for(表达式 1; 表达式 2; 表达式 3)
+{
+    // 循环体
+}
+</code></pre>
+<p>C++11基于范围的for循环，语法格式：</p>
+<pre><code class="language-cpp">for (declaration : expression)
+{
+    // 循环体
+}
+</code></pre>
+<p>在上面的语法格式中declaration表示遍历声明，在遍历过程中，当前被遍历到的元素会被存储到声明的变量中。expression是要遍历的对象，它可以是<font color='red'>表达式、容器、数组、初始化列表等。</font></p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+int main(void)
+{
+    vector&lt;int&gt; t{ 1,2,3,4,5,6 };
+    cout &lt;&lt; &quot;遍历修改之前的容器: &quot;;
+    for (auto &amp;value : t)
+    {
+        cout &lt;&lt; value++ &lt;&lt; &quot; &quot;;
+    }
+    cout &lt;&lt; endl &lt;&lt; &quot;遍历修改之后的容器: &quot;;
+    for (auto &amp;value : t)
+    {
+        cout &lt;&lt; value &lt;&lt; &quot; &quot;;
+    }
+    cout &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+<p><strong>auto &amp;value : t</strong></p>
+<p>由于直接不采用引用的方式是使用拷贝的方法来输出，这种拷贝的不仅影响内存还影响速度，采用引用的方式会解决了资源占用，还能进行对其数值进行修改</p>
+<h3 id="2基于范围的for循环需要注意的3个细节">2基于范围的for循环需要注意的3个细节</h3>
+<h4 id="21-关系型容器">2.1 关系型容器</h4>
+<p>使用基于范围的for循环有一些需要注意的细节，先来看一下对关系型容器map的遍历：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;map&gt;
+using namespace std;
+
+int main(void)
+{
+    map&lt;int, string&gt; m{
+        {1, &quot;lucy&quot;},{2, &quot;lily&quot;},{3, &quot;tom&quot;}
+    };
+
+    // 基于范围的for循环方式
+    for (auto&amp; it : m)
+    {
+        cout &lt;&lt; &quot;id: &quot; &lt;&lt; it.first &lt;&lt; &quot;, name: &quot; &lt;&lt; it.second &lt;&lt; endl;
+    }
+    
+    // 普通的for循环方式
+    for (auto it = m.begin(); it != m.end(); ++it)
+    {
+        cout &lt;&lt; &quot;id: &quot; &lt;&lt; it-&gt;first &lt;&lt; &quot;, name: &quot; &lt;&lt; it-&gt;second &lt;&lt; endl;
+    }
+    
+    return 0;
+
+}
+</code></pre>
+<p>在上面的例子中使用两种方式对map进行了遍历，通过对比有两点需要注意的事项：</p>
+<p>使用普通的for循环方式（基于迭代器）遍历关联性容器，<font color='red'> auto自动推导出的是一个迭代器类型</font>，需要使用迭代器的方式取出元素中的键值对（<font color='red'>和指针的操作方法相同</font>）：</p>
+<ul>
+<li>it-&gt;first</li>
+<li>it-&gt;second</li>
+</ul>
+<p>使用基于范围的for循环遍历关联性容器，<font color='red'>auto自动推导出的类型是容器中的value_type</font>，相当于一个对组（std::pair）对象，提取键值对的方式如下：</p>
+<ul>
+<li>it.first<br>
+it.second</li>
+</ul>
+<h4 id="22元素只读">2.2元素只读</h4>
+<p><font color='red'>对应set容器来说，内部元素都是只读的，这是由容器的特性决定的，因此在for循环中auto&amp;会被视为const auto &amp; 。</font></p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;set&gt;
+using namespace std;
+
+int main(void)
+{
+    set&lt;int&gt; st{ 1,2,3,4,5,6 };
+    for (auto &amp;item : st) 
+    {
+        cout &lt;&lt; item++ &lt;&lt; endl;		// error, 不能给常量赋值
+    }
+    return 0;
+}
+</code></pre>
+<h4 id="23访问次数">2.3访问次数</h4>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+vector&lt;int&gt; v{ 1,2,3,4,5,6 };
+vector&lt;int&gt;&amp; getRange()
+{
+    cout &lt;&lt; &quot;get vector range...&quot; &lt;&lt; endl;
+    return v;
+}
+int main(void)
+{
+    for (auto val : getRange())
+    {
+        cout &lt;&lt; val &lt;&lt; &quot; &quot;;
+    }
+    cout &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+<p>输出的结果如下：<br>
+<code>get vector range...</code><br>
+<code>1 2 3 4 5 6</code></p>
+<p><font color='red'>对应基于范围的for循环来说，冒号后边的表达式只会被执行一次。在得到遍历对象之后会先确定好迭代的范围，基于这个范围直接进行遍历。如果是普通的for循环，在每次迭代的时候都需要判断是否已经到了结束边界。</font></p>
+<h3 id="3-nullptr">3 nullptr</h3>
+<p>在C++程序开发中，为了提高程序的健壮性，一般会在定义指针的同时完成初始化操作，或者在指针的指向尚未明确的情况下，都会给指针初始化为NULL，避免产生野指针（没有明确指向的指针，操作也这种指针极可能导致程序发生异常）。C++98/03 标准中，将一个指针初始化为空指针的方式有 2 种：</p>
+<pre><code class="language-cpp">char *ptr = 0;
+char *ptr = NULL;
+</code></pre>
+<p>C++ 中将 NULL 定义为字面常量 0，并不能保证在所有场景下都能很好的工作，比如，函数重载时，NULL 和 0 无法区分</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+void func(char *p)
+{
+    cout &lt;&lt; &quot;void func(char *p)&quot; &lt;&lt; endl;
+}
+
+void func(int p)
+{
+    cout &lt;&lt; &quot;void func(int p)&quot; &lt;&lt; endl;
+}
+
+int main()
+{
+    func(nullptr);
+    func(250);
+    return 0;
+}
+</code></pre>
+<p><font color='red'>nullptr 无法隐式转换为整形，但是可以隐式匹配指针类型</font>。在 C++11 标准下，相比 NULL 和 0，使用 nullptr 初始化空指针可以令我们编写的程序更加健壮。</p>
+<p><font color='red'>总的来说在支持c++11的编译器之中，建议使用nullptr来代替NULL 和0，来避免报错。</font></p>
+<h3 id="4-lambda表达式">4、lambda表达式</h3>
+<h4 id="1-基本用法">1、基本用法</h4>
+<p>lambda表达式的语法形式简单归纳如下：</p>
+<pre><code class="language-cpp">[capture](params) opt -&gt; ret {body;};
+</code></pre>
+<p>其中<font color='red'>capture</font>是捕获列表，<font color='red'>params</font>是参数列表，<font color='red'>opt</font>是函数选项，<font color='red'>ret</font>是返回值类型，<font color='red'>body</font>是函数体。</p>
+<ol>
+<li>捕获列表[]: 捕获一定范围内的变量</li>
+<li>参数列表(): 和普通函数的参数列表一样，如果没有参数参数列表可以省略不写。</li>
+</ol>
+<pre><code class="language-cpp">auto f = [](){return 1;}	// 没有参数, 参数列表为空
+auto f = []{return 1;}		// 没有参数, 参数列表省略不写
+</code></pre>
+<p>​	3.opt 选项， <font color='red'>不需要可以省略</font></p>
+<ul>
+<li>​	mutable: 可以修改按值传递进来的拷贝（注意是能修改拷贝，而不是值本身）</li>
+<li>​	exception: 指定函数抛出的异常，如抛出整数类型的异常，可以使用throw();</li>
+</ul>
+<p>​	4.返回值类型：在C++11中，lambda表达式的返回值是通过返回值后置语法来定义的。</p>
+<p>​	5.函数体：函数的实现，这部分不能省略，但函数体可以为空。</p>
+<h4 id="2捕获列表">2.捕获列表</h4>
+<p>lambda表达式的捕获列表可以捕获一定范围内的变量，具体使用方式如下：</p>
+<ul>
+<li>[] - 不捕捉任何变量</li>
+<li>[&amp;] - 捕获外部作用域中所有变量, 并作为引用在函数体内使用 (按引用捕获)</li>
+<li>[=] - 捕获外部作用域中所有变量, 并作为副本在函数体内使用 (按值捕获)</li>
+<li>拷贝的副本在匿名函数体内部是只读的</li>
+<li>[=, &amp;foo] - 按值捕获外部作用域中所有变量, 并按照引用捕获外部变量 foo</li>
+<li>[bar] - 按值捕获 bar 变量, 同时不捕获其他变量</li>
+<li>[&amp;bar] - 按引用捕获 bar 变量, 同时不捕获其他变量</li>
+<li>[this] - 捕获当前类中的this指针</li>
+</ul>
+<p>​		让lambda表达式拥有和当前类成员函数同样的访问权限<br>
+​		如果已经使用了 &amp; 或者 =, 默认添加此选项</p>
+<pre><code class="language-cpp">//lambda表达式
+#include &lt;iostream&gt;
+using namespace std;
+void func(int x, int y)
+{
+	int a = 1;
+	int b = 2;
+	[=,&amp;x]() mutable//除了x为引用的方式被取值，其他的元素都是以拷贝的方式取值
+	{
+		int c = a;
+		b++;//使用mutable可以使得拷贝进来的元素可以进行修改
+		cout &lt;&lt; b &lt;&lt; endl;
+	}();//要调用这个函数需要在{}后面接上(),如果{}前面的小括号有参数，{}后面的也要有相应类型的参数
+	cout &lt;&lt; b &lt;&lt; endl;
+	[=](int z)mutable
+	{
+		int d = a;
+		a++;
+		cout &lt;&lt; &quot;d= &quot; &lt;&lt; d&lt;&lt;endl;
+	}(1);
+}
+int main()
+{
+	func(1, 2);
+	system(&quot;pause&quot;);
+	return 0;
+}
+</code></pre>
+<h4 id="3-返回值">3、返回值</h4>
+<p>很多时候，lambda表达式的返回值是非常明显的，因此在C++11中允许省略lambda表达式的返回值。</p>
+<pre><code class="language-cpp">// 完整的lambda表达式定义
+auto f = [](int a) -&gt; int
+{
+    return a+10;  
+};
+
+// 忽略返回值的lambda表达式定义
+auto f = [](int a)
+{
+    return a+10;  
+};
+</code></pre>
+<p>一般情况下，不指定lambda表达式的返回值，编译器会根据return语句自动推导返回值的类型，但需要注意的是labmda表达式<font color='red'>不能通过</font><font color='red'>列表初始化自动推导出返回值类型</font>。</p>
+<pre><code class="language-cpp">/ ok，可以自动推导出返回值类型
+auto f = [](int i)
+{
+    return i;
+}
+
+// error，不能推导出返回值类型
+auto f1 = []()
+{
+    return {1, 2};	// 基于列表初始化推导返回值，错误
+}
+</code></pre>
+<h4 id="4-函数本质">4、函数本质</h4>
+<p>使用lambda表达式捕获列表捕获外部变量，如果希望去修改按值捕获的外部变量，那么应该如何处理呢？这就需要使用mutable选项，<font color='red'>被mutable修改是lambda表达式就算没有参数也要写明参数列表，并且可以去掉按值捕获的外部变量的只读（const）属性。</font></p>
+<pre><code class="language-cpp">int a = 0;
+auto f1 = [=] {return a++; };              // error, 按值捕获外部变量, a是只读的
+auto f2 = [=]()mutable {return a++; };     // ok
+</code></pre>
+<p>最后再剖析一下为什么通过值拷贝的方式捕获的外部变量是只读的:</p>
+<ol>
+<li>lambda表达式的类型在C++11中会被看做是一个带operator()的类，即仿函数。</li>
+<li>按照C++标准，lambda表达式的operator()默认是const的，一个const成员函数是无法修改成员变量值的。</li>
+</ol>
+<p>​	<font color='red'>mutable选项的作用就在于取消operator()的const属性。</font></p>
+<p>因为lambda表达式在C++中会被看做是一个仿函数，因此可以使用<font color='red'>std::function和std::bind来存储和操作lambda表达式</font>：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;functional&gt;
+using namespace std;
+
+int main(void)
+{
+    // 包装可调用函数
+    std::function&lt;int(int)&gt; f1 = [](int a) {return a; };
+    // 绑定可调用函数
+    std::function&lt;int(int)&gt; f2 = bind([](int a) {return a; }, placeholders::_1);
+
+    // 函数调用
+    cout &lt;&lt; f1(100) &lt;&lt; endl;
+    cout &lt;&lt; f2(200) &lt;&lt; endl;
+    return 0;
+
+}
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://tangyin1.github.io/post/c11-xin-te-xing-2zi-dong-lei-xing-tui-dao/">
+                  <h3 class="post-title">
+                    C++11新特性2（自动类型推导）
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

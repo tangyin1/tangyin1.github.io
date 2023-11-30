@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>C++11新特性（五） | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://tangyin1.github.io/favicon.ico?v=1701334476768">
+<link rel="stylesheet" href="https://tangyin1.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="1、可调用对象包装器和绑定器
+什么是可调用对象
+c++11中有一个重要的概念叫做可调用对象(Callable Objects)。
+可调用对象用处广泛，比如在使用一些基于范围的模板函数时（如 sort()、all_of()、find_if()..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://tangyin1.github.io">
+        <img src="https://tangyin1.github.io/images/avatar.png?v=1701334476768" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://tangyin1.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">C++11新特性（五）</h2>
+            <div class="post-date">2023-11-30</div>
+            
+            <div class="post-content" v-pre>
+              <h3 id="1-可调用对象包装器和绑定器">1、可调用对象包装器和绑定器</h3>
+<h4 id="什么是可调用对象">什么是可调用对象</h4>
+<p>c++11中有一个重要的概念叫做<font color='red'>可调用对象(Callable Objects)。</font></p>
+<p><strong>可调用对象用处广泛，比如在使用一些基于范围的模板函数时（如 sort()、all_of()、find_if() 等），常常需要我们传入一个可调用对象，以指明我们需要对范围中的每个元素进行怎样的处理。</strong><br>
+又比如，在处理一些回调函数、触发函数时，也常常会使用可调用对象。</p>
+<p>总的来说，可调用对象可以是以下几种情况：</p>
+<ul>
+<li>普通函数</li>
+<li>函数指针</li>
+<li>仿函数，即重载了operator()运算符的类对象</li>
+<li>匿名函数，即Lambda表达式</li>
+<li>std::function</li>
+</ul>
+<h4 id="可调用对象包装器-function">可调用对象包装器 function</h4>
+<p>首先需要在头文件里面包含#include<functional></p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include&lt;functional&gt;
+using namespace std;
+int add(int a, int b)
+{
+    cout &lt;&lt; a &lt;&lt; &quot; + &quot; &lt;&lt; b &lt;&lt; &quot; = &quot; &lt;&lt; a + b &lt;&lt; endl;
+    return a + b;
+}
+
+class T1
+{
+public:
+    static int sub(int a, int b)
+    {
+        cout &lt;&lt; a &lt;&lt; &quot; - &quot; &lt;&lt; b &lt;&lt; &quot; = &quot; &lt;&lt; a - b &lt;&lt; endl;
+        return a - b;
+    }
+};
+
+class T2
+{
+public:
+    int operator()(int a, int b)
+    {
+        cout &lt;&lt; a &lt;&lt; &quot; * &quot; &lt;&lt; b &lt;&lt; &quot; = &quot; &lt;&lt; a * b &lt;&lt; endl;
+        return a * b;
+    }
+};
+
+int main()
+{
+    //包装普通函数
+    function&lt;int(int, int)&gt;f1 = add;
+    //包装类的静态函数
+    function&lt;int(int, int)&gt;f2 = T1::sub;
+    //包装仿函数
+    T2 t;
+    function&lt;int(int, int)&gt;f3 = t;
+    //调用
+    f1(1, 2);
+    f2(3, 4);
+    f3(5, 6);
+	system(&quot;pause&quot;);
+	return 0;
+
+}
+</code></pre>
+<h4 id="可调用对象绑定器-bind">可调用对象绑定器 bind</h4>
+<p>bind()函数同样在头文件<font color='red'>functional</font>里面</p>
+<p>std::bind用来将可调用对象与其参数一起进行绑定。绑定后的结果可以使用std::function进行保存，并延迟调用到任何我们需要的时候。通俗来讲，它主要有两大作用：</p>
+<ol>
+<li>
+<p>将可调用对象与其参数一起绑定成一个仿函数。</p>
+</li>
+<li>
+<p>将多元（参数个数为n，n&gt;1）可调用对象转换为一元或者（n-1）元可调用对象，即只绑定部分参数。</p>
+</li>
+</ol>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include&lt;functional&gt;
+using namespace std;
+void output(int x, int y)
+{
+	cout &lt;&lt; x &lt;&lt; &quot; &quot; &lt;&lt; y &lt;&lt; endl;
+}
+
+int main()
+{
+    // 使用绑定器绑定可调用对象和参数, 并调用得到的仿函数
+    bind(output, 1, 2)();
+    bind(output, placeholders::_1, 2)(10);
+    bind(output, 2, placeholders::_1)(10);
+
+    // error, 调用时没有第二个参数
+    // bind(output, 2, placeholders::_2)(10);
+    // 调用时第一个参数10被吞掉了，没有被使用
+    bind(output, 2, placeholders::_2)(10, 20);
+    
+    bind(output, placeholders::_1, placeholders::_2)(10, 20);
+    bind(output, placeholders::_2, placeholders::_1)(10, 20);
+    
+    system(&quot;pause&quot;);
+    return 0;
+}
+</code></pre>
+<p>绑定类内元素</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include&lt;functional&gt;
+using namespace std;
+class A
+{
+public:
+	void print(int a, int b)
+	{
+		cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; endl;
+	}
+	int c;
+
+};
+int main()
+{
+	A aa;
+	//绑定类内函数
+	auto f1 = bind(&amp;A::print,&amp;aa, placeholders::_1,placeholders::_2);//自动推导得出的仿函数类型
+	function&lt;void(int,int)&gt; f11 = 
+	bind(&amp;A::print, &amp;aa, placeholders::_1, placeholders::_2);//进行了function包装，二者参数类型不同
+	f1(1,2);
+	f11(8,9);
+	//绑定类内成员变量
+	auto f22 = bind(&amp;A::c, &amp;aa);
+	function&lt;int&amp;(void)&gt; f2=bind(&amp;A::c, &amp;aa);
+	f2() = 3;
+	cout &lt;&lt; f2() &lt;&lt; endl;
+	f22() = 4;
+	cout &lt;&lt; f22() &lt;&lt; endl;
+	system(&quot;pause&quot;);
+	return 0;
+}
+</code></pre>
+<p>在用绑定器绑定类成员函数或者成员变量的时候需要将它们所属的实例对象一并传递到绑定器函数内部。<font color='red'>f1的类型是function&lt;void(int, int)&gt;，通过使用std::bind将Test的成员函数output的地址和对象t绑定，并转化为一个仿函数并存储到对象f1中。</font></p>
+<p><font color='red'>使用绑定器绑定的类成员变量m_number得到的仿函数被存储到了类型为function&lt;int&amp;(void)&gt;的包装器对象f2中，并且可以在需要的时候修改这个成员。其中int是绑定的类成员的类型，并且允许修改绑定的变量，因此需要指定为变量的引用，由于没有参数因此参数列表指定为void。</font></p>
+<p>示例程序中是使用function包装器保存了bind返回的仿函数，如果不知道包装器的模板类型如何指定，可以直接使用auto进行类型的自动推导，这样使用起来会更容易一些。</p>
+<h3 id="2-右值引用">2、右值引用</h3>
+<p>C++11 增加了一个新的类型，称为右值引用（ R-value reference），标记为<code>&amp;&amp;</code>。在介绍右值引用类型之前先要了解什么是左值和右值：</p>
+<ul>
+<li>lvalue 是<code>loactor value</code>的缩写，rvalue 是 <code>read value</code>的缩写</li>
+<li>左值是指存储在内存中、有明确存储地址（可取地址）的数据；</li>
+<li>右值是指可以提供数据值的数据（不可取地址）；</li>
+</ul>
+<p>通过描述可以看出，区分左值与右值的便捷方法是：可以对表达式取地址（&amp;）就是左值，否则为右值 。所有有名字的变量或对象都是左值，而右值是匿名的。</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+using namespace std;
+
+int&amp;&amp; value = 520;
+class Test
+{
+public:
+    Test()
+    {
+        cout &lt;&lt; &quot;construct: my name is jerry&quot; &lt;&lt; endl;
+    }
+    Test(const Test&amp; a)
+    {
+        cout &lt;&lt; &quot;copy construct: my name is tom&quot; &lt;&lt; endl;
+    }
+};
+
+Test getObj()
+{
+    return Test();
+}
+
+int main()
+{
+    int a1;
+    int &amp;&amp;a2 = a1;        // error
+    Test&amp; t = getObj();   // error
+    Test &amp;&amp; t = getObj();
+    const Test&amp; t = getObj();
+    return 0;
+}
+</code></pre>
+<ul>
+<li>在上面的例子中<code>int&amp;&amp; value = 520;</code>里面<code>520</code>是纯右值，<code>value</code>是对字面量<code>520</code>这个右值的引用。</li>
+<li>在<code>int &amp;&amp;a2 = a1;</code>中<code>a1</code>虽然写在了<code>=</code>右边，但是它仍然是一个左值，<code>使用左值初始化一个右值引用类型是不合法的。</code></li>
+<li>在<code>Test&amp; t = getObj()</code>这句代码中语法是错误的，<code>右值不能给普通的左值引用赋值。</code></li>
+<li>在<code>Test &amp;&amp; t = getObj();</code>中<code>getObj()</code>返回的<code>临时对象</code>被称之为<code>将亡值</code>，<code>t</code>是这个将亡值的右值引用。</li>
+<li><code>const Test&amp; t = getObj()</code>这句代码的语法是正确的，<code>常量左值引用是一个万能引用类型，它可以接受左值、右值、常量左值和常量右值。</code></li>
+</ul>
+<p><font color='red'>在C++中在进行对象赋值操作的时候，很多情况下会发生对象之间的深拷贝，如果堆内存很大，这个拷贝的代价也就非常大，在某些情况下，如果想要避免对象的深拷贝，就可以使用右值引用进行性能的优化。</font></p>
+<h4 id="特性">&amp;&amp;特性</h4>
+<p>在C++中，<font color='cornflowerblue'>并不是所有情况下 &amp;&amp; 都代表是一个右值引用</font>，具体的场景体现在模板和自动类型推导中，如果是模板参数需要指定为T&amp;&amp;，如果是自动类型推导需要指定为auto &amp;&amp;，在这两种场景下 &amp;&amp;被称作未定的引用类型。另外还有一点需要额外注意<font color='red'>const T&amp;&amp;表示一个右值引用，不是未定引用类型。</font></p>
+<ol>
+<li><font color='red'> 左值和右值是独立于他们的类型的，右值引用类型可能是左值也可能是右值。</font></li>
+<li><font color='red'>编译器会将已命名的右值引用视为左值，将未命名的右值引用视为右值。</font></li>
+<li><font color='red'>auto&amp;&amp;或者函数参数类型自动推导的T&amp;&amp;是一个未定的引用类型，它可能是左值引用也可能是右值引用类型，这取决于初始化的值类型（上面有例子）。</font></li>
+<li><font color='red'>通过右值推导 T&amp;&amp; 或者 auto&amp;&amp; 得到的是一个右值引用类型，其余都是左值引用类型。</font></li>
+</ol>
+<pre><code class="language-cpp">int&amp;&amp; a1 = 5;
+auto&amp;&amp; bb = a1;
+auto&amp;&amp; bb1 = 5;
+
+int a2 = 5;
+int &amp;a3 = a2;
+auto&amp;&amp; cc = a3;
+auto&amp;&amp; cc1 = a2;
+
+const int&amp; s1 = 100;
+const int&amp;&amp; s2 = 100;
+auto&amp;&amp; dd = s1;
+auto&amp;&amp; ee = s2;
+
+const auto&amp;&amp; x = 5;
+</code></pre>
+<ul>
+<li>
+<p>第2行：a1为右值引用，推导出的bb为左值引用类型</p>
+</li>
+<li>
+<p>第3行：5为右值，推导出的bb1为右值引用类型</p>
+</li>
+<li>
+<p>第7行：a3为左值引用，推导出的cc为左值引用类型</p>
+</li>
+<li>
+<p>第8行：a2为左值，推导出的cc1为左值引用类型</p>
+</li>
+<li>
+<p>第12行：s1为常量左值引用，推导出的dd为常量左值引用类型</p>
+</li>
+<li>
+<p>第13行：s2为常量右值引用，推导出的ee为常量左值引用类型</p>
+</li>
+<li>
+<p>第15行：x为右值引用，不需要推导，只能通过右值初始化</p>
+</li>
+</ul>
+<h3 id="3-转移和完美转发">3、转移和完美转发</h3>
+<h4 id="1-move">1、move</h4>
+<p>在C++11添加了右值引用，并且不能使用左值初始化右值引用，如果想要使用左值初始化一个右值引用需要借助std::move()函数，使用<font color='red'>std::move方法可以将左值转换为右值。使用这个函数并不能移动任何东西，而是和移动构造函数一样都具有移动语义，将对象的状态或者所有权从一个对象转移到另一个对象，只是转移，没有内存拷贝。</font></p>
+<p>（舔狗净身出户，车房还在，只是所有权转移）</p>
+<pre><code class="language-cpp">class Test
+{
+public：
+    Test(){}
+    ......
+}
+int main()
+{
+    Test t;
+    Test &amp;&amp; v1 = t;          // error
+    Test &amp;&amp; v2 = move(t);    // ok
+    return 0;
+}
+</code></pre>
+<ul>
+<li>在第4行中，使用左值初始化右值引用，因此语法是错误的</li>
+<li>在第5行中，使用move()函数将左值转换为了右值，这样就可以初始化右值引用了。</li>
+</ul>
+<p>假设一个临时容器很大，并且需要将这个容器赋值给另一个容器，就可以执行如下操作：</p>
+<pre><code class="language-cpp">list&lt;string&gt; ls;
+ls.push_back(&quot;hello&quot;);
+ls.push_back(&quot;world&quot;);
+......
+list&lt;string&gt; ls1 = ls;        // 需要拷贝, 效率低
+list&lt;string&gt; ls2 = move(ls);
+</code></pre>
+<p>如果不使用std::move，拷贝的代价很大，性能较低。使用move几乎没有任何代价，只是转换了资源的所有权。如果一个对象内部有较大的堆内存或者动态数组时，使用move()就可以非常方便的进行数据所有权的转移。另外，我们也可以给类编写相应的移动构造函数（<font color='red'>T::T(T&amp;&amp; another</font>)）和和具有移动语义的赋值函数（<font color='red'>T&amp;&amp; T::operator=(T&amp;&amp; rhs)</font>），在构造对象和赋值的时候尽可能的进行资源的重复利用，<font color='red'>因为它们都是接收一个右值引用参数。</font></p>
+<h4 id="2-forward">2、forward</h4>
+<p>// 函数原型</p>
+<pre><code class="language-cpp">template &lt;class T&gt; T&amp;&amp; forward (typename remove_reference&lt;T&gt;::type&amp; t) noexcept;
+template &lt;class T&gt; T&amp;&amp; forward (typename remove_reference&lt;T&gt;::type&amp;&amp; t) noexcept;
+
+// 精简之后的样子
+std::forward&lt;T&gt;(t);
+</code></pre>
+<ul>
+<li><font color='red'>当T为左值引用类型时，t将被转换为T类型的左值</font></li>
+<li><font color='red'>当T不是左值引用类型时，t将被转换为T类型的右值</font></li>
+</ul>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+template&lt;typename T&gt;
+void printValue(T&amp; t)
+{
+    cout &lt;&lt; &quot;l-value: &quot; &lt;&lt; t &lt;&lt; endl;
+}
+
+template&lt;typename T&gt;
+void printValue(T&amp;&amp; t)
+{
+    cout &lt;&lt; &quot;r-value: &quot; &lt;&lt; t &lt;&lt; endl;
+}
+
+template&lt;typename T&gt;
+void testForward(T &amp;&amp; v)
+{
+    printValue(v);
+    printValue(move(v));
+    printValue(forward&lt;T&gt;(v));
+    cout &lt;&lt; endl;
+}
+
+int main()
+{
+    testForward(520);
+    int num = 1314;
+    testForward(num);
+    testForward(forward&lt;int&gt;(num));
+    testForward(forward&lt;int&amp;&gt;(num));
+    testForward(forward&lt;int&amp;&amp;&gt;(num));
+
+    return 0;
+
+}
+</code></pre>
+<p>测试结果如下</p>
+<pre><code class="language-cpp">l-value: 520
+r-value: 520
+r-value: 520
+
+l-value: 1314
+r-value: 1314
+l-value: 1314
+
+l-value: 1314
+r-value: 1314
+r-value: 1314
+
+l-value: 1314
+r-value: 1314
+l-value: 1314
+
+l-value: 1314
+r-value: 1314
+r-value: 1314
+</code></pre>
+<h3 id="4-共享智能指针">4、共享智能指针</h3>
+<p>在C++中没有垃圾回收机制，必须自己释放分配的内存，否则就会造成内存泄露。<font color='red'>解决这个问题最有效的方法是使用智能指针</font>（smart pointer）。</p>
+<p>智能指针：</p>
+<p><font color='red'>是存储指向动态分配（堆）对象指针的类，用于生存期的控制，能够确保在离开指针所在作用域时，自动地销毁动态分配的对象，防止内存泄露。智能指针的核心实现技术是引用计数，每使用它一次，内部引用计数加1，每析构一次内部的引用计数减1，减为0时，删除所指向的堆内存。</font></p>
+<p>C++11中提供了三种智能指针，使用这些智能指针时需要引用头文件<memory>：</p>
+<ul>
+<li>
+<pre><code class="language-cpp">- std::shared_ptr：共享的智能指针
+- std::unique_ptr：独占的智能指针
+- std::weak_ptr：弱引用的智能指针，它不共享指针，不能操作资源，是用来监视shared_ptr的。
+</code></pre>
+</li>
+</ul>
+<h4 id="shared_ptr-四种初始化方法">shared_ptr 四种初始化方法</h4>
+<ol>
+<li>
+<p>通过构造函数初始化</p>
+</li>
+<li>
+<p>通过拷贝和移动构造函数初始化</p>
+</li>
+<li>
+<p>通过std::make_shared初始化</p>
+</li>
+<li>
+<p>通过 reset方法初始化</p>
+<pre><code class="language-cpp">//共享智能指针
+#include &lt;iostream&gt;
+#include&lt;memory&gt;
+using namespace std;
+class Test
+{
+public:
+    Test()
+    {
+        cout &lt;&lt; &quot;construct Test...&quot; &lt;&lt; endl;
+    }
+    Test(int x)
+    {
+        cout &lt;&lt; &quot;construct Test, x = &quot; &lt;&lt; x &lt;&lt; endl;
+    }
+    Test(string str)
+    {
+        cout &lt;&lt; &quot;construct Test, str = &quot; &lt;&lt; str &lt;&lt; endl;
+    }
+    void setValue(int v)
+    {
+        m_num = v;
+    }
+    void print()
+    {
+        cout &lt;&lt; m_num &lt;&lt; endl;
+    }
+    ~Test()
+    {
+        cout &lt;&lt; &quot;destruct Test ...&quot; &lt;&lt; endl;
+    }
+private:
+    int m_num;
+};
+
+int main()
+{
+    //通过构造函数初始化
+    shared_ptr&lt;int&gt;ptr1(new int(3));
+    cout &lt;&lt; &quot;ptr1 use count: &quot; &lt;&lt; ptr1.use_count() &lt;&lt; endl;
+    //通过移动构造和拷贝构造函数初始话
+    shared_ptr&lt;int&gt;ptr2 = move(ptr1);
+    cout &lt;&lt; &quot;ptr1 use count: &quot; &lt;&lt; ptr1.use_count() &lt;&lt; endl;
+    cout &lt;&lt; &quot;ptr2 use count: &quot; &lt;&lt; ptr2.use_count() &lt;&lt; endl;
+    //通过make_shared初始化
+    shared_ptr&lt;int&gt; ptr3 = make_shared&lt;int&gt;(8);
+    shared_ptr&lt;Test&gt;ptr4 = make_shared&lt;Test&gt;(0);
+    shared_ptr&lt;Test&gt;ptr5 = make_shared&lt;Test&gt;(&quot;hello&quot;);
+    cout &lt;&lt; &quot;ptr3 use count: &quot; &lt;&lt; ptr3.use_count() &lt;&lt; endl;
+    //通过reset初始化
+    ptr5.reset();
+    cout &lt;&lt; &quot;ptr5 use count: &quot; &lt;&lt; ptr5.use_count() &lt;&lt; endl;
+    ptr5.reset(new Test(&quot;kkk&quot;));
+    cout &lt;&lt; &quot;ptr5 use count: &quot; &lt;&lt; ptr5.use_count() &lt;&lt; endl;
+    //通过原始指针
+    Test* t = ptr5.get();
+    t-&gt;setValue(1000);
+    t-&gt;print();
+    ptr5-&gt;setValue(999);
+    ptr5-&gt;print();
+	system(&quot;pause&quot;);
+	return 0;
+
+}
+</code></pre>
+</li>
+</ol>
+<p>获取原始指针</p>
+<pre><code class="language-cpp">T* get() const noexcept;
+</code></pre>
+<h3 id="unique_ptr独占的共享指针">unique_ptr,独占的共享指针</h3>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+
+#include&lt;memory&gt;
+using namespace std;
+class Test
+{
+public:
+    Test()
+    {
+        cout &lt;&lt; &quot;construct Test...&quot; &lt;&lt; endl;
+    }
+    Test(int x)
+    {
+        cout &lt;&lt; &quot;construct Test, x = &quot; &lt;&lt; x &lt;&lt; endl;
+    }
+    Test(string str)
+    {
+        cout &lt;&lt; &quot;construct Test, str = &quot; &lt;&lt; str &lt;&lt; endl;
+    }
+    void setValue(int v)
+    {
+        m_num = v;
+    }
+    void print()
+    {
+        cout &lt;&lt; m_num &lt;&lt; endl;
+    }
+    ~Test()
+    {
+        cout &lt;&lt; &quot;destruct Test ...&quot; &lt;&lt; endl;
+    }
+private:
+    int m_num;
+};
+
+unique_ptr&lt;int&gt; func()
+{
+	return unique_ptr&lt;int&gt;(new int(99));
+}
+int main()
+{
+	//初始化
+	unique_ptr&lt;int&gt;ptr_1(new int(1));//普通初始化
+	unique_ptr&lt;int&gt;ptr2 = move(ptr_1);//使用move
+	unique_ptr&lt;int&gt;ptr_3 = func();//将亡值
+    shared_ptr&lt;int&gt;pw(new int(777));
+	//reset	
+	ptr_1.reset();
+	ptr2.reset(new int(2)); 
+	cout &lt;&lt; *ptr2 &lt;&lt; endl;
+    //获取原始指针
+    unique_ptr&lt;Test&gt; ppp(new Test (999));
+    Test* p = ppp.get();
+    p-&gt;setValue(888);
+    p-&gt;print();
+    //独占智能指针没有use_count()函数
+    cout &lt;&lt; pw.use_count() &lt;&lt; endl;;
+    //删除器
+    using ptrFunc = void(*)(Test*);
+    unique_ptr&lt;Test,ptrFunc&gt;prr_9(new Test(&quot;kkkk&quot;), [](Test* t) {
+        cout &lt;&lt; &quot;----------&quot; &lt;&lt; endl;
+        delete t;
+
+​    });
+
+   ////独占的智能指针可以管理数组类型的地址，能够自动释放
+   // unique_ptr &lt;Test[]&gt;ptr_11(new Test[3]);
+   // ptr_11 = nullptr;
+
+​	system(&quot;pause&quot;);
+​	return 0;
+
+}
+
+
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://tangyin1.github.io/post/c11-xin-te-xing-si/">
+                  <h3 class="post-title">
+                    C++11新特性（四）
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

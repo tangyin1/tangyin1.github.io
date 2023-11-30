@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>C++11新特性（四） | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://tangyin1.github.io/favicon.ico?v=1701334476768">
+<link rel="stylesheet" href="https://tangyin1.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="本章节包含
+constexpr修饰常量表达式
+常量表达式函数
+using定义基础类型和函数指针别名
+委托构造函数和继承构造函数
+列表初始化
+
+1、constexpr修饰常量表达式
+在c++11以后，表达只读的话使用const 或者const..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://tangyin1.github.io">
+        <img src="https://tangyin1.github.io/images/avatar.png?v=1701334476768" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://tangyin1.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">C++11新特性（四）</h2>
+            <div class="post-date">2023-11-22</div>
+            
+              <div class="feature-container" style="background-image: url('https://tangyin1.github.io/post-images/c11-xin-te-xing-si.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <p>本章节包含<br>
+constexpr修饰常量表达式<br>
+常量表达式函数<br>
+using定义基础类型和函数指针别名<br>
+委托构造函数和继承构造函数<br>
+列表初始化</p>
+<!-- more -->
+<h3 id="1-constexpr修饰常量表达式">1、constexpr修饰常量表达式</h3>
+<p><font color='red'>在c++11以后，表达只读的话使用const 或者constexpr都是可以的，在只读方面二者是等价的，在表示常量的时候建议使用constexptr。</font></p>
+<p>在介绍gcc/g++工作流程的时候说过，C++ 程序从编写完毕到执行分为四个阶段：<font color='red'>预处理、 编译、汇编和链接4个阶段</font>，得到可执行程序之后就可以运行了。需要额外强调的是，常量表达式和非常量表达式的计算时机不同，非常量表达式只能在程序运行阶段计算出结果，但是常量表达式的计算往往发生在程序的编译阶段，这可以极大提高程序的执行效率，因为表达式只需要在编译阶段计算一次，节省了每次程序运行时都需要计算一次的时间。</p>
+<p>那么问题来了，编译器如何识别表达式是不是常量表达式呢？在C++11中添加了constexpr关键字之后就可以在程序中使用它来修饰常量表达式，用来提高程序的执行效率。在使用中建议将 const 和 constexpr 的功能区分开，<font color='red'>即凡是表达“只读”语义的场景都使用 const</font>，<font color='red'>表</font><font color='red'>达“常量”语义的场景都使用 constexpr。</font></p>
+<p>在定义常量时，const 和 constexpr 是等价的，都可以在程序的编译阶段计算出结果，例如：</p>
+<pre><code class="language-cpp">const int m = f();  // 不是常量表达式，m的值只有在运行时才会获取。
+const int i=520;    // 是一个常量表达式
+const int j=i+1;    // 是一个常量表达式
+
+constexpr int i=520;    // 是一个常量表达式
+constexpr int j=i+1;    // 是一个常量表达式
+</code></pre>
+<p>对于 C++ 内置类型的数据，可以直接用 constexpr 修饰，但如果是自定义的数据类型（用 struct 或者 class 实现），直接用 constexpr 修饰是不行的。</p>
+<pre><code class="language-cpp">// 此处的constexpr修饰是无效的
+constexpr struct Test
+{
+    int id;
+    int num;
+};
+</code></pre>
+<p>如果要定义一个结构体/类常量对象，可以这样写：</p>
+<pre><code class="language-cpp">struct Test
+{
+    int id;
+    int num;
+};
+int main()
+{
+    constexpr Test t{ 1, 2 };
+    constexpr int id = t.id;
+    constexpr int num = t.num;
+    // error，不能修改常量
+    t.num += 100;
+    cout &lt;&lt; &quot;id: &quot; &lt;&lt; id &lt;&lt; &quot;, num: &quot; &lt;&lt; num &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+<p>在第13行的代码中t.num += 100;的操作是错误的，对象t是一个常量，因此它的成员也是常量，常量是不能被修改的。</p>
+<h3 id="2-常量表达式函数">2、常量表达式函数</h3>
+<p>为了提高C++程序的执行效率，我们可以将程序中值不需要发生变化的变量定义为常量，也可以使用constexpr修饰函数的返回值，这种函数被称作常量表达式函数，这些函数主要包括以下几种：<font color='red'>普通函数/类成员函数、类的构造函数、模板函数</font>。</p>
+<h4 id="1-constexpr并不能修改任意函数的返回值使这些函数成为常量表达式函数必须要满足以下几个条件">1、constexpr并不能修改任意函数的返回值，使这些函数成为常量表达式函数，必须要满足以下几个条件：</h4>
+<ol>
+<li>函数必须要有返回值，并且return 返回的表达式必须是常量表达式。</li>
+<li>函数在使用之前，必须有对应的定义语句。</li>
+<li>整个函数的函数体中，不能出现非常量表达式之外的语句（<font color='red'>using 指令、typedef 语句以及 static_assert 断言、return语句除外</font>）。</li>
+</ol>
+<pre><code class="language-cpp">// error
+constexpr int func1()
+{
+    constexpr int a = 100;
+    constexpr int b = 10;
+    for (int i = 0; i &lt; b; ++i)
+    {
+        cout &lt;&lt; &quot;i: &quot; &lt;&lt; i &lt;&lt; endl;
+    }
+    return a + b;
+}
+
+// ok
+constexpr int func2()
+{
+    using mytype = int;
+    constexpr mytype a = 100;
+    constexpr mytype b = 10;
+    constexpr mytype c = a * b;
+    return c - (a + b);
+}
+</code></pre>
+<p>因为func1()是一个常量表达式函数，在函数体内部是不允许出现非常量表达式以外的操作，因此函数体内部的for循环是一个非法操作。</p>
+<h4 id="2-修饰模板函数">2、修饰模板函数</h4>
+<p>C++11 语法中，constexpr 可以修饰函数模板，但由于模板中类型的不确定性，因此函数模板实例化后的模板函数是否符合常量表达式函数的要求也是不确定的。<font color='red'>如果 constexpr 修饰的模板函数实例化结果不满足常量表达式函数的要求，则 constexpr 会被自动忽略，即该</font><font color='red'>函数就等同于一个普通函数。</font></p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+struct Person {
+    const char* name;
+    int age;
+};
+
+// 定义函数模板
+template&lt;typename T&gt;
+constexpr T dispaly(T t) {
+    return t;
+}
+
+int main()
+{
+    struct Person p { &quot;luffy&quot;, 19 };
+    //普通函数
+    struct Person ret = dispaly(p);
+    cout &lt;&lt; &quot;luffy's name: &quot; &lt;&lt; ret.name &lt;&lt; &quot;, age: &quot; &lt;&lt; ret.age &lt;&lt; endl;
+
+    //常量表达式函数
+    constexpr int ret1 = dispaly(250);
+    cout &lt;&lt; ret1 &lt;&lt; endl;
+    
+    constexpr struct Person p1 { &quot;luffy&quot;, 19 };
+    constexpr struct Person p2 = dispaly(p1);
+    cout &lt;&lt; &quot;luffy's name: &quot; &lt;&lt; p2.name &lt;&lt; &quot;, age: &quot; &lt;&lt; p2.age &lt;&lt; endl;
+    return 0;
+
+}
+</code></pre>
+<p>在上面示例程序中定义了一个函数模板 display()，但由于其返回值类型未定，因此在实例化之前无法判断其是否符合常量表达式函数的要求：</p>
+<ul>
+<li><font color='red'>struct Person ret = dispaly(p);</font>由于参数p是变量，所以实例化后的函数不是常量表达式函数，此时 constexpr 是无效的</li>
+<li><font color='red'>constexpr int ret1 = dispaly(250)</font>;参数是常量，符合常量表达式函数的要求，此时 constexpr 是有效的</li>
+<li><font color='red'>constexpr struct Person p2 = dispaly(p1)</font>;参数是常量，符合常量表达式函数的要求，此时 constexpr 是有效的</li>
+</ul>
+<h4 id="3-修饰构造函数">3、修饰构造函数</h4>
+<p>如果想用直接得到一个常量对象，也可以使用constexpr修饰一个构造函数，这样就可以得到一个常量构造函数了。常量构造函数有一个要求：构造函数的函数体必须为空，并且必须采用初始化列表的方式为各个成员赋值。</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+struct Person {
+    constexpr Person(const char* p, int age) :name(p), age(age)
+    {
+    }
+    const char* name;
+    int age;
+};
+
+int main()
+{
+    constexpr struct Person p1(&quot;luffy&quot;, 19);
+    cout &lt;&lt; &quot;luffy's name: &quot; &lt;&lt; p1.name &lt;&lt; &quot;, age: &quot; &lt;&lt; p1.age &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+<h3 id="3-通过using定义基础类型和函数指针别名">3、通过using定义基础类型和函数指针别名</h3>
+<h4 id="1-定义别名">1、定义别名</h4>
+<p>在 C++中可以通过 typedef 重定义一个类型，语法格式如下：</p>
+<p>被重定义的类型并不是一个新的类型，仅仅只是原有的类型取了一个新的名字。和以前的声明语句一样，这里的声明符也可以包含类型修饰，从而也能由基本数据类型构造出复合类型来。C++11中规定了一种新的方法，使用别名声明(alias declaration)来定义类型的别名，即使用using。</p>
+<p>在使用的时候，关键字using作为别名声明的开始，其后紧跟别名和等号，其作用是把等号左侧的名字规定成等号右侧类型的别名。<font color='red'>类型</font><font color='red'>别名和类型的名字等价，只要是类型的名字能出现的地方，就能使用类型别名。使用typedef定义的别名和使用using定义的别名在语义上</font><font color='red'>是等效的。</font></p>
+<p>使用using定义别名的语法格式是这样的：</p>
+<pre><code class="language-cpp">using 新的类型 = 旧的类型;
+// 使用举例
+using uint_t = int;
+</code></pre>
+<p>通过using和typedef的语法格式可以看到二者的使用没有太大的区别，假设我们定义一个函数指针，using的优势就能凸显出来了，看一下下面的例子：</p>
+<pre><code class="language-cpp">// 使用typedef定义函数指针
+typedef int(*func_ptr)(int, double);
+
+// 使用using定义函数指针
+using func_ptr1 = int(*)(int, double);
+</code></pre>
+<p>使用using定义函数指针别名的写法看起来就非常直观了，把别名的名字强制分离到了左边，<font color='red'>而把别名对应的实际类型放在了右边，比较清晰，可读性比较好。</font></p>
+<h4 id="2-模板的别名">2、模板的别名</h4>
+<p>使用typedef重定义类似很方便，但是它有一点限制，比如无法重定义一个模板，比如我们需要一个固定以int类型为key的map，它可以和很多类型的value值进行映射，如果使用typedef这样直接定义就非常麻烦:</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;functional&gt;
+#include &lt;map&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+// 定义外敷类
+struct MyMap
+{
+    typedef map&lt;int, T&gt; type;
+};
+
+int main(void)
+{
+    MyMap&lt;string&gt;::type m;
+    m.insert(make_pair(1, &quot;luffy&quot;));
+    m.insert(make_pair(2, &quot;ace&quot;));
+
+    MyMap&lt;int&gt;::type m1;
+    m1.insert(1, 100);
+    m1.insert(2, 200);
+    
+    return 0;
+
+}
+</code></pre>
+<p>使用using就会很简洁</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;functional&gt;
+#include &lt;map&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+using mymap = map&lt;int, T&gt;;
+
+int main(void)
+{
+    // map的value指定为string类型
+    mymap&lt;string&gt; m;
+    m.insert(make_pair(1, &quot;luffy&quot;));
+    m.insert(make_pair(2, &quot;ace&quot;));
+
+    // map的value指定为int类型
+    mymap&lt;int&gt; m1;
+    m1.insert(1, 100);
+    m1.insert(2, 200);
+    
+    return 0;
+
+}
+</code></pre>
+<p><font color='red'>最后在强调一点：using语法和typedef一样，并不会创建出新的类型，它们只是给某些类型定义了新的别名。using相较于typedef的优势在于定义函数指针别名时看起来更加直观，并且可以给模板定义别名。</font></p>
+<h3 id="4-委托构造函数和继承构造函数">4、委托构造函数和继承构造函数</h3>
+<h4 id="1-委托构造函数">1、委托构造函数</h4>
+<p>在C++11以后，构造函数中构造函数2中有构造函数1，可以在构造函数2里调用构造函数1</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class Test
+{
+public:
+    Test() {};
+    Test(int max)
+    {
+        this-&gt;m_max = max &gt; 0 ? max : 100;
+    }
+
+    Test(int max, int min):Test(max)
+    {
+        this-&gt;m_min = min &gt; 0 &amp;&amp; min &lt; max ? min : 1;
+    }
+    
+    Test(int max, int min, int mid):Test(max, min)
+    {
+        this-&gt;m_middle = mid &lt; max &amp;&amp; mid &gt; min ? mid : 50;
+    }
+    
+    int m_min;
+    int m_max;
+    int m_middle;
+
+};
+
+int main()
+{
+    Test t(90, 30, 60);
+    cout &lt;&lt; &quot;min: &quot; &lt;&lt; t.m_min &lt;&lt; &quot;, middle: &quot; 
+         &lt;&lt; t.m_middle &lt;&lt; &quot;, max: &quot; &lt;&lt; t.m_max &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+<p>在一个构造函数中调用了其他的构造函数用于相关数据的初始化，相当于是一个链式调用。在使用委托构造函数的时候还需要注意一些几个问题：</p>
+<p><font color='red'>这种链式的构造函数调用不能形成一个闭环（死循环），否则会在运行期抛异常。</font></p>
+<p><font color='red'>如果要进行多层构造函数的链式调用，建议将构造函数的调用的写在初始列表中而不是函数体内部，否则编译器会提示形参的重复定义</font>。</p>
+<pre><code class="language-cpp">Test(int max)
+{
+    this-&gt;m_max = max &gt; 0 ? max : 100;
+}
+
+Test(int max, int min)
+{
+    Test(max);	// error, 此处编译器会报错, 提示形参max被重复定义
+    this-&gt;m_min = min &gt; 0 &amp;&amp; min &lt; max ? min : 1;
+}
+</code></pre>
+<p><font color='red'>在初始化列表中调用了代理构造函数初始化某个类成员变量之后，就不能在初始化列表中再次初始化这个变量了。</font></p>
+<pre><code class="language-cpp">// 错误, 使用了委托构造函数就不能再次m_max初始化了
+Test(int max, int min) : Test(max), m_max(max)
+{
+    this-&gt;m_min = min &gt; 0 &amp;&amp; min &lt; max ? min : 1;
+}
+</code></pre>
+<h4 id="2-继承构造函数">2、继承构造函数</h4>
+<p>C++11中提供的继承构造函数可以让派生类直接使用基类的构造函数，而无需自己再写构造函数，尤其是在基类有很多构造函数的情况下，可以极大地简化派生类构造函数的编写。</p>
+<p>继承构造函数的使用方法是这样的：通过使用<font color='red'>using 类名::构造函数名（其实类名和构造函数名是一样的）</font>来声明使用基类的构造函数，这样子类中就可以不定义相同的构造函数了，直接使用基类的构造函数来构造派生类对象</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Base
+{
+public:
+    Base(int i) :m_i(i) {}
+    Base(int i, double j) :m_i(i), m_j(j) {}
+    Base(int i, double j, string k) :m_i(i), m_j(j), m_k(k) {}
+
+    int m_i;
+    double m_j;
+    string m_k;
+
+};
+
+class Child : public Base
+{
+public:
+    using Base::Base;
+};
+
+int main()
+{
+    Child c1(520, 13.14);
+    cout &lt;&lt; &quot;int: &quot; &lt;&lt; c1.m_i &lt;&lt; &quot;, double: &quot; &lt;&lt; c1.m_j &lt;&lt; endl;
+    Child c2(520, 13.14, &quot;i love you&quot;);
+    cout &lt;&lt; &quot;int: &quot; &lt;&lt; c2.m_i &lt;&lt; &quot;, double: &quot; 
+         &lt;&lt; c2.m_j &lt;&lt; &quot;, string: &quot; &lt;&lt; c2.m_k &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+<h3 id="5-列表初始化">5、列表初始化</h3>
+<h4 id="1-统一初始化">1、统一初始化</h4>
+<p>C++98：</p>
+<pre><code class="language-cpp">// 数组的初始化
+int array[] = { 1,3,5,7,9 };
+double array1[3] = { 1.2, 1.3, 1.4 };
+
+// 对象的初始化
+struct Person
+{
+    int id;
+    double salary;
+}zhang3{ 1, 3000 };
+</code></pre>
+<p>C++11：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class Test
+{
+public:
+    Test(int) {}
+private:
+    Test(const Test &amp;);
+};
+
+int main(void)
+{
+    Test t1(520);
+    Test t2 = 520; 
+    Test t3 = { 520 };
+    Test t4{ 520 };
+    int a1 = { 1314 };
+    int a2{ 1314 };
+    int arr1[] = { 1, 2, 3 };
+    int arr2[]{ 1, 2, 3 };
+    return 0;
+}
+</code></pre>
+<ul>
+<li>
+<p>t1：最中规中矩的初始化方式，通过提供的带参构造进行对象的初始化</p>
+</li>
+<li>
+<p>t2：语法错误，因为提供的拷贝构造函数是私有的。如果拷贝构造函数是公共的，520会通过隐式类型转换被Test(int)构造成一个匿名对象，然后再通过对这个匿名对象进行拷贝构造得到t2（<font color='red'>这个错误在VS中不会出现</font>，在Linux中使用g++编译会提示描述的这个错误，截图如下。）</p>
+</li>
+<li>
+<p>t3和t4：使用了C++11的初始化方式来初始化对象，效果和t1的方式是相同的。</p>
+</li>
+<li>
+<p>在初始时，{}前面的等号是否书写对初始化行为没有任何影响。</p>
+</li>
+<li>
+<ul>
+<li>t3虽然使用了等号，但是它仍然是列表初始化，因此私有的拷贝构造对它没有任何影响。</li>
+<li>t1、arr1和t2、arr2：这两个是基础数据类型的列表初始化方式，可以看到，和对象的初始化方式是统一的。</li>
+</ul>
+</li>
+<li>
+<p>t4、a2、arr2的写法，<font color='red'>是C++11中新添加的语法格式，使用这种方式可以直接在变量名后边跟上初始化列表，来进行变量或者对象的初始化</font></p>
+</li>
+</ul>
+<h4 id="2-列表初始化细节">2、列表初始化细节</h4>
+<h5 id="1-聚合体">1、聚合体</h5>
+<ul>
+<li>普通数组本身可以看做是一个聚合类型</li>
+<li>满足以下条件的类（class、struct、union）可以被看做是一个聚合类型：</li>
+</ul>
+<p>​		<font color='cornflowerblue'>（1）无用户自定义的构造函数。</font></p>
+<p>​		<font color='cornflowerblue'>（2）无私有或保护的非静态数据成员。</font></p>
+<p>​		<font color='cornflowerblue'>（3）无基类。</font></p>
+<p>​		<font color='cornflowerblue'>（4）无虚函数。</font></p>
+<p>​		<font color='cornflowerblue'>（5）类中不能有使用{}和=直接初始化的非静态数据成员（从c++14开始就支持了</font></p>
+<h5 id="2-非聚合体">2、非聚合体</h5>
+<p>对于聚合类型的类可以直接使用列表初始化进行对象的初始化，如果不满足聚合条件还想使用列表初始化其实也是可以的，<font color='red'>需要在类的内部自定义一个构造函数, 在构造函数中使用初始化列表对类成员变量进行初始化:</font></p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+struct T1
+{
+    int x;
+    double y;
+    // 在构造函数中使用初始化列表初始化类成员
+    T1(int a, double b, int c) : x(a), y(b), z(c){}
+    virtual void print()
+    {
+        cout &lt;&lt; &quot;x: &quot; &lt;&lt; x &lt;&lt; &quot;, y: &quot; &lt;&lt; y &lt;&lt; &quot;, z: &quot; &lt;&lt; z &lt;&lt; endl;
+    }
+private:
+    int z;
+};
+
+int main(void)
+{
+    T1 t{ 520, 13.14, 1314 };	// ok, 基于构造函数使用初始化列表初始化类成员
+    t.print();
+    return 0;
+}
+</code></pre>
+<p>另外，需要额外注意的是<font color='red'>聚合类型的定义并非递归的&lt;，也就是说<font color='red'>当一个类的非静态成员是非聚合类型时，这个类也可能是聚合类型，比如下面的这个例子</font>：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+struct T1
+{
+    int x;
+    double y;
+private:
+    int z;
+};
+
+struct T2
+{
+    T1 t1;
+    long x1;
+    double y1;
+};
+
+int main(void)
+{
+    T2 t2{ {}, 520, 13.14 };
+    return 0;
+}
+</code></pre>
+<p>可以看到，T1并非一个聚合类型，因为它有一个Private的非静态成员。但是尽管T2有一个非聚合类型的非静态成员t1，T2依然是一个聚合类型，可以直接使用列表初始化的方式进行初始化。</p>
+<p>最后强调一下t2对象的初始化过程，对于非聚合类型的成员t1做初始化的时候，可以直接写一对空的大括号{}，这相当于调用是T1的无参构造函数。</p>
+<p><font color='red'>对于一个聚合类型，使用列表初始化相当于对其中的每个元素分别赋值，而对于非聚合类型，则需要先自定义一个合适的构造函数，此时使用列表初始化将会调用它对应的构造函数。</font></p>
+<h4 id="3-sstdinitializer_list模板类的使用">3、sstd::initializer_list模板类的使用</h4>
+<p>在C++的STL容器中，可以进行任意长度的数据的初始化，使用初始化列表也只能进行固定参数的初始化，如果想要做到和STL一样有任意长度初始化的能力，可以使用<font color='red'>std::initializer_list</font>这个轻量级的类模板来实现。</p>
+<p>先来介绍一下这个类模板的一些特点：</p>
+<ul>
+<li>它是一个轻量级的容器类型，内部定义了迭代器iterator等容器必须的概念，遍历时得到的迭代器是只读的。</li>
+<li>对于std::initializer_list<T>而言，它可以接收任意长度的初始化列表，但是要求元素<font color='red'>必须是同种类型T</font></li>
+<li>在std::initializer_list内部有三个成员接口：<font color='red'>size(), begin(), end()。</font></li>
+<li>std::initializer_list对象<font color='red'>只能被整体初始化或者赋值</font>。</li>
+</ul>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+//构造函数
+class Person
+{
+public:
+	Person(initializer_list&lt;string&gt;ls)
+	{
+		auto it = ls.begin();
+		for (; it != ls.end(); it++)
+		{
+			cout &lt;&lt; *it &lt;&lt; endl;
+			m_name.push_back(*it);
+		}
+	}
+private:
+	vector&lt;string&gt;m_name;
+};
+//普通函数
+void func(initializer_list&lt;int&gt;ls)
+{
+	auto it = ls.begin();
+	for (; it != ls.end(); ++it)
+	{
+		cout &lt;&lt; *it &lt;&lt;&quot; &quot;;
+	}
+	cout &lt;&lt; endl;
+}
+int main()
+{
+	func({ 1,2,3,4,5,6,7 });
+	Person p1({ &quot;a&quot;,&quot;b&quot;,&quot;c&quot; });
+	system(&quot;pause&quot;);
+	return 0;
+}
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://tangyin1.github.io/post/c11-xin-te-xing-san/">
+                  <h3 class="post-title">
+                    C++11新特性（三）
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

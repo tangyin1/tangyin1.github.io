@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://localhost:4000</id>
+    <id>https://tangyin1.github.io</id>
     <title>Gridea</title>
-    <updated>2025-03-11T02:18:35.699Z</updated>
+    <updated>2025-03-11T02:30:33.819Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="http://localhost:4000"/>
-    <link rel="self" href="http://localhost:4000/atom.xml"/>
+    <link rel="alternate" href="https://tangyin1.github.io"/>
+    <link rel="self" href="https://tangyin1.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>http://localhost:4000/images/avatar.png</logo>
-    <icon>http://localhost:4000/favicon.ico</icon>
+    <logo>https://tangyin1.github.io/images/avatar.png</logo>
+    <icon>https://tangyin1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2025, Gridea</rights>
     <entry>
         <title type="html"><![CDATA[C++八股]]></title>
-        <id>http://localhost:4000/post/cba-gu/</id>
-        <link href="http://localhost:4000/post/cba-gu/">
+        <id>https://tangyin1.github.io/post/cba-gu/</id>
+        <link href="https://tangyin1.github.io/post/cba-gu/">
         </link>
         <updated>2025-03-11T01:29:10.000Z</updated>
-        <summary type="html"><![CDATA[<p>常见C++八股问题，常看常新，看完这个以后还需要继续深入其他问题，列如opencv，opengl，qt等从事相关行业的具体知识。例外，还需补充相关数据结构，数据库等知识<br>
-<img src="https://tangyin1.github.io/post-images/1741657230550.jfif" alt="" loading="lazy"></p>
+        <summary type="html"><![CDATA[<p>常见C++八股问题，常看常新，看完这个以后还需要继续深入其他问题，列如opencv，opengl，qt等从事相关行业的具体知识。例外，还需补充相关数据结构，数据库等知识</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>常见C++八股问题，常看常新，看完这个以后还需要继续深入其他问题，列如opencv，opengl，qt等从事相关行业的具体知识。例外，还需补充相关数据结构，数据库等知识<br>
-<img src="http://localhost:4000/post-images/1741657230550.jfif" alt="" loading="lazy"></p>
+        <content type="html"><![CDATA[<p>常见C++八股问题，常看常新，看完这个以后还需要继续深入其他问题，列如opencv，opengl，qt等从事相关行业的具体知识。例外，还需补充相关数据结构，数据库等知识</p>
 <!-- more -->
 <h3 id="1讲一讲封装-继承-多态是什么">1.讲一讲封装、继承、多态是什么？</h3>
 <p><strong>封装</strong>：将具体实现过程和数据封装成一个类，只能通过接口进行访问，降低耦合性，使类成为一个具有内部数据的自我隐藏能力、功能独立的软件模块。意义：保护或防止代码在无意之中被破坏，保护类中的成员，不让类中以外的程序直接访问或者修改，只能通过提供的公共接口访问。</p>
@@ -413,8 +411,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[C++面经分享]]></title>
-        <id>http://localhost:4000/post/t/</id>
-        <link href="http://localhost:4000/post/t/">
+        <id>https://tangyin1.github.io/post/t/</id>
+        <link href="https://tangyin1.github.io/post/t/">
         </link>
         <updated>2024-08-29T05:48:45.000Z</updated>
         <summary type="html"><![CDATA[<p>一些常见面试题搜集</p>
@@ -2754,8 +2752,8 @@ rdd1.top(2)
     </entry>
     <entry>
         <title type="html"><![CDATA[C++11新特性（五）]]></title>
-        <id>http://localhost:4000/post/c11-xin-te-xing-wu/</id>
-        <link href="http://localhost:4000/post/c11-xin-te-xing-wu/">
+        <id>https://tangyin1.github.io/post/c11-xin-te-xing-wu/</id>
+        <link href="https://tangyin1.github.io/post/c11-xin-te-xing-wu/">
         </link>
         <updated>2023-11-30T08:53:59.000Z</updated>
         <content type="html"><![CDATA[<h3 id="1-可调用对象包装器和绑定器">1、可调用对象包装器和绑定器</h3>
@@ -3268,8 +3266,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[C++11新特性（四）]]></title>
-        <id>http://localhost:4000/post/c11-xin-te-xing-si/</id>
-        <link href="http://localhost:4000/post/c11-xin-te-xing-si/">
+        <id>https://tangyin1.github.io/post/c11-xin-te-xing-si/</id>
+        <link href="https://tangyin1.github.io/post/c11-xin-te-xing-si/">
         </link>
         <updated>2023-11-22T09:19:06.000Z</updated>
         <summary type="html"><![CDATA[<p>本章节包含<br>
@@ -3762,8 +3760,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[C++11新特性（三）]]></title>
-        <id>http://localhost:4000/post/c11-xin-te-xing-san/</id>
-        <link href="http://localhost:4000/post/c11-xin-te-xing-san/">
+        <id>https://tangyin1.github.io/post/c11-xin-te-xing-san/</id>
+        <link href="https://tangyin1.github.io/post/c11-xin-te-xing-san/">
         </link>
         <updated>2023-11-21T09:20:53.000Z</updated>
         <summary type="html"><![CDATA[<p>文章内容来自https://subingwen.cn/cplusplus/的整理，感谢丙哥</p>
@@ -4039,8 +4037,8 @@ int main(void)
     </entry>
     <entry>
         <title type="html"><![CDATA[C++11新特性2（自动类型推导）]]></title>
-        <id>http://localhost:4000/post/c11-xin-te-xing-2zi-dong-lei-xing-tui-dao/</id>
-        <link href="http://localhost:4000/post/c11-xin-te-xing-2zi-dong-lei-xing-tui-dao/">
+        <id>https://tangyin1.github.io/post/c11-xin-te-xing-2zi-dong-lei-xing-tui-dao/</id>
+        <link href="https://tangyin1.github.io/post/c11-xin-te-xing-2zi-dong-lei-xing-tui-dao/">
         </link>
         <updated>2023-11-21T01:59:28.000Z</updated>
         <summary type="html"><![CDATA[<p>C++11新特性2（自动类型推导） auto、decltype、返回值类型后置</p>
@@ -4375,8 +4373,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[C++11新特性（1）]]></title>
-        <id>http://localhost:4000/post/c11-xin-te-xing-1/</id>
-        <link href="http://localhost:4000/post/c11-xin-te-xing-1/">
+        <id>https://tangyin1.github.io/post/c11-xin-te-xing-1/</id>
+        <link href="https://tangyin1.github.io/post/c11-xin-te-xing-1/">
         </link>
         <updated>2023-11-20T05:52:29.000Z</updated>
         <summary type="html"><![CDATA[<p>C++11的一些常用新特性，本节包含<br>
@@ -4677,8 +4675,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[vim命令]]></title>
-        <id>http://localhost:4000/post/vim-ming-ling/</id>
-        <link href="http://localhost:4000/post/vim-ming-ling/">
+        <id>https://tangyin1.github.io/post/vim-ming-ling/</id>
+        <link href="https://tangyin1.github.io/post/vim-ming-ling/">
         </link>
         <updated>2023-11-09T02:17:53.000Z</updated>
         <summary type="html"><![CDATA[<p>vim命令大全，需要自己多看多用。也可在终端输入 vimtutor来帮助自己学习！</p>
@@ -5383,8 +5381,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[vs2019连接本地虚拟机linux]]></title>
-        <id>http://localhost:4000/post/vs2019-lian-jie-ben-di-xu-ni-ji-linux/</id>
-        <link href="http://localhost:4000/post/vs2019-lian-jie-ben-di-xu-ni-ji-linux/">
+        <id>https://tangyin1.github.io/post/vs2019-lian-jie-ben-di-xu-ni-ji-linux/</id>
+        <link href="https://tangyin1.github.io/post/vs2019-lian-jie-ben-di-xu-ni-ji-linux/">
         </link>
         <updated>2023-10-31T11:13:55.000Z</updated>
         <summary type="html"><![CDATA[<p>今天准备使用vs2019远程连接Linux进行一些小玩意，结果死活连不上。捣鼓了一会终于成功！</p>
@@ -5439,8 +5437,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[搜索方法分享]]></title>
-        <id>http://localhost:4000/post/sou-suo-fang-fa-fen-xiang/</id>
-        <link href="http://localhost:4000/post/sou-suo-fang-fa-fen-xiang/">
+        <id>https://tangyin1.github.io/post/sou-suo-fang-fa-fen-xiang/</id>
+        <link href="https://tangyin1.github.io/post/sou-suo-fang-fa-fen-xiang/">
         </link>
         <updated>2023-10-28T13:00:20.000Z</updated>
         <summary type="html"><![CDATA[<p>关于现在搜索能力的一些信息</p>

@@ -8,8 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://tangyin1.github.io/favicon.ico?v=1741659499653">
-<link rel="stylesheet" href="https://tangyin1.github.io/styles/main.css">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1741659499602">
+<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
 
 
 
@@ -32,8 +32,8 @@
       <div class="sidebar" :class="{ 'full-height': menuVisible }">
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
-      <a class="site-title-container" href="https://tangyin1.github.io">
-        <img src="https://tangyin1.github.io/images/avatar.png?v=1741659499653" class="site-logo">
+      <a class="site-title-container" href="http://localhost:4000">
+        <img src="http://localhost:4000/images/avatar.png?v=1741659499602" class="site-logo">
         <h1 class="site-title">Gridea</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -86,7 +86,7 @@
       温故而知新
     </div>
     <div class="site-footer">
-      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://tangyin1.github.io/atom.xml" target="_blank">RSS</a>
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="http://localhost:4000/atom.xml" target="_blank">RSS</a>
     </div>
   </div>
 </div>
@@ -98,7 +98,7 @@
             <h2 class="post-title">单元测试的一些基础知识</h2>
             <div class="post-date">2023-08-14</div>
             
-              <div class="feature-container" style="background-image: url('https://tangyin1.github.io/post-images/dan-yuan-ce-shi-de-yi-xie-ji-chu-zhi-shi.webp')">
+              <div class="feature-container" style="background-image: url('http://localhost:4000/post-images/dan-yuan-ce-shi-de-yi-xie-ji-chu-zhi-shi.webp')">
               </div>
             
             <div class="post-content" v-pre>
@@ -113,9 +113,9 @@
 <h1 id="二-单元测试案例gtest">二、单元测试案例（gtest）</h1>
 <p>在vs2019中，内置gtest测试功能，选择创建新项目---&gt;点击搜索---&gt;本机单元测试---&gt;找到gtest<br>
 下面是根据一个计算器的基础功能加减乘除的作为例子讲解<br>
-<img src="https://tangyin1.github.io/post-images/1692019404735.png" alt="" loading="lazy"><br>
+<img src="http://localhost:4000/post-images/1692019404735.png" alt="" loading="lazy"><br>
 在一个单元测试中，有下面三个部分组成<br>
-<img src="https://tangyin1.github.io/post-images/1692019631421.png" alt="" loading="lazy"></p>
+<img src="http://localhost:4000/post-images/1692019631421.png" alt="" loading="lazy"></p>
 <h2 id="1">1.</h2>
 <p>在pch.cpp中放需要测试的函数<br>
 需要在头部包含<strong>pch.h</strong>头文件</p>
@@ -178,7 +178,7 @@ double calculate(const std::string&amp; expression) {
 </code></pre>
 <h2 id="2">2.</h2>
 <p>在pch.h中<br>
-<img src="https://tangyin1.github.io/post-images/1692020040154.png" alt="" loading="lazy"></p>
+<img src="http://localhost:4000/post-images/1692020040154.png" alt="" loading="lazy"></p>
 <h2 id="3">3.</h2>
 <p>在test.cpp中写测试数据代码</p>
 <pre><code class="language-C++">#include &quot;pch.h&quot;
@@ -214,7 +214,7 @@ TEST(CalculatorTest, DivisionByZero) {
 <h2 id="4">4.</h2>
 <p>最后点击运行，如果是在整个项目中添加到额单元测试，想要运行测试代码则右键---&gt;设为启动项即可<br>
 测试结果如下：<br>
-<img src="https://tangyin1.github.io/post-images/1692020497921.png" alt="" loading="lazy"></p>
+<img src="http://localhost:4000/post-images/1692020497921.png" alt="" loading="lazy"></p>
 <h1 id="三-测试的需求">三、测试的需求</h1>
 <p>基础的测试工作，在实际开发中大多数的岗位是开发岗位，但技术含量相对较低，由于分为白盒测试跟黑盒测试，写开发代码的才是大佬，基础的说白了也就是配置好环境以后点点点，高端的测试岗位一般都在大厂，且很重要，中小型公司技术含量较低，一般都是新手进去了解整个项目开发流程的一个岗位。</p>
 <p>测试有专门的岗位，单元测试是开发人员的职责。</p>
@@ -227,7 +227,7 @@ TEST(CalculatorTest, DivisionByZero) {
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://tangyin1.github.io/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/">
+                <a href="http://localhost:4000/post/gan-zhuang-yu-yi-xie-ji-ben-zhi-ling/">
                   <h3 class="post-title">
                     gdb安装与一些基本指令
                   </h3>
